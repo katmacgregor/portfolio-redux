@@ -1,0 +1,40 @@
+{% extends "layouts/default.html" %}
+
+{% set tools_text="Tools" %}
+
+{% block content %}
+
+  {% include "includes/heading.html" %}
+
+  <div class="content-container">
+    <div class="content-header">
+      <h2 class="project title">{{portfolio_item.name}}</h2>
+      <a href="{{portfolio_item.link.href}}" class="link">{{portfolio_item.link.title}}</a>
+    </div>
+
+    <div class="content-info">
+      <div class="desc">
+        {{portfolio_item.description | safe}}
+      </div>
+
+      <div class="tools-container">
+        <div class="heading">{{tools_text}}</div>
+        {% if portfolio_item.tools %}
+          <ul class="tools">{{portfolio_item.tools | safe}}</ul>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="images">
+      {% if portfolio_item.images %}
+        {% for image in portfolio_item.images %}
+        <div class="image{%if image.classes%} {{image.classes}}{%endif%}">
+          <div class="image-wrapper">
+            <img src="{{image.src}}" alt="{{image.alt}}"/>
+          </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

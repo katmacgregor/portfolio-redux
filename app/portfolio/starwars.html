@@ -1,0 +1,49 @@
+{% extends "./layouts/portfolio_page.html" %}
+
+{% set portfolio_item = {
+    name: "Star Wars",
+    description: "
+      <p>Developed new modules and updated module designs in code to support fluid responsive states</p>
+      <p>Data modeling and manipulation, strategic templates to minimize code bloat</p>
+      <p>Used client-side code for visual elements whenever possible, reducing load times and page weight</p>
+      <p>Developed several complex Sass mixins for managing configurable styling</p>
+      <p>Compressing animated navigation on scroll, hamburger light saber toggle</p>
+    ",
+    tools:"
+      <li>HTML</li>
+      <li>Mustache</li>
+      <li>Sass</li>
+      <li>Ruby</li>
+    ",
+    link: {
+      title: "view site",
+      href: "http://www.starwars.com"
+    },
+    images: [
+      {
+        src: "images/starwars/sw_home.jpg",
+        alt: "Star Wars Homepage",
+        classes:"browser"
+      },
+      {
+        src: "images/starwars/sw_data.jpg",
+        alt: "Star Wars Data Page",
+        classes:"browser"
+      },
+      {
+        src: "images/starwars/sw_saber.jpg",
+        alt: "Star Wars Saber Toggle"
+      },
+      {
+        src: "images/starwars/sw_video.jpg",
+        alt: "Star Wars Video Page",
+        classes:"browser"
+      },
+      {
+        src: "images/starwars/sw_gall2.jpg",
+        alt: "Star Wars Gallery Modal",
+        classes:"browser"
+      }
+    ]
+  }
+%}

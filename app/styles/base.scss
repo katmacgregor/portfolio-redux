@@ -1,0 +1,31 @@
+@import "global/_style_elements.scss";
+
+html, body{ width: 100%; height: 100%; }
+
+h1, h2, h3{
+  font-family: $headertext;
+  font-size: 1.9em;
+  display: inline-block;
+}
+
+h3{ margin: 0 10px 0 0; }
+
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+a{
+  text-decoration: none;
+  &, html.no-touch &:hover, &:active, &:visited{ color: $accent; }
+}
+
+p{
+  font-size: 0.8em;
+  font-weight: 200;
+  line-height: 1.5em;
+  letter-spacing: 0.03em;
+  display: block;
+}
+
+img{ max-width: 100%; }

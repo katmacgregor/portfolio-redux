@@ -1,2 +1,2 @@
-# portfolio
-updated portfolio website
+# portfolio-redux
+updated portfolio website & redesign

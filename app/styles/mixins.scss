@@ -1,0 +1,40 @@
+// HiDPI mixin. Default value set to 1.3 to target Google Nexus 7 (http://bjango.com/articles/min-device-pixel-ratio/)
+@mixin hidpi($ratio: 1.3) {
+  @media only screen and (-webkit-min-device-pixel-ratio: $ratio),
+  only screen and (min--moz-device-pixel-ratio: $ratio),
+  only screen and (-o-min-device-pixel-ratio: #{$ratio}/1),
+  only screen and (min-resolution: #{round($ratio*96)}dpi),
+  only screen and (min-resolution: #{$ratio}dppx) {
+    @content;
+  }
+}
+
+//retina image
+@mixin retina-image($filename, $background-size: null, $extension: png, $retina-filename: null, $background-repeat: no-repeat) {
+  background-image: asset-url($filename + "." + $extension);
+  background-repeat: $background-repeat;
+
+  @include hidpi {
+    @if $retina-filename {
+      background-image: asset-url($retina-filename + "." + $extension);
+    } @else {
+      background-image: asset-url($filename + "@2x" + "." + $extension);
+    }
+  }
+  @if $background-size { background-size: $background-size; }
+}
+
+// set page background colors
+@mixin page-background($base-color, $accent-color: null){
+  @if$accent-color{
+    background-size: 350%;
+    background-image: radial-gradient($accent-color, $base-color);
+    animation: gradient-fade 10s infinite alternate;
+  }
+  background-color: $base-color;
+}
+
+// set container color
+@mixin container-alternating-color($color, $base: 6%){
+  &:nth-of-type(even){ background-color: darken($color, $base); }
+}

@@ -1,0 +1,108 @@
+@import "mixins.scss";
+@import "global/_style_elements.scss";
+@import "global/_breakpoints.scss";
+
+.content-container{
+  $border-radius: 4px;
+
+  position: relative;
+  // padding: 10px;
+  overflow: hidden;
+  line-height: 1.1em;
+  box-sizing: border-box;
+  // @include container-alternating-color(rgba(255, 255, 255, 0.3), $base: 0%, $accent: 8%);
+  &:nth-of-type(2){ border-radius: $border-radius $border-radius 0 0; }
+  &:last-of-type{ border-radius: 0 0 $border-radius $border-radius; }
+
+  .no-js & {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+h2.project{
+  font-family: $bodytext;
+  font-weight: 200;
+  font-size: 1.3em;
+  margin: 3px 0 0;
+  line-height: 1.3em;
+}
+
+.content-header{
+  text-align: center;
+  .title{
+    text-transform: uppercase;
+  }
+  .link{
+    display: block;
+  }
+}
+
+.image{
+  &:not(.browser){
+    text-align: center;
+    img{
+      max-width: 50%;
+    }
+  }
+}
+
+
+.content-info{
+  display: flex;
+  flex-wrap: wrap;
+  p{ margin-top: 0; }
+}
+
+
+@media screen and (min-width: 570px){
+  // .content-container{ padding: 10px 20px; }
+
+  h2.project{ font-size: 1.2em; margin: 0; }
+}
+
+@media screen and (min-width: $mid-high-breakpoint){
+  h2.project{ font-size: 2em; }
+
+  .content-info{
+    .desc, .tools-container{
+      flex: 1 1 50%;
+    }
+  }
+
+  .browser{
+    margin: 60px;
+    .image-wrapper{
+      $rounded: 5px;
+      position: relative;
+      max-width: 750px;
+      margin: auto;
+      border-top: 30px solid #ddd;
+      border-radius: $rounded;
+      box-sizing: border-box;
+      &:before, &:after{
+        content: "";
+        position: absolute;
+      }
+      &:before{
+        width: 61px;
+        top: -25px;
+        height: 20px;
+        left: 7px;
+        background: radial-gradient(rgba(0, 0, 0, 0.1) 48%, transparent 16%);
+        background-size: 20px 20px;
+      }
+      &:after{
+        width: 60%;
+        height: 20px;
+        top: -25px;
+        left: 76px;
+        background-color: #fff;
+        border-radius: 8px;
+      }
+      img{
+        border-radius: 0 0 $rounded $rounded;
+      }
+    }
+  }
+}
