@@ -1,7 +1,7 @@
 {% set project = [
     {
       name: "Star Wars",
-      link: "starwars.html",
+      link: "starwars",
       description: "Redesign of StarWars.com",
       main_image: {
         src: "images/starwars/sw_home.jpg"
@@ -10,6 +10,7 @@
 
     {
       name: "Disney.com",
+      link: "disney",
       description: "Disney storytelling",
       main_image: {
         src: "images/dcom/dcom_cars.jpg"
@@ -17,14 +18,16 @@
     },
 
     {
-      name: "DisneyJunior.com",
-      description: "Redesign",
+      name: "Disney Junior",
+      link: "disney_junior",
+      description: "Child-focused redesign of DisneyJunior.com",
       main_image: {
         src: "images/junior/devicescomp_junior.png"
       }
     },
     {
       name: "YayArt",
+      link: "yayart",
       description: "Responsive redesign of e-commerce user-centric art website",
       main_image: {
         src: "images/yayart/devicescomp_yay.png"
@@ -32,7 +35,8 @@
     },
     {
       name: "ApartmentList",
-      description: "Illustrations based off of the associated personas of 20 well-known neighborhoods in Chicago, Boston, Los Angeles, and New York",
+      link: "apartmentlist",
+      description: "Illustrationed associated personas of 20 well-known urban neighborhoods",
       main_image: {
         src: "images/apt-list/AparmentList-Personas_delivery-04.png"
       }
@@ -43,15 +47,24 @@
 
 {% for item in project %}
   <div class="content-item">
-    <a href="{{item.link}}" style="background-image: url({{item.main_image.src}});">
+    {% if item.link %}
+    <a href="{{item.link + '.html'}}" class="item" alt="{{item.name}}">
+    {% else %}
+    <div class="item">
+    {% endif %}
       <div class="wrapper">
-        <div class="content-info">
+        <div class="thumb"></div>
+        <div class="content-info" style="background-image: url({{item.main_image.src}});">
           <div class="text">
             <h2 class="project">{{item.name}}</h2>
             <div class="content-desc">{{item.description | safe}}</div>
           </div>
         </div>
       </div>
+    {% if item.link %}
     </a>
+    {% else %}
+    </div>
+    {% endif %}
   </div>
 {% endfor %}

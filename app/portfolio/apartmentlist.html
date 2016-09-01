@@ -1,0 +1,44 @@
+{% extends "./layouts/portfolio_page.html" %}
+
+{% set portfolio_item = {
+    name: "ApartmentList",
+    description: "
+      <p>80 unique illustrations based off of the associated personas of 20 well-known neighborhoods in Chicago, Boston, Los Angeles, and New York</p>
+      <p>Utilized hand drawing, then finalized and polished in Adobe Illustrator</p>
+    ",
+    tools: [
+      "Hand Drawing",
+      "Illustrator"
+    ],
+    images: [
+      {
+        src: "images/apt-list/AparmentList-Personas_delivery-04.png",
+        alt: "Apartment List"
+      },
+      {
+        src: "images/apt-list/ApartmentList-Chicago.jpg",
+        link: "images/apt-list/ApartmentList-Chicago.pdf",
+        alt: "ApartmentList Chicago",
+        pdf: true
+      },
+      {
+        src: "images/apt-list/ApartmentList-Boston.jpg",
+        link: "images/apt-list/ApartmentList-Boston.pdf",
+        alt: "ApartmentList Boston",
+        pdf: true
+      },
+      {
+        src: "images/apt-list/ApartmentList-LosAngeles.jpg",
+        link: "images/apt-list/ApartmentList-LosAngeles.pdf",
+        alt: "ApartmentList Los Angeles",
+        pdf: true
+      },
+      {
+        src: "images/apt-list/ApartmentList-NewYork.jpg",
+        link: "images/apt-list/ApartmentList-NewYork.pdf",
+        alt: "ApartmentList New York",
+        pdf: true
+      }
+    ]
+  }
+%}

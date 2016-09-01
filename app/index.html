@@ -6,11 +6,52 @@
 
 {% set main_classes = "port" %}
 
+{% set skills = {
+    skills: [
+      {
+        title: "Languages / Frameworks",
+        items: [
+          "HTML",
+          "CSS",
+          "Sass",
+          "JavaScript",
+          "jQuery",
+          "Ruby",
+          "Mustache",
+          "Nunjucks",
+          "Backbone",
+          "Gulp",
+          "Yeoman",
+          "npm",
+          "Social APIs",
+          "Git"
+        ]
+      },
+      {
+        title: "UX & Design",
+        items: [
+          "Rapid Prototyping",
+          "IA/UX",
+          "Wireframes",
+          "Responsive Design",
+          "Graphic Design",
+          "Illustrator",
+          "Photoshop",
+          "InDesign",
+          "Painting",
+          "Drawing/Illustration"
+        ]
+      }
+    ]
+  }
+%}
+
 {% block content %}
   <a name="top"></a>
 
-  <div class="content-container fill-screen skip-padding">
+  <div class="content-container header fill-screen skip-padding">
     <div class="content">
+    {% set header_classes = "home" %}
     {% include "includes/heading.html" %}
     </div>
 
@@ -21,38 +62,30 @@
     {% include "includes/portfolio.html" %}
   </div>
 
-  <div class="content-container fill-screen">
-    Languages / Frameworks
-    Additional Skills
-    HTML
-    CSS
-    Sass
-    JavaScript
-    jQuery
-    Ruby
-    Rapid Prototyping
-    IA/UX
-    Wireframes
-    Responsive Design
-    Graphic Design
-    Illustrator
-    Photoshop
-    InDesign
-    Painting
-    Drawing/Illustration
-  </div>
 
-  <div class="content-container fill-screen">
-    <p>I made my debut as an artist with "Thanksgiving is Yummy" (Crayola on loose leaf 8.5" by 11"), featured in the kindergarten parent newsletter. This marked the dawn of my creative exploits, which evenutally lead to receiving my BA in Painting and Design from USC's Roski School of Fine Arts.</p>
-    <p>My career hopped in a natural progression from design into UI &amp; UX, and into my current position in web development as a Sr. Web Application Developer at Disney Interactive.</p>
-    <p>As a developer, I translate my passion for art and design into clean, responsive code. Daily languages include Javascript, Ruby, HTML, CSS, and libraries including Backbone, Underscore, Nunjucks, and Sass.</p>
-    <p> When I'm not tinkering with code, you can find me doting on my pet rabbit, or at the Three Broomsticks.</p>
-  </div>
-
-  <a href="#top">
-    <div id="top">
-      <i class="fa fa-chevron-up fa-inline"></i>
-      <p class="top-text"> Back to Top</p>
+  <div class="skills content-container">
+    <div class="content-wrapper">
+      <div class="section-wrapper">
+        {% for subsection in skills.skills %}
+          <div class="section">
+            <h5>{{subsection.title}}</h5>
+            <div class="items">
+              {% for skill in subsection.items %}
+              <p>{{skill}}</p>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
-  </a>
+  </div>
+
+  <div class="about content-container fill-screen">
+    <div class="content">
+      <p>I made my debut as an artist with "Thanksgiving is Yummy" (Crayola on loose leaf 8.5" by 11"), featured in the kindergarten parent newsletter. This marked the dawn of my creative exploits, which evenutally lead to receiving my BA in Painting and Design from USC's Roski School of Fine Arts.</p>
+      <p>My career hopped in a natural progression from design into UI &amp; UX, and into my current position in web development as a Sr. Web Application Developer at Disney Interactive.</p>
+      <p>As a developer, I translate my passion for art and design into clean, responsive code. Daily languages include Javascript, Ruby, HTML, CSS, and libraries including Backbone, Underscore, Nunjucks, and Sass.</p>
+      <p> When I'm not tinkering with code, you can find me doting on my pet rabbit, or at the Three Broomsticks.</p>
+    </div>
+  </div>
 {% endblock %}

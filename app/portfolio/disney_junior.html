@@ -1,0 +1,55 @@
+{% extends "./layouts/portfolio_page.html" %}
+
+{% set portfolio_item = {
+    name: "DisneyJunior.com",
+    description: "
+      <p>Tablet-targeted responsive redesign of DisneyJunior.com</p>
+        <p>IA, UX, and front-end development</p>
+        <p>Targeted user interaction, such as large hit areas, simplified navigation, iconography for non-readers, and continuous swiping to browse content</p>
+        <p>Designed and coded background to reflect the current time of day: <a href=\"http://disneyjunior.com/?time=morning\">morning</a>, <a href=\"http://disneyjunior.com/?time=afternoon\">afternoon</a>, <a href=\"http://disneyjunior.com/?time=evening\">evening</a>, <a href=\"http://disneyjunior.com/?time=night\">night</a>, and <a href=\"http://disneyjunior.com/?time=midnight\">midnight</a>. Bonus! Click on the sun and moon (tablet and desktop)</p>
+          <p>Designed flexible <a href=\"images/junior/DisneyJunior_Grid.pdf\" target=\"blank\"><i class=\"fa fa-file-pdf-o fa-inline\"></i> Custom Grid System</a> that powers the majority of the site</p>
+    ",
+    tools: [
+      "HTML",
+      "Mustache",
+      "Sass",
+      "IA",
+      "UX"
+    ],
+    link: {
+      title: "view site",
+      href: "http://www.disneyjunior.com"
+    },
+    images: [
+      {
+        src: "images/junior/devicescomp_junior.png",
+        alt: "Disney Junior Responsive",
+        classes: "styled"
+      },
+      {
+        src: "images/junior/hp_wire.jpg",
+        alt: "Disney Junior Homepage Wireframe",
+        classes: "ipad styled"
+      },
+      {
+        src: "images/junior/hp_final.png",
+        alt: "Disney Junior Homepage Final",
+        classes: "ipad styled"
+      },
+      {
+        src: "images/junior/doc_wire.jpg",
+        alt: "Disney Junior Showpage Final"
+      },
+      {
+        src: "images/junior/doc_final.png",
+        alt: "Disney Junior Showpage Final",
+        classes: "ipad styled"
+      },
+      {
+        src: "images/junior/junior_sitemap3.jpg",
+        alt: "Disney Junior Sitemap",
+        classes: "styled"
+      }
+    ]
+  }
+%}

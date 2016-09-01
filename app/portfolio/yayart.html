@@ -1,0 +1,50 @@
+{% extends "./layouts/portfolio_page.html" %}
+
+{% set portfolio_item = {
+    name: "YayArt (case study)",
+    description: "
+      <p>Responsive redesign of e-commerce user-centric art website</p>
+      <p>Enhances and elevates the site's major functions: submit, vote, and shop</p>
+      <p>Conducted extensive research, user testing, and persona development</p>
+      <p>Utilized Bootstrap to convert wire sketches into a working wire prototype</p>
+      <a href=\"http://www.katrinamacgregor.com/bootstrap/index.html\" target=\"blank\"><h4>View Bootstrap Wires</h4></a>
+      <a href=\"images/yayart/yayart_casestudy.pdf\" target=\"blank\"><h4><i class=\"fa fa-file-pdf-o fa-inline\"></i> Full Case Study</h4></a>
+    ",
+    tools: [
+      "IA",
+      "UX",
+      "Bootstrap",
+      "Photoshop"
+    ],
+    link: {
+      title: "view build",
+      href: "http://www.katrinamacgregor.com/bootstrap/index.html"
+    },
+    images: [
+      {
+        src: "images/yayart/devicescomp_yay.png",
+        alt: "YayArt Responsive",
+        classes: "styled"
+      },
+      {
+        src: "images/yayart/hp_original.jpg",
+        alt: "YayArt Original Homepage",
+        classes: "browser styled",
+        caption: "Original Homepage"
+      },
+      {
+        src: "images/yayart/hp_sketch.jpg",
+        alt: "YayArt Homepage Sketch"
+      },
+      {
+        src: "images/yayart/hp_wire.jpg",
+        alt: "YayArt Homepage Wire"
+      },
+      {
+        src: "images/yayart/hp_final.jpg",
+        alt: "YayArt Homepage Final",
+        classes: "browser styled"
+      }
+    ]
+  }
+%}

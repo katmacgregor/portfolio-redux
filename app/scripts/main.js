@@ -1,28 +1,56 @@
 'use strict';
 
 $(document).ready(function() {
-  var $body = $('body'),
+
+  var $html = $('html'),
+      $body = $('body'),
       $home = $('body.home'),
       $document = $(document),
       $container = $('.content-container'),
       $topButton = $('#top'),
-      initialBrowserHeight = $(window).height();
+      $homeTop = $('body.home .header.nav .title'),
+      initialBrowserHeight = $('.content-container.header').height(),
+      isTouch = 'ontouchstart' in document.documentElement;
 
-  $('.main-container').addClass('loaded');
+  if(isTouch){
+    $html.addClass('touch');
+  } else{
+    $html.addClass('no-touch');
+  }
 
-  processTimeOfDay();
+  $body.addClass('loaded');
 
+  var scrolled,
+      lastScrollTop = 0,
+      navHeight = 40,
+      navbarHeight = $('.header').outerHeight();
+
+  $document.scroll( function () {
+    scrolled = true;
+  });
+
+  setInterval(function() {
+    if (scrolled) {
+      hasScrolled();
+      scrolled = false;
+    }
+  }, 250);
+
+  // scroll down to content
+  $('.home .main-container .arrow').click( function() {
+    $('html, body').animate({ scrollTop: initialBrowserHeight });
+  });
+
+  // scroll back to top
   $topButton.click(scrollToTop);
+  $homeTop.click(scrollToTop);
+
+
+  // Set time of day styling
+  processTimeOfDay();
 
   // Query Time of Day
   setTimeQuery();
-
-  // scrollTop Menu
-  $document.scroll(setFixedHeader);
-
-  $('.home .main-container .arrow').click(function(){
-    $('html, body').animate({ scrollTop: initialBrowserHeight });
-  });
 
 
   //------
@@ -35,12 +63,31 @@ $(document).ready(function() {
     $(this).removeClass('visible');
   }
 
-  function setFixedHeader () {
-    $home.toggleClass('fixed', $document.scrollTop() >= initialBrowserHeight);
-    $home.toggleClass('scrolled', $document.scrollTop() > 0);
+  function hasScrolled() {
+    var scrollTop = $document.scrollTop();
 
-    $topButton.removeClass('visible');
-    $topButton.addClass('visible');
+    // Make sure they scroll more than navHeight
+    if(Math.abs(lastScrollTop - scrollTop) <= navHeight){ return; }
+
+    $home.toggleClass('fixed', $document.scrollTop() >= initialBrowserHeight);
+    $body.toggleClass('scrolled', $document.scrollTop() > 0);
+
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if(scrollTop > lastScrollTop && scrollTop > navbarHeight){
+      $body.removeClass('nav-show');
+    }
+    else if(scrollTop > lastScrollTop || ($body.hasClass('home') && scrollTop <= navHeight)){
+      // Scroll Down or at top
+      $body.removeClass('nav-show');
+    } else{
+      // Scroll Up
+      if((scrollTop + $(window).height() < $document.height())) {
+        $body.addClass('nav-show');
+      }
+    }
+
+    lastScrollTop = scrollTop;
   }
 
   function setTimeOfDay (time) {

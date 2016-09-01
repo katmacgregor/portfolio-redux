@@ -1,0 +1,71 @@
+@import "global/_breakpoints.scss";
+@import "global/_style_elements.scss";
+
+body.scrolled{
+  #top{ visibility: visible; opacity: 1; }
+}
+
+footer{
+  position: relative;
+  text-align: center;
+  border-top: 1px solid rgba(#fff, 0.08);
+  .connect{
+    display: flex;
+  }
+  .copyright{
+    padding-bottom: 10px;
+  }
+}
+
+#top{
+  margin-top: 30px;
+  margin-bottom: 20px;
+  opacity: 0;
+  text-align: center;
+  visibility: hidden;
+  transition: opacity 250ms 100ms, visibility 0ms 650ms;
+  font-size: 1rem;
+  html.no-touch &:hover .top-text{
+    opacity: 1;
+  }
+  .fa{ height: auto; }
+}
+.top-text{
+  position: relative;
+  margin: 0;
+  padding-top: 16px;
+  opacity: 0;
+  transition: opacity 250ms;
+}
+
+@media screen and (max-width: $mid-high-breakpoint - 1px){
+  footer{
+    .connect{ justify-content: center; }
+  }
+}
+
+@media screen and (min-width: $mid-high-breakpoint){
+  footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .connect, .copyright, & > a{
+      flex: 1 1;
+    }
+    .connect{
+      order: 3;
+      text-align: right;
+      padding-top: 20px;
+      padding-right: $side-padding;
+    }
+    .copyright{
+      order: 1;
+      text-align: left;
+      padding-left: $side-padding;
+    }
+    & > a{
+      position: relative;
+      order: 2;
+    }
+  }
+}

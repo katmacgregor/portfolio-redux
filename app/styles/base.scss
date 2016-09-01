@@ -6,6 +6,7 @@ h1, h2, h3{
   font-family: $headertext;
   font-size: 1.9em;
   display: inline-block;
+  margin: 0;
 }
 
 h3{ margin: 0 10px 0 0; }
@@ -17,7 +18,8 @@ ul{
 
 a{
   text-decoration: none;
-  &, html.no-touch &:hover, &:active, &:visited{ color: $accent; }
+  cursor: pointer;
+  &, html.no-touch &:hover, &:active, &:visited{ color: $day-text; }
 }
 
 p{

@@ -1,0 +1,90 @@
+@import "global/_breakpoints.scss";
+@import "global/_style_elements.scss";
+
+$nav-height: 40px;
+
+body{
+  &.nav-show .header.nav{
+    transform: translateY(0) !important; // make sure this renders on each page type
+  }
+  &:not(.home) .main-container{
+    margin-top: $nav-height;
+  }
+
+  &.day.afternoon .header.nav{ background-color: rgba($afternoon-thumb, 0.9); }
+
+  &.night{
+    .header.nav{
+      background-color: rgba($night-thumb, 0.9);
+      border-bottom: 1px solid rgba(#fff, 0.15);
+    }
+    &.evening .header.nav{ background-color: rgba($evening-thumb, 0.9); }
+    &.midnight .header.nav{ background-color: rgba($midnight-thumb, 0.9); }
+  }
+}
+
+.header.nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: $nav-height;
+  padding: 0;
+  font-size: 0.5em;
+  z-index: 10;
+  background-color: rgba($day-thumb, 0.9);
+  border-bottom: 1px solid rgba(#666, 0.15);
+  transition: position 200ms, background-color 200ms, transform 200ms;
+  transform: translateY(-100%);
+
+  .title, .connect{
+    position: absolute;
+    transition: position 200ms;
+  }
+
+  .title{
+    width: 40%;
+    line-height: 4.2em;
+    cursor: pointer;
+    text-align: left;
+    padding-left: $side-padding;
+    box-sizing: border-box;
+    h2:not(.project){
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .connect{
+    width: 60%;
+    right: 0;
+    text-align: right;
+  }
+
+  .fa{
+    font-size: 2.5em;
+    &:before{ top: 25%; }
+    &.fa-file-text{ font-size: 2.2em; }
+  }
+}
+
+@media screen and (max-width: $mid-high-breakpoint - 1px){
+  .header.nav{
+    .icons{ width: 30px; }
+  }
+}
+
+@media screen and (min-width: $mid-high-breakpoint){
+  .header.nav{
+    font-size: 0.7em;
+    .title{
+      width: 30%;
+      line-height: 3em;
+    }
+    .connect{ width: 70%; }
+    .fa{
+      font-size: 2.3em;
+      &:before{ top: 20%; }
+      &.fa-file-text{ font-size: 1.8em; }
+    }
+  }
+}

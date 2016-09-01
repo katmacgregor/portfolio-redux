@@ -2,107 +2,150 @@
 @import "global/_style_elements.scss";
 @import "global/_breakpoints.scss";
 
-.content-container{
-  $border-radius: 4px;
+$holder-color: #ddd;
+$holder-accent: rgba(0, 0, 0, 0.1);
 
-  position: relative;
-  // padding: 10px;
-  overflow: hidden;
-  line-height: 1.1em;
-  box-sizing: border-box;
-  // @include container-alternating-color(rgba(255, 255, 255, 0.3), $base: 0%, $accent: 8%);
-  &:nth-of-type(2){ border-radius: $border-radius $border-radius 0 0; }
-  &:last-of-type{ border-radius: 0 0 $border-radius $border-radius; }
-
-  .no-js & {
-    padding-top: 20px;
-    padding-bottom: 20px;
+.portfolio-page{
+  .bg-fill{ background-color: $base-bg; }
+  h2.project{
+    font-family: $bodytext;
+    font-weight: 200;
+    font-size: 1.3em;
+    margin: 3px 0 0;
+    line-height: 1.3em;
   }
-}
 
-h2.project{
-  font-family: $bodytext;
-  font-weight: 200;
-  font-size: 1.3em;
-  margin: 3px 0 0;
-  line-height: 1.3em;
-}
-
-.content-header{
-  text-align: center;
-  .title{
-    text-transform: uppercase;
-  }
-  .link{
-    display: block;
-  }
-}
-
-.image{
-  &:not(.browser){
+  .content-header{
     text-align: center;
-    img{
-      max-width: 50%;
+    padding-bottom: 16px;
+    .title{
+      text-transform: uppercase;
+    }
+    .link{ display: block; }
+  }
+
+  .image{
+    &:not(.styled){
+      text-align: center;
+      img{ max-width: 50%; }
+    }
+    &.styled{
+      img{ width: 100%; }
     }
   }
-}
 
+  .content-info{
+    display: flex;
+    flex-wrap: wrap;
+    p{ margin-top: 0; }
+  }
 
-.content-info{
-  display: flex;
-  flex-wrap: wrap;
-  p{ margin-top: 0; }
+  .caption{
+    text-align: center;
+    margin-top: 10px;
+  }
 }
 
 
 @media screen and (min-width: 570px){
-  // .content-container{ padding: 10px 20px; }
-
-  h2.project{ font-size: 1.2em; margin: 0; }
+  .portfolio-page{
+    h2.project{ font-size: 1.2em; margin: 0; }
+  }
 }
 
 @media screen and (min-width: $mid-high-breakpoint){
-  h2.project{ font-size: 2em; }
+  .portfolio-page{
+    h2.project{ font-size: 2em; }
 
-  .content-info{
-    .desc, .tools-container{
-      flex: 1 1 50%;
+    .content-header{ padding: 20px 0 30px; }
+
+    .content-info{
+      @include max-cap;
+      .desc{
+        flex: 1 1 80%;
+        padding-right: 40px;
+        box-sizing: border-box;
+      }
+      .tools-container{ flex: 1 1 20%; }
     }
-  }
 
-  .browser{
-    margin: 60px;
-    .image-wrapper{
-      $rounded: 5px;
+    .styled{
+      margin: 60px;
+      .image-wrapper{
+        max-width: 750px;
+        margin: 0 auto;
+        font-size: 0;
+        .caption{ font-size: 1rem; }
+      }
+    }
+
+    .browser{
+      .image-wrapper{
+        $rounded: 5px;
+
+        position: relative;
+        border: 1px solid $holder-color;
+        border-top-width: 30px;
+        border-radius: $rounded;
+        box-sizing: border-box;
+        &:before, &:after{
+          content: "";
+          position: absolute;
+        }
+        &:before{
+          width: 61px;
+          top: -25px;
+          height: 20px;
+          left: 7px;
+          background: radial-gradient($holder-accent 48%, transparent 16%);
+          background-size: 20px 20px;
+        }
+        &:after{
+          width: 60%;
+          height: 20px;
+          top: -25px;
+          left: 76px;
+          background-color: #fff;
+          border-radius: 8px;
+        }
+        img{
+          border-radius: 0 0 $rounded $rounded;
+        }
+      }
+    }
+
+    .ipad{
+      $thickness: 60px;
+
       position: relative;
-      max-width: 750px;
-      margin: auto;
-      border-top: 30px solid #ddd;
-      border-radius: $rounded;
-      box-sizing: border-box;
+      border-radius: 50px;
+      border: $thickness solid $holder-color;
+      background-color: $holder-color;
       &:before, &:after{
         content: "";
         position: absolute;
+        top: 50%;
+        border-radius: 50%;
+        background-color: $holder-accent;
+        transform: translateY(-50%);
       }
       &:before{
-        width: 61px;
-        top: -25px;
-        height: 20px;
-        left: 7px;
-        background: radial-gradient(rgba(0, 0, 0, 0.1) 48%, transparent 16%);
-        background-size: 20px 20px;
+        $size: 14px;
+
+        left: -(($size/2) + ($thickness/2));
+        width: $size;
+        height: $size;
       }
       &:after{
-        width: 60%;
-        height: 20px;
-        top: -25px;
-        left: 76px;
-        background-color: #fff;
-        border-radius: 8px;
+        $size: 40px;
+
+        right: -(($size/2) + ($thickness/2));
+        width: $size;
+        height: $size;
+        border: 2px solid lighten($holder-accent, 30%);
+        box-sizing: border-box;
       }
-      img{
-        border-radius: 0 0 $rounded $rounded;
-      }
+      img{ border-radius: 5px; }
     }
   }
 }

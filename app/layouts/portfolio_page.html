@@ -1,15 +1,16 @@
 {% extends "layouts/default.html" %}
 
+{% set body_classes = "portfolio-page nav-show" %}
+
 {% set tools_text="Tools" %}
 
 {% block content %}
-
-  {% include "includes/heading.html" %}
-
   <div class="content-container">
     <div class="content-header">
       <h2 class="project title">{{portfolio_item.name}}</h2>
+      {% if portfolio_item.link.href %}
       <a href="{{portfolio_item.link.href}}" class="link">{{portfolio_item.link.title}}</a>
+      {% endif %}
     </div>
 
     <div class="content-info">
@@ -20,7 +21,11 @@
       <div class="tools-container">
         <div class="heading">{{tools_text}}</div>
         {% if portfolio_item.tools %}
-          <ul class="tools">{{portfolio_item.tools | safe}}</ul>
+          <ul class="tools">
+            {% for tool in portfolio_item.tools%}
+              <li>{{tool}}</li>
+            {% endfor %}
+          </ul>
         {% endif %}
       </div>
     </div>
@@ -32,6 +37,9 @@
           <div class="image-wrapper">
             <img src="{{image.src}}" alt="{{image.alt}}"/>
           </div>
+           {% if image.caption%}
+          <div class="caption">{{image.caption}}</div>
+          {% endif %}
         </div>
         {% endfor %}
       {% endif %}

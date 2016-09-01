@@ -3,12 +3,20 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+
+<!--
+ __
+/  \ |__|    |__|  /\  |
+\__/ |  |    |  | /--\ |
+
+ -->
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KATRINA MACGREGOR{% if page_subtitle %} |  {{page_subtitle}}{% endif %}</title>
+    <title>Katrina MacGregor{% if page_subtitle %} |  {{page_subtitle}}{% endif %}</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -26,30 +34,26 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
-    <!-- build:js scripts/vendor/modernizr.js -->
-    <script src="/bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild -->
   </head>
   <body{% if body_classes %} class="{{body_classes}}"{% endif %}>
     <!--[if lt IE 10]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="bg-fill"></div>
-    <div class="main-container {{main_classes}}">
-      {% block content %}{% endblock %}
-    </div>
-    <div class="footer">
-      <div class="copyright">
-        <span>©</span>
-        <span class="date">2016</span>
-        <span>Katrina MacGregor</span>
+    <div id="content">
+      <div class="bg-fill"></div>
+
+      {% set header_classes = "nav" %}
+      {% include "includes/heading.html" %}
+
+      <div class="main-container {{main_classes}}">
+        {% block content %}{% endblock %}
       </div>
+      {% include "includes/footer.html" %}
     </div>
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/underscore/underscore.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
