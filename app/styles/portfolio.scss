@@ -7,7 +7,6 @@ $holder-accent: rgba(0, 0, 0, 0.1);
 .portfolio-page{
   .bg-fill{ background-color: $base-bg; }
   h2.project{
-    font-family: $bodytext;
     font-weight: 200;
     font-size: 1.3em;
     margin: 3px 0 0;
@@ -17,14 +16,11 @@ $holder-accent: rgba(0, 0, 0, 0.1);
   .content-header{
     text-align: center;
     padding-bottom: 16px;
-    .title{
-      text-transform: uppercase;
-    }
     .link{ display: block; }
   }
 
   .content{
-    max-width: $max-breakpoint;
+    max-width: $wide-breakpoint;
     margin: 0 auto;
     &:not(.styled){
       text-align: center;
@@ -194,7 +190,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
   }
 }
 
-@media screen and (min-width: $max-breakpoint){
+@media screen and (min-width: $wide-breakpoint){
   .portfolio-page{
     .content-wrapper{
       display: flex;

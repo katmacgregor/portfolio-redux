@@ -71,7 +71,7 @@
           html.no-touch &:hover{
             .content-info{
               opacity: 1;
-              .text{ transform: translate(-50%, -50%); }
+              .text{ transform: translateY(-50%); }
             }
           }
         }
@@ -105,16 +105,22 @@
           .text{
             position: absolute;
             top: 50%;
-            left: 50%;
+            width: 100%;
+            padding: 10px;
             z-index: 1;
-            transform: translate(-50%, -30%);
+            box-sizing: border-box;
+            transform: translateY(-30%);
             transition: transform $trans-dur * 1.75;
-            h2{ white-space: nowrap; }
+            .project{
+              font-size: 1.3em;
+              line-height: 1.5em;
+            }
           }
         }
       }
     }
     &.skills{
+      padding-top: 30px;
       .content-wrapper{ @include max-cap; }
       .section-wrapper{
         display: flex;
@@ -152,7 +158,7 @@
         border-right: $border;
         transform: translateX(-50%) rotate(135deg);
         transition: opacity 300ms;
-        &:hover{ opacity: 1; }
+        html.no-touch &:hover{ opacity: 1; }
       }
       .content{
         position: absolute;
@@ -166,14 +172,13 @@
 
 @media screen and (max-width: $mid-high-breakpoint - 1px){
   .home{
-    .header.home .title{
-      padding-top: 40px;
-    }
+    .header.home .title{ padding-top: 40px; }
   }
 }
 
 @media screen and (min-width: $mid-high-breakpoint){
   .home{
+    .header.home .title{ font-size: 1.8em; }
     .content-container{
       &.skills{
         .section{
@@ -207,11 +212,18 @@
   }
 }
 
-@media screen and (min-width: $max-breakpoint){
+@media screen and (max-width: $max-breakpoint - 1px){
+  .home .content-container.work .content-item .content-info{
+    .content-desc{ display: none; }
+  }
+}
+
+@media screen and (min-width: $wide-breakpoint){
   .home .content-container.work .content-item{
     $item-size: 25%;
 
     flex: 1 1 $item-size;
     max-width: $item-size;
+    .content-info .text .project{ white-space: nowrap; }
   }
 }
