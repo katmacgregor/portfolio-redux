@@ -1,0 +1,50 @@
+{% extends "./layouts/portfolio_page.html" %}
+
+{% set portfolio_item = {
+    name: "Disney Tumblrs",
+    path: "tumblr",
+    description: "
+      <p>Created new modules in both design and development including responsive image gallery</p>
+      <p>Refactored codebase to minimize code bloat and page load times, and increase general standards and legibility</p>
+      <p>Defined and created the CSS coding standards and style guide that was distributed to all devs</p>
+      <p>IA, UX and design for the <a href=\"http://mickey.disney.com\" target=\"blank\">Mickey</a> franchise site</p>
+    ",
+    tools: [
+      "HTML",
+      "Mustache",
+      "Sass",
+      "IA",
+      "UX"
+    ],
+    link: {
+      title: "view site",
+      href: "http://www.playmation.com/avengers"
+    },
+    images: [
+      {
+        src: "tumblr_alice.mp4",
+        alt: "Alice Tumblr",
+        classes: "browser styled",
+        video: {
+          controls: true
+        }
+      },
+      {
+        src: "tumblr_pirates.mp4",
+        alt: "Pirates of the Caribbean Tumblr",
+        classes: "browser styled",
+        video: {
+          controls: true
+        }
+      },
+      {
+        src: "tumblr_toystory.mp4",
+        alt: "Toy Story Anniversay Tumblr",
+        classes: "browser styled",
+        video: {
+          controls: true
+        }
+      }
+    ]
+  }
+%}

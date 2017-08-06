@@ -1,4 +1,8 @@
 @import "global/_style_elements.scss";
+@import "mixins/font_helpers";
+
+// include local fonts
+@include set-font-face('KingBasil', 'King-Basil-Lite');
 
 html, body{ width: 100%; height: 100%; }
 

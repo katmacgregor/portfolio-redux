@@ -54,9 +54,9 @@ footer{
     }
     .connect{
       order: 3;
-      text-align: right;
       padding-top: 20px;
       padding-right: $side-padding;
+      justify-content: flex-end;
     }
     .copyright{
       order: 1;

@@ -20,17 +20,22 @@ $(document).ready(function() {
 
   $body.addClass('loaded');
 
+  var $portfolioImage = $('.portfolio-page .images .image');
+
+  // checkVisibility
+
   var scrolled,
       lastScrollTop = 0,
       navHeight = 40,
       navbarHeight = $('.header').outerHeight();
 
-  $document.scroll( function () {
+  $document.scroll( debounce( function() {
     scrolled = true;
-  });
+    setImageVisibility($portfolioImage);
+  }, 250));
 
-  setInterval(function() {
-    if (scrolled) {
+  setInterval( function() {
+    if(scrolled){
       hasScrolled();
       scrolled = false;
     }
@@ -90,6 +95,33 @@ $(document).ready(function() {
     lastScrollTop = scrollTop;
   }
 
+  function setImageVisibility ($el) {
+    // console.log($el.find('video'));
+    $el.each(function (){
+      var $that = $(this),
+          isVisible = checkVisibility(this),
+          videoEl = $that.find('video')[0];
+
+
+      if(videoEl){
+        // only trigger if the state needs to change
+        var paused = videoEl.dataset.paused === 'true' ? true : false;
+
+        if(isVisible){
+          if(paused){
+            videoEl.play();
+            videoEl.dataset.paused = false;
+          }
+        } else{
+          if(!paused){
+            videoEl.pause();
+            videoEl.dataset.paused = true;
+          }
+        }
+      }
+    });
+  }
+
   function setTimeOfDay (time) {
     var supplementalTime = (time === 'day' || time === 'afternoon') ? 'day' : 'night';
     $body.addClass(time + ' ' + supplementalTime);
@@ -142,3 +174,38 @@ $(document).ready(function() {
     }
   }
 });
+
+
+// ------
+// HELPER FUNCTIONS
+
+// check if an element is in the viewport
+function checkVisibility(el) {
+  var rect = el.getBoundingClientRect();
+
+  return rect.bottom > 0 &&
+      rect.right > 0 &&
+      rect.left < (window.innerWidth || $(window).width()) &&
+      rect.top < (window.innerHeight || $(window).height());
+}
+
+// Underscore
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function() {
+    var context = this, args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+};

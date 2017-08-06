@@ -1,14 +1,13 @@
 {% extends "./layouts/portfolio_page.html" %}
 
 {% set portfolio_item = {
-    name: "DisneyJunior.com",
+    name: "Disney.com",
+    path: "dcom",
     description: "
-      <p>Tablet-targeted responsive redesign of DisneyJunior.com</p>
-        <p>IA, UX, and front-end development</p>
-        <p>Targeted user interaction, such as large hit areas, simplified navigation, iconography for non-readers, and continuous swiping to browse content</p>
-        <p>Designed and coded background to reflect the current time of day: <a href=\"http://disneyjunior.com/?time=morning\">morning</a>, <a href=\"http://disneyjunior.com/?time=afternoon\">afternoon</a>, <a href=\"http://disneyjunior.com/?time=evening\">evening</a>, <a href=\"http://disneyjunior.com/?time=night\">night</a>, and <a href=\"http://disneyjunior.com/?time=midnight\">midnight</a>. Bonus! Click on the sun and moon (tablet and desktop)</p>
-          <p>Designed flexible <a href=\"images/junior/DisneyJunior_Grid.pdf\" target=\"blank\"><i class=\"fa fa-file-pdf-o fa-inline\"></i> Custom Grid System</a> that powers the majority of the site</p>
-          <a href=\"http://disneyjunior.com\" target=\"blank\"><h4>View DisneyJunior.com</h4></a>
+      <p>Created new modules in both design and development including responsive image gallery</p>
+      <p>Refactored codebase to minimize code bloat and page load times, and increase general standards and legibility</p>
+      <p>Defined and created the CSS coding standards and style guide that was distributed to all devs</p>
+      <p>IA, UX and design for the <a href=\"http://mickey.disney.com\" target=\"blank\">Mickey</a> franchise site</p>
     ",
     tools: [
       "HTML",
@@ -23,33 +22,34 @@
     },
     images: [
       {
-        src: "images/junior/devicescomp_junior.png",
-        alt: "Disney Junior Responsive",
+        src: "dcom_cars.jpg",
+        alt: "Cars Homepage",
         classes: "styled"
       },
       {
-        src: "images/junior/hp_wire_thumb.jpg",
-        alt: "Disney Junior Homepage Wireframe",
-        classes: "ipad styled"
+        src: "answer_reveal.mp4",
+        alt: "Answer Reveal Module",
+        classes: "browser styled",
+        video: {
+          controls: true
+        }
       },
       {
-        src: "images/junior/hp_final_thumb.jpg",
-        alt: "Disney Junior Homepage Final",
-        classes: "ipad styled"
+        src: "tfa_takeover.mp4",
+        alt: "The Force Awakens Takeover",
+        classes: "browser styled",
+        video: {
+          controls: true
+        }
       },
       {
-        src: "images/junior/doc_wire_thumb.png",
-        alt: "Disney Junior Showpage Final"
-      },
-      {
-        src: "images/junior/doc_final_thumb.jpg",
-        alt: "Disney Junior Showpage Final",
-        classes:"ipad styled"
-      },
-      {
-        src: "images/junior/junior_sitemap3_thumb.jpg",
-        alt: "Disney Junior Sitemap",
-        classes: "styled"
+        src: "interactive_grid.mp4",
+        alt: "Interactive Grid Module",
+        classes: "browser styled",
+        caption: "Interactive grid that is pretty sweet and allows for sprite that can be programmed to auto play or hover when the module is in the viewport",
+        video: {
+          controls: true
+        }
       }
     ]
   }

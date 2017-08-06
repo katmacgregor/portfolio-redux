@@ -1,6 +1,6 @@
 @import "global/_breakpoints.scss";
 @import "global/_style_elements.scss";
-@import "mixins.scss";
+@import "mixins/mixins.scss";
 
 .home{
   .content-container{
@@ -40,10 +40,17 @@
     }
   }
 
+  &.fixed{
+    &, &.night, &.evening, &.day, &.afternoon{
+      .bg-fill{ animation-play-state: paused; }
+    }
+  }
+
   .content-container{
     &.work{
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       padding: $side-padding;
       .content-item{
         $trans-dur: 350ms;
@@ -79,7 +86,12 @@
           width: 100%;
           height: 100%;
         }
-        .thumb{ background-color: $day-thumb; }
+        .thumb{
+          background-color: $day-thumb;
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
         .content-info{
           text-align: center;
           opacity: 0;
@@ -88,7 +100,7 @@
           transition: opacity $trans-dur;
           &:after{
             content: "";
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.6);
           }
           .text{
             position: absolute;
@@ -162,7 +174,6 @@
 
 @media screen and (min-width: $mid-high-breakpoint){
   .home{
-    &.fixed .bg-fill{ animation-play-state: paused; }
     .content-container{
       &.skills{
         .section{
@@ -193,5 +204,14 @@
         max-width: $item-size;
       }
     }
+  }
+}
+
+@media screen and (min-width: $max-breakpoint){
+  .home .content-container.work .content-item{
+    $item-size: 25%;
+
+    flex: 1 1 $item-size;
+    max-width: $item-size;
   }
 }

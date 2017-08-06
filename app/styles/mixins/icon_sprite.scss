@@ -1,0 +1,46 @@
+@import "mixins/retina.scss";
+
+@mixin icon-sprite($image-path, $icon-size, $start-row, $source-image-size, $list: null, $extension: png){
+  $icon-cols: nth($source-image-size, 1);
+  $icon-rows: nth($source-image-size, 2);
+
+  $background-size: ($icon-cols * 100%) ($icon-rows * 100%);
+
+  @include retina-image($image-path, $background-size, $extension); //background size required by Bourbon, but doesn't play well with percentage
+
+  //if only 1 value is passed in $icon-size, use that value for both width and height
+  @if(length($icon-size) > 1){
+    width: nth($icon-size, 1);
+    height: nth($icon-size, 2);
+  }
+  @else{
+    width: $icon-size;
+    height: $icon-size;
+  }
+
+  //now set the position
+  @include sprite-position($start-row, $source-image-size, $list);
+}
+
+//set & override the icon position for sprite (only works when icon-sprite mixin is used)
+@mixin sprite-position($start-row, $source-image-size, $list: null){
+  $icon-cols: nth($source-image-size, 1);
+  $icon-rows: nth($source-image-size, 2);
+
+  $i: 0; //initial index value for incrementing inside @each loop
+  $x-shift: if($icon-cols > 1, 100%/($icon-cols - 1), 0); //percentage to shift x-pos per icon
+  $y-shift: if($icon-rows > 1, 100%/($icon-rows - 1), 0); //percentage to shift y-pos per icon
+
+  //if there a list is passed, run through position with class matching
+  @if($list){
+    @each $item in $list{
+      &.#{$item}{ background-position: ($i * $x-shift) (($start-row - 1) * $y-shift); }
+      $i: $i + 1; //increment counter
+    }
+  }
+
+  //if no list, class-agnostic & return position
+  @else{
+    background-position: ($i * $x-shift) (($start-row - 1) * $y-shift);
+  }
+}

@@ -33,13 +33,21 @@
     <div class="images">
       {% if portfolio_item.images %}
         {% for image in portfolio_item.images %}
-        <div class="image{%if image.classes%} {{image.classes}}{%endif%}">
-          <div class="image-wrapper">
-            <img src="{{image.src}}" alt="{{image.alt}}"/>
+        <div class="content{%if image.classes%} {{image.classes}}{%endif%}">
+          <div class="content-wrapper">
+            <div class="image">
+              <div class="image-wrapper">
+                {% if image.video %}
+                  <video src="{{'images/' + portfolio_item.path + '/' + image.src}}"{% if image.video.controls %} controls {% endif %} data-paused="true" alt="{{image.alt}}"></video>
+                {% else %}
+                  <img src="{{'images/' + portfolio_item.path + '/' + image.src}}" alt="{{image.alt}}"/>
+                {% endif %}
+              </div>
+            </div>
+            {% if image.caption%}
+            <div class="caption">{{image.caption}}</div>
+            {% endif %}
           </div>
-           {% if image.caption%}
-          <div class="caption">{{image.caption}}</div>
-          {% endif %}
         </div>
         {% endfor %}
       {% endif %}
