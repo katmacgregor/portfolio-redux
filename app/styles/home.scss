@@ -48,17 +48,19 @@
 
   .content-container{
     &.work{
+      $content-spacing: 10px;
+
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: $side-padding;
+      padding: $side-padding - $content-spacing;
       .content-item{
         $trans-dur: 350ms;
         $item-size: 50%;
 
         position: relative;
         overflow: hidden;
-        padding: 10px;
+        padding: $content-spacing;
         box-sizing: border-box;
         flex: 1 1 $item-size;
         max-width: $item-size;
@@ -88,7 +90,7 @@
         }
         .thumb{
           background-color: $day-thumb;
-          background-size: contain;
+          background-size: 42%;
           background-position: center;
           background-repeat: no-repeat;
         }
@@ -120,7 +122,7 @@
       }
     }
     &.skills{
-      padding-top: 30px;
+      padding-top: $side-padding + 10px;
       .content-wrapper{ @include max-cap; }
       .section-wrapper{
         display: flex;

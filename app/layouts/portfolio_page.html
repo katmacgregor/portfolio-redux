@@ -2,7 +2,8 @@
 
 {% set body_classes = "portfolio-page nav-show" %}
 
-{% set tools_text="Tools" %}
+{% set role_label="Role" %}
+{% set tools_label="Tools" %}
 
 {% block content %}
   <div class="content-container">
@@ -19,7 +20,12 @@
       </div>
 
       <div class="tools-container">
-        <h6 class="heading">{{tools_text}}</h6>
+        {% if portfolio_item.role_desc %}
+        <h6 class="heading role">{{role_label}}</h6>
+        <p>{{portfolio_item.role_desc}}</p>
+        {% endif %}
+
+        <h6 class="heading">{{tools_label}}</h6>
         {% if portfolio_item.tools %}
           <ul class="tools">
             {% for tool in portfolio_item.tools%}
