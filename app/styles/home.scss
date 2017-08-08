@@ -204,7 +204,14 @@
           }
         }
       }
-      &.fill-screen{ height: 100vh; }
+      &.fill-screen{
+        $padding-offset: ($side-padding * 2);
+
+        height: 100vh;
+        &:not(.skip-padding){
+          height: calc(100vh - #{$padding-offset});
+        }
+      }
       &.work .content-item{
         $item-size: percentage(1/3);
 
