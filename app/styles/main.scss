@@ -19,7 +19,9 @@ body{
 }
 
 .night .header.nav{
-  color: $night-text;
+  &, .title{
+    color: $night-text;
+  }
   .fa{ color: rgba(255, 255, 255, 0.75); }
 }
 

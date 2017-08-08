@@ -26,7 +26,7 @@
     }
 
     h1 .accent, h3{ color: $night-text; }
-    .header h2, .fa{ color: rgba(255, 255, 255, 0.75); }
+    .fa{ color: rgba(255, 255, 255, 0.75); }
 
     .content-container.about{ color: $day-text; }
 
@@ -110,6 +110,7 @@
             width: 100%;
             padding: 10px;
             z-index: 1;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
             box-sizing: border-box;
             transform: translateY(-30%);
             transition: transform $trans-dur * 1.75;

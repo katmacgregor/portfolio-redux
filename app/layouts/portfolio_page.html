@@ -39,15 +39,17 @@
     <div class="images">
       {% if portfolio_item.images %}
         {% for image in portfolio_item.images %}
-        <div class="content{%if image.classes%} {{image.classes}}{%endif%}">
+        <div class="content{%if image.classes%} {{image.classes}}{%endif%}{%if image.video%} has-video{%endif%}">
           <div class="content-wrapper">
             <div class="image">
               <div class="image-wrapper">
+                <div class="aspect">
                 {% if image.video %}
                   <video src="{{'images/' + portfolio_item.path + '/' + image.src}}"{% if image.video.controls %} controls {% endif %} data-paused="true" alt="{{image.alt}}"></video>
                 {% else %}
                   <img src="{{'images/' + portfolio_item.path + '/' + image.src}}" alt="{{image.alt}}"/>
                 {% endif %}
+                </div>
               </div>
             </div>
             {% if image.caption%}

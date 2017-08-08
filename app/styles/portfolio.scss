@@ -4,6 +4,21 @@
 $holder-color: #ddd;
 $holder-accent: rgba(0, 0, 0, 0.1);
 
+@mixin set-aspect($aspect){
+  overflow: hidden;
+  .aspect{
+    position: relative;
+    padding-top: $aspect;
+    img, video{
+      position: absolute;
+      top: 0;
+      object-fit: cover;
+      object-position: top;
+    }
+    video{ height: 100%; }
+  }
+}
+
 .portfolio-page{
   .bg-fill{ background-color: $base-bg; }
   h2.project{
@@ -112,6 +127,10 @@ $holder-accent: rgba(0, 0, 0, 0.1);
           border-radius: 0 0 $rounded $rounded;
         }
       }
+      &.set-aspect{
+        @include set-aspect(percentage(9/16));
+        .image-wrapper .aspect{ overflow-y: auto; }
+      }
     }
 
     .device{
@@ -159,31 +178,34 @@ $holder-accent: rgba(0, 0, 0, 0.1);
         }
       }
 
-      &.iphone .image-wrapper{
-        $side-width: 30px;
+      &.iphone{
+        @include set-aspect(percentage(16/9));
+        .image-wrapper{
+          $side-width: 30px;
 
-        max-width: 320px;
-        border-left-width: $side-width;
-        border-right-width: $side-width;
-        &:before, &:after{
-          left: 50%;
-          transform: translateX(-50%);
-        }
-        &:before{
-          $size: 8px;
+          max-width: 320px;
+          border-left-width: $side-width;
+          border-right-width: $side-width;
+          &:before, &:after{
+            left: 50%;
+            transform: translateX(-50%);
+          }
+          &:before{
+            $size: 8px;
 
-          // top: 0;
-          top: -(($size/2) + ($thickness/2));
+            // top: 0;
+            top: -(($size/2) + ($thickness/2));
 
-          width: $size;
-          height: $size;
-        }
-        &:after{
-          $size: 40px;
-          // bottom: 0;
-          bottom: -(($size/2) + ($thickness/2));
-          width: $size;
-          height: $size;
+            width: $size;
+            height: $size;
+          }
+          &:after{
+            $size: 40px;
+            // bottom: 0;
+            bottom: -(($size/2) + ($thickness/2));
+            width: $size;
+            height: $size;
+          }
         }
       }
     }
