@@ -9,8 +9,14 @@
   <div class="content-container">
     <div class="content-header">
       <h2 class="project title">{{portfolio_item.name}}</h2>
-      {% if portfolio_item.link.href %}
-      <a class="link skip-link-style" href="{{portfolio_item.link.href}}">{{portfolio_item.link.title}}</a>
+      {% if portfolio_item.link.title %}
+        {% if portfolio_item.link.href %}
+        <a class="link skip-link-style" href="{{portfolio_item.link.href}}">
+        {% endif %}
+        <span{% if not portfolio_item.link.href %} class="link"{% endif %}>{{portfolio_item.link.title}}<span>
+        {% if portfolio_item.link.title %}
+          </a>
+        {% endif %}
       {% endif %}
     </div>
 

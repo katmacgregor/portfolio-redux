@@ -8,7 +8,8 @@ body{
     transform: translateY(0) !important; // make sure this renders on each page type
   }
   &:not(.home) .main-container{
-    margin-top: $nav-height;
+    min-height: calc(100vh - #{$nav-height} - 53px); // last value is footer height
+    padding-top: $nav-height;
   }
 
   &.day.afternoon .header.nav{ background-color: rgba($afternoon-thumb, 0.9); }
