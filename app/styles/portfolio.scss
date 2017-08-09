@@ -183,7 +183,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
         .image-wrapper{
           $side-width: 20px;
 
-          max-width: 280px;
+          width: 280px;
           border-radius: 30px;
           border-left-width: $side-width;
           border-right-width: $side-width;

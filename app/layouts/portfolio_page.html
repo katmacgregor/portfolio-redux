@@ -28,7 +28,7 @@
       <div class="tools-container">
         {% if portfolio_item.role_desc %}
         <h6 class="heading role">{{role_label}}</h6>
-        <p>{{portfolio_item.role_desc}}</p>
+        <p>{{portfolio_item.role_desc | safe}}</p>
         {% endif %}
 
         <h6 class="heading">{{tools_label}}</h6>

@@ -3,23 +3,45 @@
 {% set portfolio_item = {
     name: "Coloring App",
     path: "coloring",
-    role_desc: "UX Interaction/FE Development",
+    role_desc: "FE Development",
     description: "
-      <p>An interactive SVG coloring book, where the SVG's white areas are converted to paintable spaces that can be filled with a variety of colors and patterns. In addition to various painting tools, users can undo/redo their most recent action, clear the entire image to the original state, download/save the image, and print.</p>
-      <p>Synced with CMS configuration options, so that the images, text translations, colors & tools can be programmed and controlled via Matterhorn.</p>
+      <p>An interactive coloring book, where the SVG's white areas are converted to paintable spaces that can be filled with a variety of colors and patterns. In addition to various painting tools, users can undo/redo their most recent action, clear the entire image to the original state, download/save the image, and print.</p>
+      <p>Synced with Disney Interactive's internal CMS configuration options, so that the images, internationalized text translations, colors &amp tool types can be customizable and programmable.</p>
+      <p>Utilizes SVG's to create a responsive, dynamic coloring surface that capitalizes on Disney's plethora of publishing content, and brings the physical coloring book into the digital space.</p>
     ",
     tools: [
-      "HTML",
-      "Mustache",
-      "Sass",
-      "IA",
+      "SVG/SVG Filters",
       "UX"
     ],
+    link: {
+      title: "view page",
+      href: "http://lol.disney.com/games/coloring-pages/bambi-thumper-coloring-page"
+    },
     images: [
       {
-        src: "coloring_cms.jpg",
-        alt: "Playmation Responsive Homepage",
+        src: "sadness_blank.jpg",
+        alt: "Coloring Book Blank Page",
         classes: "browser styled"
+      },
+      {
+        src: "sadness_paintbucket.jpg",
+        alt: "Coloring Book Paint Bucket Tool",
+        classes: "browser styled"
+      },
+      {
+        src: "sadness_tools.jpg",
+        alt: "Coloring Book Tool Flyout",
+        classes: "browser styled"
+      },
+      {
+        src: "sadness_airbrush.jpg",
+        alt: "Coloring Book Airbrush Tool",
+        classes: "browser styled"
+      },
+      {
+        src: "mickey_mobile.jpg",
+        alt: "Coloring Book Mobile  State",
+        classes: "device iphone styled"
       }
     ]
   }
