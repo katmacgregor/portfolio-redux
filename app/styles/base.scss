@@ -18,13 +18,10 @@ h1, h2, h3, h4, h5, h6{
   margin: 0;
 }
 
-h1, h2, h3, h4{
-  font-family: $headertext;
-}
-
 h1, h2, h3{
   font-size: 1.9em;
   display: inline-block;
+  font-family: $headertext;
 }
 
 h4, h5{

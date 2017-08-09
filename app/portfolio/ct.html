@@ -1,0 +1,25 @@
+{% extends "./layouts/portfolio_page.html" %}
+
+{% set portfolio_item = {
+    name: "Creative Technology",
+    path: "ct",
+    role_desc: "UX Interaction/FE Development",
+    description: "
+      <p>An interactive piñata that cracks progressively over 4 clicks, fully opening on the 4th crack to reveal the following options: a button with a CMS programmable link. Shower of objects of a single CMS programmable image from the top of the module i.e. falling churros</p>
+    ",
+    tools: [
+      "HTML",
+      "Mustache",
+      "Sass",
+      "IA",
+      "UX"
+    ],
+    images: [
+      {
+        src: "ct_hp.png",
+        alt: "Creatie Technology Homepage",
+        classes: "browser styled"
+      }
+    ]
+  }
+%}
