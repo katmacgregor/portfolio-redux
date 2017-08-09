@@ -18,8 +18,8 @@ footer{
 }
 
 #top{
-  margin-top: 30px;
-  margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 30px;
   opacity: 0;
   text-align: center;
   visibility: hidden;
@@ -31,11 +31,13 @@ footer{
   .fa{ height: auto; }
 }
 .top-text{
-  position: relative;
+  position: absolute;
+  left: 50%;
   margin: 0;
-  padding-top: 16px;
+  padding: 18px 0 4px;
   opacity: 0;
   transition: opacity 250ms;
+  transform: translateX(-50%);
 }
 
 @media screen and (max-width: $mid-high-breakpoint - 1px){
@@ -49,12 +51,12 @@ footer{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-top: 8px;
     .connect, .copyright, & > a{
       flex: 1 1;
     }
     .connect{
       order: 3;
-      padding-top: 20px;
       padding-right: $side-padding;
       justify-content: flex-end;
     }

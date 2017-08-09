@@ -153,7 +153,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
           box-sizing: border-box;
         }
         img, video{
-          border-radius: 5px;
+          border-radius: 3px;
         }
       }
 
@@ -181,9 +181,10 @@ $holder-accent: rgba(0, 0, 0, 0.1);
       &.iphone{
         @include set-aspect(percentage(16/9));
         .image-wrapper{
-          $side-width: 30px;
+          $side-width: 20px;
 
-          max-width: 320px;
+          max-width: 280px;
+          border-radius: 30px;
           border-left-width: $side-width;
           border-right-width: $side-width;
           &:before, &:after{
