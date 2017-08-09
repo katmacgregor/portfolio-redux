@@ -183,7 +183,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
         .image-wrapper{
           $side-width: 20px;
 
-          width: 280px;
+          max-width: 280px;
           border-radius: 30px;
           border-left-width: $side-width;
           border-right-width: $side-width;
@@ -217,6 +217,9 @@ $holder-accent: rgba(0, 0, 0, 0.1);
   .portfolio-page{
     .content-wrapper{
       display: flex;
+      .image{
+        flex: 1 1 auto;
+      }
       .caption{
         margin-top: 0;
         padding-left: 24px;
