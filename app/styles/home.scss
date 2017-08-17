@@ -163,11 +163,16 @@
         transition: opacity 300ms;
         html.no-touch &:hover{ opacity: 1; }
       }
-      .content{
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+      .content-container.fill-screen{
+        .content{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        &.header .content{
+          top: 45%;
+        }
       }
     }
   }
@@ -203,6 +208,12 @@
             box-sizing: border-box;
           }
         }
+      }
+      &.header .content{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
       &.fill-screen{
         $padding-offset: ($side-padding * 2);

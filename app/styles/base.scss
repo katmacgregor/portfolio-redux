@@ -43,12 +43,13 @@ a{
   text-decoration: none;
   cursor: pointer;
   &, html.no-touch &:hover, &:active, &:visited{ color: $day-text; }
+  html.no-touch &:hover{ text-decoration: underline; }
 }
 
 p, li{
   font-size: 0.8em;
   font-weight: 200;
-  line-height: 1.5em;
+  line-height: 1.4em;
   letter-spacing: 0.03em;
   display: block;
 }

@@ -31,7 +31,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
   .content-header{
     text-align: center;
     padding-bottom: 16px;
-    .link{ display: block; }
+    .project.title{ display: block; }
   }
 
   .content{
@@ -45,6 +45,9 @@ $holder-accent: rgba(0, 0, 0, 0.1);
       img, video{ width: 100%; }
     }
     .image{ margin: 0 auto; }
+    .content-wrapper{
+      margin: 30px 0;
+    }
   }
 
   .content-info{
@@ -57,12 +60,37 @@ $holder-accent: rgba(0, 0, 0, 0.1);
     text-align: center;
     margin-top: 10px;
   }
+
+  .tools-container{
+    .heading{ margin-bottom: 10px; }
+    li{ margin-bottom: 6px; }
+  }
 }
 
 
 @media screen and (min-width: 570px){
   .portfolio-page{
     h2.project{ font-size: 1.2em; margin: 0; }
+  }
+}
+
+@media screen and (max-width: $mid-high-breakpoint - 1px){
+  .portfolio-page{
+    .content .image{
+      max-height: 600px;
+      overflow: hidden;
+    }
+    .content-info{
+      padding-bottom: 20px;
+      border-bottom: $border-default;
+    }
+    .desc + .tools-container{
+      margin-top: 10px;
+    }
+    .tools-container{
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 
@@ -194,15 +222,13 @@ $holder-accent: rgba(0, 0, 0, 0.1);
           &:before{
             $size: 8px;
 
-            // top: 0;
             top: -(($size/2) + ($thickness/2));
-
             width: $size;
             height: $size;
           }
           &:after{
             $size: 40px;
-            // bottom: 0;
+
             bottom: -(($size/2) + ($thickness/2));
             width: $size;
             height: $size;

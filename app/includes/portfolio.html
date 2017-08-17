@@ -10,7 +10,8 @@
     {
       name: "Shop Disney",
       class: "shopdisney",
-      description: "Redesign of DisneyStore.com"
+      description: "Redesign of DisneyStore.com, coming soon",
+      no_link: true
     },
     {
       name: "Star Wars",
@@ -99,7 +100,7 @@
 
 {% for item in project %}
   <div class="content-item">
-    {% if item.class %}
+    {% if item.class and not item.no_link %}
     <a href="{{item.class + '.html'}}" class="item skip-link-style" alt="{{item.name}}">
     {% else %}
     <div class="item">
@@ -114,7 +115,7 @@
           </div>
         </div>
       </div>
-    {% if item.class %}
+    {% if item.class and not item.no_link %}
     </a>
     {% else %}
     </div>
