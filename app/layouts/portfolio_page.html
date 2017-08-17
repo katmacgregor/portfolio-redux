@@ -39,7 +39,7 @@
     <div class="images">
       {% if portfolio_item.images %}
         {% for image in portfolio_item.images %}
-        <div class="content{%if image.classes%} {{image.classes}}{%endif%}{%if image.video%} has-video{%endif%}">
+        <div class="content{%if image.classes%} {{image.classes}}{%endif%}{%if image.video%} has-video{%endif%}{% if image.caption %} has-caption{%endif%}">
           <div class="content-wrapper">
             <div class="image">
               <div class="image-wrapper">
