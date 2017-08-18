@@ -278,6 +278,9 @@ $holder-accent: rgba(0, 0, 0, 0.1);
           padding-right: $caption-offset;
         }
       }
+      &.set-aspect.browser .image{
+        min-width: 750px;
+      }
       &.iphone{
         .content-wrapper{
           max-width: 750px;
