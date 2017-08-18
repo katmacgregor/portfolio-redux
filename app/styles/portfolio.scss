@@ -266,7 +266,8 @@ $holder-accent: rgba(0, 0, 0, 0.1);
 @media screen and (min-width: $wide-breakpoint){
   .portfolio-page{
     .content.has-caption{
-      $caption-offset: 24px;
+      $caption-offset: 36px;
+
       &:not(.image-right){
         .caption{ padding-left: $caption-offset; }
       }
@@ -275,6 +276,16 @@ $holder-accent: rgba(0, 0, 0, 0.1);
         .caption{
           order: 1;
           padding-right: $caption-offset;
+        }
+      }
+      &.iphone{
+        .content-wrapper{
+          max-width: 750px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .caption{
+          flex: 1 1 5%;
         }
       }
       .caption{

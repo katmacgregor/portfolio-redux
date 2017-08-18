@@ -4,23 +4,79 @@
     name: "Creative Technology Games",
     path: "ct/games",
     description: "
-      <p>built with Phaser, pre-configured with npm, bower, and gulp</p>
-      <p>A path tracing memory game, in which a path is initially drawn, fades out, and then the user is prompted to mimic the path. On success, a branded animation plays back the path, and the user then advances to the next level. Additional connector points are introduced after x-num (currently 3) of successes to increase complexity. The speed of the initial path tracing is increased after the maximum number (currently 6) of connectors have been introduced. On failure, the user is directed to a view with their score, and applicable personal best/high score information</p>
-      <p>A configurable number of tiles are generated (by either specifying the number of rows and/or columns, where filling the game space automatically is the default setting). Then, the user finds combinations of 3 or more tiles (i.e. blue dots). When 3 or more are matched, the matched tiles collapse and additional ones animate in from the top of the screen to take their place, and the user is rewarded points based on the number of matched tiles. As the board is refilled, the game checks for any existing matches, and automatically collapses the matches and increments the score accordingly.</p>
-      <p>A configurable number of image pairs are generated, with the images facing down. The user clicks on different cards, which flip over with a CSS animation. Only 2 cards can be selected at a given time. If a match is made, a 'matched' transition is applied to the cards and the score is incremented. If the cards aren't a match, they turn back over, and the user continues making match attempts. Once all cards have been matched, the cards flip back over, are assigned new pair values, and a new round begins.</p>
+      <p>Ideated, built, and deployed client-side, configurable, game engines built with Phaser &amp HTML5, pre-configured with npm, bower, and gulp</p>
+      <p>Each game engine was built as a boilerplate to be configurable and programmable by producers, synced with an internal content management system. Custom artwork is uploaded for each game to offer unique themed experiences across Disney's properties.</p>
+      <p>Optional introduction/interstitial/endgame screens offer an opportunity for cohesive storytelling throughout the experience.</p>
+      <p>Variable complexity is introduced into each game in order to appeal to guests of many ages and skillsets.</p>
     ",
     tools: [
-      "HTML",
-      "Mustache",
-      "Sass",
-      "IA",
-      "UX"
+      "Bower",
+      "Gulp",
+      "npm",
+      "Phaser"
     ],
     images: [
       {
-        src: "dory_five_thumb.jpg",
-        alt: "Find Dory Forgetful Adventure Game",
-        classes: "browser styled"
+        src: "pathtracer_dory.mp4",
+        alt: "Finding Dory Forgetful Adventure Game",
+        classes: "browser styled",
+        video: {
+          controls: true
+        },
+        caption: "
+          <p>A path tracing memory game, in which a path is initially drawn, fades out, and then the user is prompted to mimic the path. On success, a branded animation plays back the path, and the user then advances to the next level. On failure, the user is directed to a view with their score, and applicable personal best/high score information.</p>
+        "
+      },
+      {
+        src: "dory_playing.jpg",
+        alt: "Finding Dory Forgetful Adventure Game In Play",
+        classes: "browser styled image-right",
+        caption: "
+          <p>Additional connector points are introduced after x-num of successes to increase complexity. The speed of the initial path tracing is increased after the maximum number of connectors have been introduced.</p>
+        "
+      },
+      {
+        src: "pathtracer_sw.mp4",
+        alt: "Star Wars Hyperdash Game",
+        classes: "browser styled",
+        video: {
+          controls: true
+        }
+      },
+      {
+        src: "tsum_play.jpg",
+        alt: "Tsum Tsum Mix",
+        classes: "browser styled",
+        caption: "
+          <p>A traditional match-3 engine custom built in phaser. A configurable number of tiles are generated (by either specifying the number of rows and/or columns, where filling the game space automatically is the default setting).</p>
+        "
+      },
+      {
+        src: "minnie_play.jpg",
+        alt: "Tsum Tsum Mix",
+        classes: "browser styled image-right",
+        caption: "
+          <p>The user finds combinations of 3 or more tiles (i.e. blue dots). When 3 or more are matched, the matched tiles collapse and additional ones animate in from the top of the screen to take their place, and the user is rewarded points based on the number of matched tiles. As the board is refilled, the game checks for any existing matches, and automatically collapses the matches and increments the score accordingly.</p>
+        "
+      },
+      {
+        src: "filmflip.mp4",
+        alt: "Film Flip Memory Card Game",
+        classes: "browser styled",
+        video: {
+          controls: true
+        },
+        caption: "
+          <p>A responsive HTML5 memory game, where a configurable number of image pairs are generated, with the images facing down. The user clicks on different cards, which flip over with a CSS animation. Only 2 cards can be selected at a given time.</p>
+        "
+      },
+      {
+        src: "filmflip_mobile.jpg",
+        alt: "Film Flip Memory Card Game Mobile",
+        classes: "device iphone styled image-right",
+        caption: "
+          <p>If a match is made, a 'matched' transition is applied to the cards and the score is incremented. If the cards aren't a match, they turn back over, and the user continues making match attempts. Once all cards have been matched, the cards flip back over, are assigned new pair values, and a new round begins.</p>
+        "
       }
     ]
   }
