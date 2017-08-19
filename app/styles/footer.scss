@@ -42,6 +42,11 @@ footer{
 
 @media screen and (max-width: $mid-high-breakpoint - 1px){
   footer{
+    #top{
+      height: 24px;
+      margin: 3px auto;
+    }
+    .top-text{ display: none !important; }
     .connect{ justify-content: center; }
   }
 }

@@ -1,4 +1,5 @@
 @import "global/_style_elements.scss";
+@import "global/_breakpoints.scss";
 @import "mixins/font_helpers";
 
 // include local fonts
@@ -25,8 +26,8 @@ h1, h2, h3{
 }
 
 h4, h5{
-  font-size: 1.3em;
-  line-height: 1.5em;
+  font-size: 1.1em;
+  line-height: 1.3em;
 }
 
 h6{ font-size: 1em; }
@@ -66,5 +67,12 @@ body{
     @include set-link-color($night-accent-text);
     &.evening{ @include set-link-color($evening-accent-text); }
     &.midnight{ @include set-link-color($midnight-accent-text); }
+  }
+}
+
+@media screen and (min-width: $mid-high-breakpoint){
+  h4, h5{
+    font-size: 1.3em;
+    line-height: 1.5em;
   }
 }

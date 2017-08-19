@@ -63,6 +63,9 @@ $holder-accent: rgba(0, 0, 0, 0.1);
         @include inline-image;
       }
     }
+    &:last-of-type .content-wrapper{
+      margin-bottom: 0 !important; // override margin adjustments
+    }
     .image{ margin: 0 auto; }
     .content-wrapper{
       margin: 36px 0;
@@ -77,6 +80,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
 
   .caption{
     text-align: center;
+    p{ font-size: inherit; }
   }
 
   .tools-container{
@@ -108,6 +112,10 @@ $holder-accent: rgba(0, 0, 0, 0.1);
     .tools-container{
       width: 100%;
       text-align: center;
+      li{
+        display: inline-block;
+        &:not(:last-child){ margin-right: 8px; }
+      }
     }
   }
 }
@@ -272,9 +280,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
 }
 
 @media screen and (max-width: $wide-breakpoint - 1px){
-  .portfolio-page .caption{
-    margin-top: 16px;
-  }
+  .portfolio-page .caption{ margin-top: 16px; }
 }
 
 @media screen and (min-width: $wide-breakpoint){

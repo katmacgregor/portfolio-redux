@@ -70,11 +70,23 @@
           height: 100%;
           overflow: hidden;
           color: $light-text;
-          html.no-touch &:hover{
+          html.no-touch &:hover, html.touch &:active, html.touch &.no-link{
             .content-info{
               opacity: 1;
               .text{ transform: translateY(-50%); }
             }
+          }
+          html.touch &.no-link{
+            .text{
+              text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.13);
+              &:after{
+                content: "coming soon";
+                display: block;
+                font-size: 0.8em;
+                line-height: 0.7em;
+              }
+            }
+            .content-info:after{ opacity: 0.3; }
           }
         }
         .wrapper{

@@ -75,7 +75,7 @@
       class: "tfa",
       description: "Takeover of Disney.com for movie premiere",
       main_image: {
-        src: "tfa/sw_takeover.jpg"
+        src: "tfa/tfa_takeover.jpg"
       }
     },
     {
@@ -103,7 +103,7 @@
     {% if item.class and not item.no_link %}
     <a href="{{item.class + '.html'}}" class="item skip-link-style" alt="{{item.name}}">
     {% else %}
-    <div class="item">
+    <div class="item{% if item.no_link %} no-link{% endif %}">
     {% endif %}
       <div class="wrapper">
         <div class="thumb" style="background-image: url({{'images/icons/port_hp_icons_' + item.class + '.svg'}});">

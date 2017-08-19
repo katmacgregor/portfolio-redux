@@ -48,7 +48,7 @@
               <div class="image-wrapper">
                 <div class="aspect">
                 {% if image.video %}
-                  <video src="{{'images/' + portfolio_item.path + '/' + image.src}}"{% if image.video.controls %} controls {% endif %} data-paused="true" alt="{{image.alt}}"></video>
+                  <video src="{{'images/' + portfolio_item.path + '/' + image.video.src + '.mp4'}}" autoplay{% if image.video.controls %} controls{% endif %}{% if image.video.loop %} loop{% endif %} alt="{{image.alt}}" poster="{{'images/' + portfolio_item.path + '/' + image.video.src + '.jpg'}}"></video>
                 {% else %}
                   <img src="{{'images/' + portfolio_item.path + '/' + image.src}}" alt="{{image.alt}}"/>
                 {% endif %}
