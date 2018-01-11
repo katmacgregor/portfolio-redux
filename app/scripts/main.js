@@ -52,6 +52,8 @@ $(document).ready(function() {
   $topButton.click(scrollToTop);
   $homeTop.click(scrollToTop);
 
+  // set current year for copyright
+  $('.date').attr('data-year', getCurrentYear());
 
   // Set time of day styling
   processTimeOfDay();
@@ -122,6 +124,12 @@ $(document).ready(function() {
         }
       }
     });
+  }
+
+  function getCurrentYear () {
+    var today = new Date();
+    var year = today.getFullYear();
+    return year;
   }
 
   function setTimeOfDay (time) {

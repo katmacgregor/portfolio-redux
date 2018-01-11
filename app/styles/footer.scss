@@ -14,6 +14,10 @@ footer{
   }
   .copyright{
     padding-bottom: 10px;
+
+    .date:before{
+      content: attr(data-year);
+    }
   }
 }
 
