@@ -1,0 +1,26 @@
+@import "../../assets/styles/global/_breakpoints.scss";
+
+.header {
+  display: block;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: transparent;
+  transition: position 200ms;
+  .title {
+    font-size: 1.25em;
+  }
+  h2 { font-weight: 200; }
+
+  @include mid-high-max {
+    .title { padding-top: 40px; }
+  }
+
+
+  @include mid-high-min {
+    .title { font-size: 1.8em; }
+  }
+}
