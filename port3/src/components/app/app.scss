@@ -12,6 +12,7 @@
 }
 
 @include set-font-face('KingBasil', 'King-Basil-Lite');
+@include set-font-face($font-family: 'Muli', $file-name: 'Muli-Regular');
 
 html, body{ width: 100%; height: 100%; }
 

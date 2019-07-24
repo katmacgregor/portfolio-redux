@@ -1,12 +1,17 @@
-@import "mixins/retina.scss";
+@import "./retina.scss";
 
-@mixin icon-sprite($image-path, $icon-size, $start-row, $source-image-size, $list: null, $extension: png) {
+@mixin icon-sprite($image-path, $icon-size, $start-row, $source-image-size, $list: null, $extension: png, $skip-retina: false) {
   $icon-cols: nth($source-image-size, 1);
   $icon-rows: nth($source-image-size, 2);
 
   $background-size: ($icon-cols * 100%) ($icon-rows * 100%);
 
-  @include retina-image($image-path, $background-size, $extension); //background size required by Bourbon, but doesn't play well with percentage
+  @if($skip-retina == false) {
+    @include retina-image($image-path, $background-size, $extension); //background size required by Bourbon, but doesn't play well with percentage
+  } @else {
+    background-image: url("../" + $image-path + "." + $extension);
+    background-size: $background-size;
+  }
 
   //if only 1 value is passed in $icon-size, use that value for both width and height
   @if(length($icon-size) > 1) {

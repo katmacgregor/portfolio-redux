@@ -1,0 +1,46 @@
+@import "../../assets/styles/global/_breakpoints.scss";
+@import "../../assets/styles/mixins/mixins.scss";
+@import "../../assets/styles/mixins/icon_sprite.scss";
+
+$list: (
+  contact,
+  linkedin,
+  github,
+  codepen,
+  resume
+);
+
+.connect {
+  a {
+    display: inline-block;
+    & + a {
+      margin-left: 1.5em;
+    }
+  }
+
+  .icon{
+    $size: 24px;
+
+    display: inline-block;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+    transition: transform 250ms, opacity 250ms;
+    @include hover-focus-helper {
+      transform: rotate(24deg);
+      opacity: 1;
+    }
+    @include icon-sprite('../assets/images/icons_connect', $size, 1, 5 1, $list: $list, $extension: svg, $skip-retina: true);
+  }
+
+  @include mid-high-min {
+    &.icons-large {
+      $size: 32px;
+      .icon {
+        width: $size;
+        height: $size;
+      }
+    }
+  }
+}

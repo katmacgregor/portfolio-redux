@@ -2,6 +2,7 @@ import React from 'react';
 import './browse.scss';
 
 import Header from '../header/header';
+import Connect from '../connect/connect';
 
 class Browse extends React.Component {
   render() {
@@ -12,6 +13,7 @@ class Browse extends React.Component {
         <div className="header content-container header fill-screen skip-padding">
           <div className="content">
             <Header h1="Katrina MacGregor" subheader="hi" header="i'm katrina" />
+            <Connect size="large" />
           </div>
           <div className="arrow"></div>
         </div>

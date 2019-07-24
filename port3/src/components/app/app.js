@@ -2,6 +2,7 @@ import React from 'react';
 import './app.scss';
 
 import Browse from '../browse/browse';
+import Footer from '../footer/footer';
 
 class App extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class App extends React.Component {
         <main className="main-container">
           <Browse />
         </main>
+        <Footer />
       </div>
     );
   }

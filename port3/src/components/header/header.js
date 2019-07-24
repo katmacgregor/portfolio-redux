@@ -6,7 +6,7 @@ const Header = ({ h1, subheader, header }) => {
     <div className="header">
       <div className="title">
         <h1 className="hide">{h1}</h1>
-        {subheader && <h3>{subheader},</h3>}{header && <h2> {header}</h2>}
+        {subheader && <h3>{subheader},</h3>}{header && <h2> {header}.</h2>}
       </div>
     </div>
   );
