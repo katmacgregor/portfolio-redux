@@ -25,21 +25,19 @@ const connectItems = [
   },
   {
     id: "resume",
-    link: "images/KMacGregor_resume_web.pdf",
+    link: `${process.env.PUBLIC_URL}/images/KMacGregor_resume_web.pdf`,
     title: "Resume"
   }
 ];
 
-const Connect = ({size}) => {
-  return (
-    <div className={classNames('connect', {[`icons-${size}`]: size})}>
-      {connectItems.map((item, i) => (
-        <a href={item.link} title={item.title} key={i}>
-          <span className={classNames('icon', [item.id])} />
-        </a>
-      ))}
-    </div>
-  );
-};
+const Connect = ({size}) => (
+  <div className={classNames('connect', {[`icons-${size}`]: size})}>
+    {connectItems.map((item, i) => (
+      <a href={item.link} title={item.title} key={i}>
+        <span className={classNames('icon', [item.id])} />
+      </a>
+    ))}
+  </div>
+);
 
 export default Connect;

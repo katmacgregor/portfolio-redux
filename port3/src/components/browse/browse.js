@@ -5,6 +5,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 
 import Header from '../header/header';
 import Connect from '../connect/connect';
+import ContentGrid from '../contentgrid/contentgrid';
 
 const skills = [
   {
@@ -76,7 +77,11 @@ class Browse extends React.Component {
           <div className="arrow" onClick={this.handleScrollDown}></div>
         </div>
 
-        <div className="skills content-container" ref={this.firstSection}>
+        <div className="content-container skip-padding" ref={this.firstSection}>
+          <ContentGrid />
+        </div>
+
+        <div className="content-container skills">
           <div className="content-wrapper">
             <div className="section-wrapper">
               {skills.map((skill, i) => (

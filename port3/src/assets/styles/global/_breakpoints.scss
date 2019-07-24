@@ -20,3 +20,9 @@ $wide-breakpoint: 1060px;
     @content;
   }
 }
+
+@mixin wide-min {
+  @media screen and (min-width: $wide-breakpoint) {
+    @content;
+  }
+}
