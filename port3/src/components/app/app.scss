@@ -1,11 +1,11 @@
-@import "../../assets/styles/global/_breakpoints.scss";
-@import "../../assets/styles/global/_style_elements.scss";
-@import "../../assets/styles/mixins/mixins.scss";
+@import "../../assets/styles/global/_breakpoints";
+@import "../../assets/styles/global/_style_elements";
+@import "../../assets/styles/mixins/mixins";
 @import "../../assets/styles/mixins/font_helpers";
 
 @mixin set-link-color($color){
   a:not(.skip-link-style){
-    &, html.no-touch &:hover, &:active, &:visited{
+    @include hover-focus-helper {
       color: $color;
     }
   }
@@ -59,11 +59,35 @@ ul {
 }
 
 a {
+  $trans: 250ms;
+  $color: $day-text;
+
+  position: relative;
   text-decoration: none;
   cursor: pointer;
-  @mixin hover-focus-helper {
-    color: $day-text;
-    text-decoration: underline;
+  color: $color;
+  &:not(.skip-link-style) {
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      opacity: 0;
+      background-color: $color;
+      transform: translateY(3px) scaleX(0.5);
+      transition: opacity ($trans * 0.2) ($trans * 0.4), transform $trans;
+    }
+
+    @include hover-focus-helper {
+      &:after {
+        opacity: 1;
+        transform: translateY(1px) scaleX(1);
+        transition: opacity ($trans * 0.1), transform $trans;
+      }
+    }
   }
 }
 
@@ -100,6 +124,11 @@ img { max-width: 100%; }
   width: 100%;
   opacity: 0;
   transition: opacity 800ms 500ms;
+}
+
+.content-container {
+  position: relative;
+  &:not(.skip-padding) { padding: $side-padding; }
 }
 
 @media screen and (min-width: $mid-high-breakpoint){

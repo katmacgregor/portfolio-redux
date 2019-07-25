@@ -33,7 +33,7 @@ const connectItems = [
 const Connect = ({size}) => (
   <div className={classNames('connect', {[`icons-${size}`]: size})}>
     {connectItems.map((item, i) => (
-      <a href={item.link} title={item.title} key={i}>
+      <a href={item.link} title={item.title} className="skip-link-style" key={i}>
         <span className={classNames('icon', [item.id])} />
       </a>
     ))}

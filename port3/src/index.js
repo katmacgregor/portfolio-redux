@@ -1,16 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './reducers/reducers';
 
 import './index.css';
 import App from './components/app/app';
+
 import * as serviceWorker from './serviceWorker';
+
+const history = createBrowserHistory();
+const store = createStore(rootReducer);
 
 const render = Component => {
   ReactDOM.render(
-    <BrowserRouter>
-      <Component/>
-    </BrowserRouter>,
+    <Provider store={store}>
+      <Router history={history}>
+        <Component/>
+      </Router>
+    </Provider>,
     document.getElementById('root')
   );
 };

@@ -4,7 +4,6 @@ import './browse.scss';
 import smoothscroll from 'smoothscroll-polyfill';
 
 import Header from '../header/header';
-import Connect from '../connect/connect';
 import ContentGrid from '../contentgrid/contentgrid';
 
 const skills = [
@@ -67,13 +66,8 @@ class Browse extends React.Component {
   render() {
     return (
       <div className="browse">
-        <a name="top"></a>
-
-        <div className="header content-container header fill-screen skip-padding">
-          <div className="content">
-            <Header h1="Katrina MacGregor" subheader="hi" header="i'm katrina" />
-            <Connect size="large" />
-          </div>
+        <div className="header content-container fill-screen">
+          <Header />
           <div className="arrow" onClick={this.handleScrollDown}></div>
         </div>
 

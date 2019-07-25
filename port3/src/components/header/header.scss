@@ -1,15 +1,72 @@
-@import "../../assets/styles/global/_breakpoints.scss";
+@import "../../assets/styles/global/_breakpoints";
+@import "../../assets/styles/global/_style_elements";
+
+.header-container {
+  &.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $nav-height;
+    padding: 0 4vw;
+    z-index: 10;
+    overflow: hidden;
+    background-color: rgba($day-thumb, 0.9);
+    border-bottom: 1px solid rgba(#666, 0.15);
+    transition: position 100ms, background-color 200ms, transform 100ms;
+    // transform: translateY(-100%);
+    box-sizing: border-box;
+
+    .header, .connect{
+      flex: 1 1;
+    }
+    .connect {
+      text-align: right;
+    }
+    .title {
+      text-align: left;
+      font-family: $headertext;
+      margin-top: 0.6em;
+      padding-top: 0;
+      .greeting + span {
+        margin-left: 0.1em;
+      }
+    }
+    @include mid-high-min {
+      font-size: 0.7em;
+    }
+  }
+
+  &:not(.nav) {
+    .header {
+      padding-top: 20px;
+      padding-bottom: 10px;
+    }
+
+    @include mid-high-min {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @include mid-high-max-min-height {
+      top: 45%;
+    }
+  }
+}
 
 .header {
   display: block;
   position: relative;
   width: 100%;
   margin: 0 auto;
-  padding-top: 20px;
-  padding-bottom: 10px;
   text-align: center;
   background-color: transparent;
   transition: position 200ms;
+  box-sizing: border-box;
   .title {
     font-size: 1.25em;
   }

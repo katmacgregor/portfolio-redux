@@ -1,11 +1,9 @@
-@import "../../assets/styles/global/_breakpoints.scss";
-@import "../../assets/styles/global/_style_elements.scss";
-@import "../../assets/styles/mixins/mixins.scss";
+@import "../../assets/styles/global/_breakpoints";
+@import "../../assets/styles/global/_style_elements";
+@import "../../assets/styles/mixins/mixins";
 
 .browse {
   .content-container {
-    position: relative;
-    &:not(.skip-padding) { padding: $side-padding; }
     @include container-alternating-color($base-bg, $base: 0%);
 
     &.skills{
@@ -41,12 +39,6 @@
 
   @include mid-high-min {
     .content-container {
-      &.header .content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
       &.fill-screen {
         $padding-offset: ($side-padding * 2);
 
@@ -87,9 +79,6 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-      }
-      &.header .content {
-        top: 45%;
       }
     }
   }
