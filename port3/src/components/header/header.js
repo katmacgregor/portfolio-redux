@@ -5,7 +5,7 @@ import './header.scss';
 
 import Connect from '../connect/connect';
 
-const Header = ({nav}) => {
+const Header = ({nav, show, hide}) => {
   let content;
   if(!nav) {
     content = (
@@ -23,7 +23,7 @@ const Header = ({nav}) => {
   }
 
   return (
-    <div className={classNames('header-container', {'nav': nav})}>
+    <div className={classNames('header-container', { 'nav': nav, 'show': show })}>
       <div className="header">
         <div className="title">
           {content}

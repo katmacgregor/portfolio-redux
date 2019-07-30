@@ -59,7 +59,7 @@ class Browse extends React.Component {
 
   handleScrollDown() {
     const firstSectionEl = this.firstSection.current;
-    firstSectionEl.scrollIntoView({ behavior: "smooth" });
+    firstSectionEl.scrollIntoView({ behavior: 'smooth' });
     smoothscroll.polyfill();
   }
 

@@ -26,7 +26,6 @@ class Detail extends React.Component {
     const that = this;
 
     const success = (data) => {
-      console.log(data);
       that.props.setItem(data);
     }
 
@@ -43,7 +42,7 @@ class Detail extends React.Component {
             <div className="content-header">
               <h2 className="project title">{item.name}</h2>
               {item.link && item.link.title && (
-                <a className="link" href={item.link.href} target="_blank">
+                <a className="link" href={item.link.href} target="_blank" rel="noopener noreferrer">
                   <span>{item.link.title}</span>
                 </a>
               )}
@@ -56,7 +55,7 @@ class Detail extends React.Component {
                 {item.tools && (
                   <ul className="tools">
                     {item.tools.map((tool, i) => (
-                      <li>{tool}</li>
+                      <li key={i}>{tool}</li>
                     ))}
                   </ul>
                 )}

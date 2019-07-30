@@ -6,12 +6,12 @@ footer {
   position: relative;
   text-align: center;
   border-top: 1px solid rgba(#fff, 0.08);
+  padding: ($side-padding * 0.7) $side-padding $side-padding;
+  box-sizing: border-box;
   .connect{
     display: flex;
   }
   .copyright{
-    // padding-bottom: 10px;
-
     .date:before{
       content: attr(data-year);
     }
@@ -19,35 +19,43 @@ footer {
 
   #top{
     position: relative;
-    margin-bottom: 30px;
-    opacity: 0;
+    margin-bottom: 1em;
     text-align: center;
-    visibility: hidden;
     transition: opacity 250ms 100ms, visibility 0ms 650ms;
     font-size: 1rem;
-    @mixin hover-focus-helper {
-      .top-text{
-        opacity: 1;
+    & > div {
+      cursor: pointer;
+      display: inline-block;
+      @include hover-focus-helper {
+        .top-text{
+          opacity: 1;
+        }
       }
     }
   }
 
+  .arrow {
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../assets/images/arrow.svg');
+    opacity: 0.3;
+    transform: scaleY(-1);
+    @include hover-focus-helper { opacity: 1; }
+  }
+
   .top-text{
-    position: absolute;
-    left: 50%;
     margin: 0;
-    padding: 18px 0 4px;
+    padding: 0.05em 0 0;
+    min-width: 100px;
     opacity: 0;
     transition: opacity 250ms;
-    transform: translateX(-50%);
   }
 
   @include mid-high-max {
-    #top{
-      height: 24px;
-      margin: 3px auto;
-    }
-    .top-text{ display: none !important; }
     .connect{
       justify-content: center;
       margin-bottom: 1em;
@@ -55,13 +63,19 @@ footer {
   }
 
   @include mid-high-min {
+    $footer-tb-padding: 10px;
+    $footer-offset: 2px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 8px;
-    & > a{
+    padding-top: $footer-tb-padding;
+    padding-bottom: $footer-tb-padding - $footer-offset;
+
+    #top{
       position: relative;
       order: 2;
+      margin: $footer-offset 0 0;
     }
 
     .connect, .copyright, & > a{

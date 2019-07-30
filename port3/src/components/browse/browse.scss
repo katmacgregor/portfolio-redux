@@ -43,9 +43,6 @@
         $padding-offset: ($side-padding * 2);
 
         height: 100vh;
-        &:not(.skip-padding) {
-          height: calc(100vh - #{$padding-offset});
-        }
       }
 
       &.skills{

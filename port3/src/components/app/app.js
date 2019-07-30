@@ -8,11 +8,12 @@ import { withRouter } from 'react-router-dom';
 
 import * as utilities from '../../shared/utilities';
 
+import classNames from 'classnames/bind';
 import './app.scss';
 
 import Browse from '../browse/browse';
 import Detail from '../detail/detail';
-import Header from '../header/header';
+import Nav from '../nav/nav';
 import Footer from '../footer/footer';
 
 const mapStateToProps = (state) => {
@@ -25,6 +26,10 @@ class App extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      loaded: false
+    };
+
     this.getPortfolioItems = this.getPortfolioItems.bind(this);
   }
 
@@ -32,11 +37,17 @@ class App extends React.Component {
     this.getPortfolioItems();
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.items !== prevProps.items) {
+      this.setState({ loaded: true });
+    }
+  }
+
   render() {
     return (
-      <div className="app">
+      <div className={classNames("app", { "loaded": this.state.loaded })}>
         <div className="bg-fill"></div>
-        <Header nav />
+        <Nav hideTop={this.props.location.pathname === '/'} />
         <main className="main-container">
           <Switch>
             <Route exact path='/' component={Browse} />

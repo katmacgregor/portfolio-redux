@@ -16,9 +16,13 @@
     overflow: hidden;
     background-color: rgba($day-thumb, 0.9);
     border-bottom: 1px solid rgba(#666, 0.15);
+    transform: translateY(-100%);
     transition: position 100ms, background-color 200ms, transform 100ms;
-    // transform: translateY(-100%);
     box-sizing: border-box;
+
+    &.show {
+      transform: translateY(0);
+    }
 
     .header, .connect{
       flex: 1 1;
@@ -53,7 +57,7 @@
       transform: translate(-50%, -50%);
     }
     @include mid-high-max-min-height {
-      top: 45%;
+      top: 43%;
     }
   }
 }
