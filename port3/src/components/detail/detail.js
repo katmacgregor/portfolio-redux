@@ -8,6 +8,8 @@ import * as utilities from '../../shared/utilities';
 import classNames from 'classnames/bind';
 import './detail.scss';
 
+import Asset from './asset/asset';
+
 const mapStateToProps = (state) => {
   return {
     item: state.portfolio.active
@@ -15,11 +17,6 @@ const mapStateToProps = (state) => {
 };
 
 class Detail extends React.Component {
-  constructor() {
-    super();
-
-    this.setImage = this.setImage.bind(this);
-  }
   componentDidMount() {
     const item = this.props.match.path;
     const path = `${process.env.PUBLIC_URL}/portfolio/${item}.json`;
@@ -35,6 +32,7 @@ class Detail extends React.Component {
 
   render() {
     const { item } = this.props;
+
     if(item) {
       return (
         <div className="detail">
@@ -62,7 +60,9 @@ class Detail extends React.Component {
               </div>
             </div>
             <div className="images">
-              {item.images && item.images.map(this.setImage)}
+              {item.images && item.images.map((image, i) => (
+                <Asset image={image} path={item.path} key={i}/>
+              ))}
             </div>
           </div>
         </div>
@@ -70,38 +70,6 @@ class Detail extends React.Component {
     } else {
       return null;
     }
-  }
-
-  setImage(image, i) {
-    const { item } = this.props;
-    const imageWrapper = (
-      <div className="image-wrapper">
-        <div className="aspect">
-          {image.video && (
-            <video src={`${process.env.PUBLIC_URL}/images/content/${item.path}/${image.video.src}.mp4`} autoPlay controls={image.video.controls} loop={image.video.loop} alt={image.alt} poster={`images/${item.path}/${image.video.src}.jpg`}></video>
-          )}
-          {!image.video && (
-            <img src={`${process.env.PUBLIC_URL}/images/content/${item.path}/${image.src}`} alt={image.alt} />
-          )}
-        </div>
-      </div>
-    );
-
-    return (
-      <div className={classNames('content', [image.classes], {'has-video': image.video, 'has-caption': image.caption})} key={i}>
-        <div className="content-wrapper">
-          <div className="image">
-            {image.link && (
-              <a href={image.link} target="_blank" rel="noopener noreferrer">
-                {imageWrapper}
-              </a>
-            )}
-            {!image.link && imageWrapper}
-          </div>
-          {image.caption && <div className="caption" dangerouslySetInnerHTML={{__html: image.caption }}/> }
-        </div>
-      </div>
-    );
   }
 }
 

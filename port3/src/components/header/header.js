@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import classNames from 'classnames/bind';
 import './header.scss';
 
@@ -17,7 +19,9 @@ const Header = ({nav, show, hide}) => {
   } else {
     content = (
       <React.Fragment>
-        <span className="greeting">hi,</span><span> i'm katrina.</span>
+        <Link to="/" className="skip-link-style">
+          <span className="greeting">hi,</span><span> i'm katrina.</span>
+        </Link>
       </React.Fragment>
     );
   }
