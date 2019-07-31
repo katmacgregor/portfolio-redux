@@ -3,14 +3,6 @@
 @import "../../assets/styles/mixins/mixins";
 @import "../../assets/styles/mixins/font_helpers";
 
-@mixin set-link-color($color){
-  a:not(.skip-link-style){
-    @include hover-focus-helper {
-      color: $color;
-    }
-  }
-}
-
 @include set-font-face('KingBasil', 'King-Basil-Lite');
 @include set-font-face($font-family: 'Muli', $file-name: 'Muli-Regular');
 
@@ -110,15 +102,6 @@ img { max-width: 100%; }
   }
 }
 
-.bg-fill {
-  @include page-background($day-base, $day-accent);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
 .main-container {
   position: relative;
   width: 100%;
@@ -136,4 +119,12 @@ img { max-width: 100%; }
     font-size: 1.3em;
     line-height: 1.5em;
   }
+}
+
+::selection {
+  background: $selection-background;
+}
+
+::-moz-selection {
+  background: $selection-background;
 }

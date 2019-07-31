@@ -38,6 +38,8 @@ $midnight-thumb: #10045f;
 $border-color-default: rgba(0, 0, 0, 0.2);
 $border-default: 1px solid $border-color-default;
 
+$selection-background: $day-base;
+
 // constants
 $side-padding: 30px;
 
@@ -48,3 +50,11 @@ $max-cap: 900px;
 }
 
 $nav-height: 40px;
+
+$connect-icons: (
+  contact,
+  linkedin,
+  github,
+  codepen,
+  resume
+);

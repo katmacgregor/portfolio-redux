@@ -1,14 +1,7 @@
 @import "../../assets/styles/global/_breakpoints";
 @import "../../assets/styles/mixins/mixins";
+@import "../../assets/styles/global/_style_elements";
 @import "../../assets/styles/mixins/icon_sprite";
-
-$list: (
-  contact,
-  linkedin,
-  github,
-  codepen,
-  resume
-);
 
 .connect {
   a {
@@ -21,17 +14,16 @@ $list: (
   .icon{
     $size: 24px;
 
+    @include icon-sprite('../assets/images/icons_connect', $size, 1, 5 2, $list: $connect-icons, $extension: svg, $skip-retina: true);
     display: inline-block;
     position: relative;
-    background-repeat: no-repeat;
-    background-position: center;
     opacity: 0.8;
     transition: transform 250ms, opacity 250ms;
+
     @include hover-focus-helper {
       transform: rotate(24deg);
       opacity: 1;
     }
-    @include icon-sprite('../assets/images/icons_connect', $size, 1, 5 1, $list: $list, $extension: svg, $skip-retina: true);
   }
 
   @include mid-high-min {

@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 import update from 'immutability-helper';
 
-// function app(state = { active: null }, action) {
-//   switch(action.type) {
-//     // case '':
-//       // return update(state, { page: { $set: action.page } });
-//     default:
-//       return state;
-//   }
-// };
+function app(state = { theme: 'day' }, action) {
+  switch(action.type) {
+    case 'SET_THEME_SUCCESS':
+      return update(state, { theme: { $set: action.theme } });
+    default:
+      return state;
+  }
+};
 
 function portfolio(state = { items: [], active: null }, action) {
   switch(action.type) {
@@ -22,7 +22,7 @@ function portfolio(state = { items: [], active: null }, action) {
 };
 
 const rootReducer = combineReducers({
-  // app,
+  app,
   portfolio
 });
 

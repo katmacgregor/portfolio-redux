@@ -1,3 +1,5 @@
+@import "./icon_sprite";
+
 // set page background colors
 @mixin page-background($base-color, $accent-color: null) {
   @if$accent-color {
@@ -28,5 +30,18 @@
     &:hover {
       @content;
     }
+  }
+}
+
+
+@mixin icon-arrow($arrow-width, $dir: 'down'){
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 300ms;
+  @include icon-sprite('../assets/images/arrow', $arrow-width, 1, 1 2, $list: null, $extension: svg, $skip-retina: true);
+  @include hover-focus-helper { opacity: 1; }
+
+  @if($dir == 'up') {
+    transform: scaleY(-1);
   }
 }

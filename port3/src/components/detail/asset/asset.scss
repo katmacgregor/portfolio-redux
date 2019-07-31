@@ -24,7 +24,6 @@ $holder-accent: rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
 
-
 .asset {
   max-width: $wide-breakpoint;
   margin: 0 auto;
@@ -34,6 +33,10 @@ $holder-accent: rgba(0, 0, 0, 0.1);
     &:focus {
       outline: none;
     }
+  }
+
+  img {
+    pointer-events: none;
   }
 
   &:not(.styled) {
@@ -130,6 +133,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
           top: -25px;
           left: 76px;
           background-color: #fff;
+          opacity: 0.6;
           border-radius: 8px;
         }
         img{

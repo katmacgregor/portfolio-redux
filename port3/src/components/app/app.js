@@ -15,6 +15,7 @@ import Browse from '../browse/browse';
 import Detail from '../detail/detail';
 import Nav from '../nav/nav';
 import Footer from '../footer/footer';
+import ThemeBg from '../themebg/themebg';
 
 const mapStateToProps = (state) => {
   return {
@@ -46,20 +47,21 @@ class App extends React.Component {
   render() {
     return (
       <div className={classNames("app", { "loaded": this.state.loaded })}>
-        <div className="bg-fill"></div>
-        <Nav hideTop={this.props.location.pathname === '/'} />
-        <main className="main-container">
-          <Switch>
-            <Route exact path='/' component={Browse} />
-            {this.props.items.map((item, i) => (
-              <Route exact path={`/${item.class}`} key={i} component={Detail} />
-            ))}
-            {/*
-            <Route component={ErrorPage} />
-            */}
-          </Switch>
-        </main>
-        <Footer />
+        <ThemeBg timeQuery={this.props.location.search || null}>
+          <Nav hideTop={this.props.location.pathname === '/'} />
+          <main className="main-container">
+            <Switch>
+              <Route exact path='/' component={Browse} />
+              {this.props.items.map((item, i) => (
+                <Route exact path={`/${item.class}`} key={i} component={Detail} />
+              ))}
+              {/*
+              <Route component={ErrorPage} />
+              */}
+            </Switch>
+          </main>
+          <Footer />
+        </ThemeBg>
       </div>
     );
   }

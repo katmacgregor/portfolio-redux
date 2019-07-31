@@ -35,16 +35,9 @@ footer {
   }
 
   .arrow {
-    width: 20px;
-    height: 20px;
+    @include icon-arrow(20px, up);
+    height: 8px;
     margin: 0 auto;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('../../assets/images/arrow.svg');
-    opacity: 0.3;
-    transform: scaleY(-1);
-    @include hover-focus-helper { opacity: 1; }
   }
 
   .top-text{

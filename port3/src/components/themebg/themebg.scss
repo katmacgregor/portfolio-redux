@@ -1,0 +1,102 @@
+@import "../../assets/styles/global/_breakpoints";
+@import "../../assets/styles/global/_style_elements";
+@import "../../assets/styles/mixins/mixins";
+
+@mixin set-link-color($color){
+  a:not(.skip-link-style){
+    &:after {
+      background-color: $color;
+    }
+    @include hover-focus-helper {
+      color: $color;
+    }
+  }
+}
+
+@mixin set-theme-els($link-color, $selection-bg, $thumb, $bg1, $bg2) {
+  @include set-link-color($link-color);
+
+  ::selection {
+    background: $selection-bg;
+  }
+
+  ::-moz-selection {
+    background: $selection-bg;
+  }
+
+  .header-container.nav { background-color: rgba($thumb, 0.9); }
+  .bg-fill { @include page-background($bg1, $bg2); }
+  .content-container-grid .content-item .thumb{ background-color: $thumb; }
+}
+
+.theme {
+  &-supplement {
+    &-day{
+      @include set-link-color($day-accent-text);
+    }
+    &-day.theme-afternoon {
+      @include set-theme-els($afternoon-accent-text, $afternoon-base, $afternoon-thumb, $afternoon-base, $afternoon-accent);
+    }
+
+    &-night{
+      @include set-theme-els($night-accent-text, $night-thumb, $night-thumb, $night-base, $night-accent);
+      $selection-color: $light-text;
+
+      ::selection {
+        color: $selection-color;
+      }
+
+      ::-moz-selection {
+        color: $selection-color;
+      }
+
+      h1 .accent, h2:not(.project), h3, footer, .content-container.skills, .header-container.nav, .header-container.nav a{
+        color: $night-text;
+      }
+
+      .main-container .arrow{ border-color: #fff; }
+      .content-container-grid .content-item .thumb{
+        .icon {
+          background-position: 50% 100%;
+        }
+      }
+      .header-container.nav {
+        border-bottom: 1px solid rgba(#fff, 0.15);
+      }
+
+      .content-container.about{ color: $day-text; }
+
+      .connect .icon {
+        @include sprite-position(2, 5 2, $connect-icons);
+      }
+
+      .arrow {
+        background-position: 0 100%;
+      }
+
+      &.theme-evening{
+        @include set-theme-els($evening-accent-text, $evening-base, $evening-thumb, $evening-base, $evening-accent);
+      }
+      &.theme-midnight{
+        @include set-theme-els($midnight-accent-text, $midnight-thumb, $midnight-thumb, $midnight-base, $midnight-accent);
+      }
+    }
+  }
+}
+
+.bg-fill {
+  @include page-background($day-base, $day-accent);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+@keyframes gradient-fade {
+  0% { background-position: 0% 51%; }
+  33% { background-position: 100% 0%; }
+  66% { background-position: 100% 50%; }
+  100% { background-position: 0% 100%; }
+}

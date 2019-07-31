@@ -2,9 +2,10 @@
 @import "../../assets/styles/global/_style_elements";
 
 .detail{
-  min-height: calc(100vh - 40px - 53px);
+  min-height: calc(100vh - #{$nav-height} - 53px);
   padding-top: $nav-height;
-  background-color: rgba(#fff, 0.8);
+  background-color: rgba(#fff, 0.93);
+
   h2.project{
     font-weight: 200;
     font-size: 1.3em;

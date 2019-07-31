@@ -17,24 +17,16 @@
     }
   }
 
-
   .arrow{
     $arrow-offset: 40px;
     $arrow-width: 30px;
 
+    @include icon-arrow($arrow-width);
     position: absolute;
     left: 50%;
     top: calc(100vh - #{$arrow-offset});
-    width: $arrow-width;
-    height: $arrow-width;
-    opacity: 0.3;
-    cursor: pointer;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url('../../assets/images/arrow.svg');
+    height: 12px;
     transform: translateX(-50%);
-    transition: opacity 300ms;
-    @include hover-focus-helper { opacity: 1; }
   }
 
   @include mid-high-min {
@@ -79,11 +71,4 @@
       }
     }
   }
-}
-
-@keyframes gradient-fade {
-  0% { background-position: 0% 51%; }
-  33% { background-position: 100% 0%; }
-  66% { background-position: 100% 50%; }
-  100% { background-position: 0% 100%; }
 }

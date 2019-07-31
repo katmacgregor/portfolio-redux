@@ -13,7 +13,10 @@ class ContentThumb extends React.Component {
         <Link to={`/${item.class}`} className={classNames('item', 'skip-link-style')} alt="{{item.name}}">
           <div className="item">
             <div className="wrapper">
-              <div className="thumb" style={{backgroundImage: `url('${process.env.PUBLIC_URL}/images/content/${item.folder}/port_hp_icons_${item.class}.svg')` }}>
+              <div className="thumb">
+                <div className="aspect">
+                  <div className="icon" style={{backgroundImage: `url('${process.env.PUBLIC_URL}/images/content/${item.folder}/port_hp_icons_${item.class}.svg')` }}></div>
+                </div>
               </div>
               <div className="content-info" style={{backgroundImage: `url('${process.env.PUBLIC_URL}/images/content/${item.folder}/${item.main_image && item.main_image.src}')`}}>
                 <div className="text">

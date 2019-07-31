@@ -5,7 +5,6 @@ import * as ACTIONS from './detail-actions';
 
 import * as utilities from '../../shared/utilities';
 
-import classNames from 'classnames/bind';
 import './detail.scss';
 
 import Asset from './asset/asset';
