@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import update from 'immutability-helper';
 
-function app(state = { theme: 'day' }, action) {
+function app(state = { theme: 'day', bgFixed: false }, action) {
   switch(action.type) {
     case 'SET_THEME_SUCCESS':
       return update(state, { theme: { $set: action.theme } });
+    case 'SET_BG_FIXED':
+      return update(state, { bgFixed: { $set: action.fixed } });
     default:
       return state;
   }

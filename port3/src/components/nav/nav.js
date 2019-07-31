@@ -4,14 +4,14 @@ import Header from '../header/header';
 
 const navHeight = 40;
 let lastScrollY = 0;
-let ticking = false;
 
 class Nav extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      show: false
+      show: false,
+      ticking: false
     }
 
     this.handleScroll = this.handleScroll.bind(this);
@@ -37,7 +37,7 @@ class Nav extends React.Component {
   handleScroll() {
     const scrollTop = window.scrollY;
 
-    if (!ticking) {
+    if (!this.state.ticking) {
       window.requestAnimationFrame(() => {
         if(scrollTop < lastScrollY) {
           // scroll up
@@ -53,11 +53,11 @@ class Nav extends React.Component {
           }
         }
 
-        ticking = false;
+        this.setState({ ticking: false });
         lastScrollY = scrollTop;
       });
 
-      ticking = true;
+      this.setState({ ticking: true });
     }
   }
 }

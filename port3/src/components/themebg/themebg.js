@@ -3,9 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as ACTIONS from './themebg-actions';
 
-// import * as utilities from '../../shared/utilities';
-
-// import classNames from 'classnames/bind';
+import classNames from 'classnames/bind';
 import './themebg.scss';
 
 const mapStateToProps = (state) => {
@@ -33,8 +31,7 @@ class ThemeBg extends React.Component {
     const { theme } = this.props;
 
     return (
-      <div className={`theme theme-${theme} theme-supplement-${this.state.supplementalTheme}`}>
-        <div className='bg-fill'></div>
+      <div className={classNames(`theme theme-${theme}`, `theme-supplement-${this.state.supplementalTheme}`)}>
         {this.props.children}
       </div>
     );

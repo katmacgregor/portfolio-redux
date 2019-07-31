@@ -1,4 +1,3 @@
-@import "../../assets/styles/global/_breakpoints";
 @import "../../assets/styles/global/_style_elements";
 @import "../../assets/styles/mixins/mixins";
 
@@ -82,21 +81,4 @@
       }
     }
   }
-}
-
-.bg-fill {
-  @include page-background($day-base, $day-accent);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-
-@keyframes gradient-fade {
-  0% { background-position: 0% 51%; }
-  33% { background-position: 100% 0%; }
-  66% { background-position: 100% 50%; }
-  100% { background-position: 0% 100%; }
 }

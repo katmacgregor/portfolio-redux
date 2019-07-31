@@ -1,8 +1,5 @@
 import React from 'react';
 
-// import { connect } from 'react-redux';
-// import * as ACTIONS from './detail-actions';
-
 import * as utilities from '../../../shared/utilities';
 
 import classNames from 'classnames/bind';
@@ -13,7 +10,8 @@ class Asset extends React.Component {
     super();
 
     this.state = {
-      playing: false
+      playing: false,
+      ticking: false
     };
 
     this.videoEl = React.createRef();
@@ -63,22 +61,29 @@ class Asset extends React.Component {
   }
 
   setImageVisibility() {
-    const videoEl = this.videoEl.current;
+    const el = this.videoEl.current;
 
-    if(videoEl){
-      const isVisible = utilities.checkVisibility(videoEl);
+    if(el && !this.state.ticking) {
+      window.requestAnimationFrame(() => {
+        console.log('stufffff');
+        const isVisible = utilities.checkVisibility(el);
 
-      if(isVisible){
-        if(!this.state.playing){
-          videoEl.play();
-          this.setState({ playing: true });
+        if(isVisible){
+          if(!this.state.playing){
+            el.play();
+            this.setState({ playing: true });
+          }
+        } else{
+          if(this.state.playing){
+            el.pause();
+            this.setState({ playing: false });
+          }
         }
-      } else{
-        if(this.state.playing){
-          videoEl.pause();
-          this.setState({ playing: false });
-        }
-      }
+
+        this.setState({ ticking: false });
+      });
+
+      this.setState({ ticking: true });
     }
   }
 }
