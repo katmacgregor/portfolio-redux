@@ -31,7 +31,7 @@
     {
       "name": "Disney.com",
       "class": "disney",
-      "description": "Disney storytelling",
+      "description": "Digital storytelling",
       "folder": "dcom",
       "main_image": {
         "src": "dcom_cars.jpg"
@@ -67,7 +67,7 @@
     {
       "name": "Disney Tumblr",
       "class": "tumblr",
-      "description": "UGC Contests for movie premieres",
+      "description": "UGC Contest sites for movie premieres",
       "folder": "tumblr",
       "main_image": {
         "src": "tumblr_alice.jpg"

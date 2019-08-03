@@ -19,6 +19,7 @@ import ThemeBg from '../themebg/themebg';
 
 const mapStateToProps = (state) => {
   return {
+    loaded: state.app.loaded,
     items: state.portfolio.items
   }
 };
@@ -26,10 +27,6 @@ const mapStateToProps = (state) => {
 class App extends React.Component {
   constructor() {
     super();
-
-    this.state = {
-      loaded: false
-    };
 
     this.getPortfolioItems = this.getPortfolioItems.bind(this);
   }
@@ -40,16 +37,15 @@ class App extends React.Component {
 
   componentDidUpdate(prevProps) {
     if(this.props.items !== prevProps.items) {
-      this.setState({ loaded: true });
+      this.props.setAppLoaded();
     }
   }
 
   render() {
     return (
-      <div className={classNames("app", { "loaded": this.state.loaded })}>
+      <div className={classNames("app", { "loaded": this.props.loaded })}>
         <ThemeBg timeQuery={this.props.location.search || null}>
           <Nav hideTop={this.props.location.pathname === '/'} />
-          <main className="main-container">
             <Switch>
               <Route exact path='/' component={Browse} />
               {this.props.items.map((item, i) => (
@@ -59,7 +55,6 @@ class App extends React.Component {
               <Route component={ErrorPage} />
               */}
             </Switch>
-          </main>
           <Footer />
         </ThemeBg>
       </div>

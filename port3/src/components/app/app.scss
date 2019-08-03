@@ -13,7 +13,7 @@ body {
   color: $day-text;
   font-family: $bodytext;
   font-size: 16px;
-  background-color: #222;
+  background-color: $base-bg;
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -100,13 +100,6 @@ img { max-width: 100%; }
     opacity: 1;
     .main-container { opacity: 1; }
   }
-}
-
-.main-container {
-  position: relative;
-  width: 100%;
-  opacity: 0;
-  transition: opacity 800ms 500ms;
 }
 
 .content-container {

@@ -1,7 +1,8 @@
 {
   "name": "Creative Technology",
   "path": "ct",
-  "description": "<p>Creative Technology is an internal group within the Disney Digital Network dedicated to creating captivating, high-end experiences, focusing on increased engagement, audience growth, and monetization opportunities.</p><p>All interactive experiences are built responsively with a mobile-first mentality, for cross-network distribution, using emerging technologies to create interactive experiences &amp push the boundaries of traditional web and application development.</p><p>Projects also include <a href=\"/ct_games.html\" target=\"_blank\">CT Game Engines</a></p>",
+  "description": "<p>Creative Technology is an internal group within the Disney Digital Network dedicated to creating captivating, high-end experiences, focusing on increased engagement, audience growth, and monetization opportunities.</p><p>All interactive experiences are built responsively with a mobile-first mentality, for cross-network distribution, using emerging technologies to create interactive experiences &amp push the boundaries of traditional web and application development.</p><p>Projects also include <a href=\"/ct_games\">CT Game Engines</a></p>",
+  "date": "2016",
   "tools": [
     "Bower",
     "Gulp",
@@ -11,6 +12,11 @@
     "SVG",
     "Nunjucks"
   ],
+  "banner": {
+    "src": "ct_hp.png",
+    "alt": "CT Featured",
+    "classes": "browser styled"
+  },
   "images": [
     {
       "video": {

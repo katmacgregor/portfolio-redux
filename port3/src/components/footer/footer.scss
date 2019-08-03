@@ -76,13 +76,11 @@ footer {
     }
     .connect{
       order: 3;
-      padding-right: $side-padding;
       justify-content: flex-end;
     }
     .copyright{
       order: 1;
       text-align: left;
-      padding-left: $side-padding;
     }
   }
 }

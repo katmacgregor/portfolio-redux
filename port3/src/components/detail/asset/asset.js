@@ -29,7 +29,7 @@ class Asset extends React.Component {
   }
 
   render() {
-    const { image, path } = this.props;
+    const { image, path, banner } = this.props;
     const imageWrapper = (
       <div className="image-wrapper">
         <div className="aspect">
@@ -44,7 +44,17 @@ class Asset extends React.Component {
     );
 
     return (
-      <div className={classNames('asset', [image.classes], {'has-video': image.video, 'has-caption': image.caption})}>
+      <div className={classNames('asset', [image.classes], {'has-video': image.video, 'has-caption': image.caption, 'banner': banner })}>
+        {image.heading && image.heading.title && (
+          <div className="section-header">
+            <h2 className="section-title">{image.heading.title}</h2>
+            {image.heading.link && (
+              <div>
+                <a className="section-link" href={image.heading.link.href} target="_blank" rel="noopener noreferrer">{image.heading.link.title}</a>
+              </div>
+            )}
+          </div>
+        )}
         <div className="asset-wrapper">
           <div className="image">
             {image.link && (
@@ -65,7 +75,6 @@ class Asset extends React.Component {
 
     if(el && !this.state.ticking) {
       window.requestAnimationFrame(() => {
-        console.log('stufffff');
         const isVisible = utilities.checkVisibility(el);
 
         if(isVisible){

@@ -2,6 +2,7 @@
   "name": "Star Wars",
   "path": "starwars",
   "description": "<p>Developed new modules, including the Star Wars Databank, and updated static designs to support fluid responsive states</p><p>Data modeling and manipulation, strategic templates to minimize code bloat</p><p>Used client-side code and advanced css animations for visual elements whenever possible, reducing load times and page weight</p><p>Developed several complex Sass mixins for managing configurable styling, including the configurations for the dark gray containers with notches and graphics</p><p>Interactive global navigation which includes a compressing banner animation on scroll in large browser widths, and an animated light saber toggle in the hamburger menu</p><p><a href=\"https://www.webbyawards.com/winners/2015/websites/general-website/celebrityfan/starwars\" target=\"blank\">2015 Webby Award Nomination: Celebrity/Fan Website</a></p><p><a href=\"https://www.webbyawards.com/winners/2017/websites/general-website/movie-film/starwarscom\" target=\"blank\">2017 Webby Award Winner: People's Voice, Movie &amp Film Website</a></p>",
+  "date": "2015",
   "tools": [
     "Backbone",
     "Mustache",
@@ -11,6 +12,11 @@
   "link": {
     "title": "view site",
     "href": "http://www.starwars.com"
+  },
+  "banner": {
+    "src": "sw_home.jpg",
+    "alt": "Star Wars Landing",
+    "classes": "browser styled"
   },
   "images": [
     {

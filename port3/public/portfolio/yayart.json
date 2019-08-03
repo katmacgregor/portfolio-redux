@@ -1,22 +1,19 @@
 {
-  "name": "YayArt (case study)",
+  "name": "YayArt",
   "path": "yayart",
   "description": "<p>Responsive redesign of e-commerce user-centric art website</p><p>Enhances and elevates the site's major functions: submit, vote, and shop</p><p>Conducted extensive research, user testing, persona development, and competitive analysis</p><p>Utilized Bootstrap to convert wire sketches into a working wire prototype</p><p><a href=\"/images/content/yayart/yayart_casestudy.pdf\" target=\"blank\"><span class=\"icon icon-pdf\"></span> Full Case Study</a></p>",
+  "date": "2013",
   "tools": [
     "IA/UX",
     "Bootstrap",
     "Photoshop"
   ],
-  "link": {
-    "title": "view build",
-    "href": "http://www.katrinamacgregor.com/bootstrap/index.html"
+  "banner": {
+    "src": "devicescomp_yay.png",
+    "alt": "YayArt Responsive",
+    "classes": "styled"
   },
   "images": [
-    {
-      "src": "devicescomp_yay.png",
-      "alt": "YayArt Responsive",
-      "classes": "styled"
-    },
     {
       "src": "hp_original.jpg",
       "alt": "YayArt Original Homepage",

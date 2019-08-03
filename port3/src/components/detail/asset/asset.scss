@@ -1,4 +1,5 @@
 @import "../../../assets/styles/global/_breakpoints";
+@import "../../../assets/styles/global/_style_elements";
 
 $holder-color: #ddd;
 $holder-accent: rgba(0, 0, 0, 0.1);
@@ -11,6 +12,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
     img, video{
       position: absolute;
       top: 0;
+      left: 0;
       object-fit: cover;
       object-position: top;
     }
@@ -28,6 +30,8 @@ $holder-accent: rgba(0, 0, 0, 0.1);
   max-width: $wide-breakpoint;
   margin: 0 auto;
   font-size: 1rem;
+  padding-left: $side-padding;
+  padding-right: $side-padding;
 
   video {
     &:focus {
@@ -39,9 +43,19 @@ $holder-accent: rgba(0, 0, 0, 0.1);
     pointer-events: none;
   }
 
+  & + .asset {
+    margin-top: 6vh;
+  }
+
+  &:last-of-type .asset-wrapper {
+    margin-bottom: 0 !important; // override margin adjustments
+    padding-bottom: 2em; // override margin adjustments
+  }
+
   &:not(.styled) {
     text-align: center;
   }
+
   &.styled {
     img, video { width: 100%; }
   }
@@ -52,15 +66,35 @@ $holder-accent: rgba(0, 0, 0, 0.1);
       @include inline-image;
     }
   }
-  &:last-of-type .asset-wrapper {
-    margin-bottom: 0 !important; // override margin adjustments
-    padding-bottom: 2em; // override margin adjustments
+
+  &.has-caption {
+    // background-color: rgba(#ddd, 0.2);
+    .asset-wrapper{
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    & + .has-caption {
+      background-color: transparent;
+      padding-top: 0;
+      padding-bottom: 0;
+
+    }
   }
 
   .image { margin: 0 auto; }
 
-  .asset-wrapper {
-    margin: 36px 0;
+  .section-header {
+    text-align: center;
+    margin-bottom: 4%;
+    .section {
+      &-title, &-link {
+        font-family: inherit;
+      }
+      &-title {
+        font-weight: 300;
+        margin-bottom: 1%;
+      }
+    }
   }
 
   .caption {
@@ -68,17 +102,41 @@ $holder-accent: rgba(0, 0, 0, 0.1);
     p{ font-size: inherit; }
   }
 
+  &.banner {
+    box-sizing: border-box;
+  }
+
   @media screen and (max-width: $mid-high-breakpoint - 1px){
     .image{
       max-height: 600px;
       overflow: hidden;
     }
+
+    &.banner {
+      padding-bottom: 1.5%;
+    }
+
+    .section-header {
+      font-size: 0.9em;
+      .section-title {
+        font-size: 1.5em;
+      }
+    }
   }
 
   @media screen and (min-width: $mid-high-breakpoint){
-    &:not(.styled):not(.inline){
+    &:not(.styled):not(.inline):not(.banner){
       img{ max-width: 50%; }
     }
+    & + .asset {
+      margin-top: 16vh;
+    }
+
+    &.banner {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
     &.inline{
       @include inline-image;
       &.thirds{
@@ -89,22 +147,23 @@ $holder-accent: rgba(0, 0, 0, 0.1);
       }
     }
     &.styled{
-      .asset-wrapper{
-        margin: 80px  0;
-      }
       .image-wrapper{
         max-width: 750px;
         margin: 0 auto;
         font-size: 0;
-        .caption{ font-size: 1rem; }
+        .caption{
+          font-size: 1rem;
+        }
       }
     }
 
     .image{
-      max-height: 600px;
       overflow: hidden;
     }
 
+    .caption{
+      font-size: 1.15em;
+    }
 
     &.browser{
       .image-wrapper{
@@ -227,14 +286,13 @@ $holder-accent: rgba(0, 0, 0, 0.1);
     &.has-caption {
       $caption-offset: 36px;
 
-      &:not(.image-right){
-        .caption { padding-left: $caption-offset; }
-      }
+      max-width: none;
+
+      .caption { padding: $caption-offset; }
       &.image-right {
         .image { order: 2; }
         .caption {
           order: 1;
-          padding-right: $caption-offset;
         }
       }
       &.set-aspect.browser .image{

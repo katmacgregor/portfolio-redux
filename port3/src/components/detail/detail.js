@@ -7,6 +7,8 @@ import * as utilities from '../../shared/utilities';
 
 import './detail.scss';
 
+import Page from '../page/page';
+import Paging from '../paging/paging';
 import Asset from './asset/asset';
 
 const mapStateToProps = (state) => {
@@ -34,37 +36,54 @@ class Detail extends React.Component {
 
     if(item) {
       return (
-        <div className="detail">
-          <div className="content-container">
-            <div className="content-header">
-              <h2 className="project title">{item.name}</h2>
-              {item.link && item.link.title && (
-                <a className="link" href={item.link.href} target="_blank" rel="noopener noreferrer">
-                  <span>{item.link.title}</span>
-                </a>
-              )}
-            </div>
-            <div className="content-info">
-              <div className="desc" dangerouslySetInnerHTML={{__html: item.description }} />
-
-              <div className="tools-container">
-                <h6 className="heading">Tools</h6>
-                {item.tools && (
-                  <ul className="tools">
-                    {item.tools.map((tool, i) => (
-                      <li key={i}>{tool}</li>
-                    ))}
-                  </ul>
+        <Page {...this.props}>
+          <div className="detail">
+            <div className="content-container skip-padding">
+              <div className="banner-container">
+                {item.banner && (
+                  <Asset image={item.banner} path={item.path} banner />
                 )}
+                <div className="content-header">
+                  <h1 className="project title">{item.name}</h1>
+                  {item.link && item.link.title && (
+                    <a className="link" href={item.link.href} target="_blank" rel="noopener noreferrer">
+                      <span>{item.link.title}</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+              <div className="content-info">
+                <div className="desc" dangerouslySetInnerHTML={{__html: item.description }} />
+
+                <div className="meta-container">
+                  {item.date && (
+                    <div className="date-container">
+                      <h6 className="heading">Date</h6>
+                      <span>{item.date}</span>
+                    </div>
+                  )}
+
+                  <div className="tools-container">
+                    <h6 className="heading">Tools</h6>
+                    {item.tools && (
+                      <ul className="tools">
+                        {item.tools.map((tool, i) => (
+                          <li key={i}>{tool}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="images">
+                {item.images && item.images.map((image, i) => (
+                  <Asset image={image} path={item.path} key={i}/>
+                ))}
               </div>
             </div>
-            <div className="images">
-              {item.images && item.images.map((image, i) => (
-                <Asset image={image} path={item.path} key={i}/>
-              ))}
-            </div>
+            <Paging currItem={item.path} />
           </div>
-        </div>
+        </Page>
       );
     } else {
       return null;

@@ -3,6 +3,7 @@ import './browse.scss';
 
 import smoothscroll from 'smoothscroll-polyfill';
 
+import Page from '../page/page';
 import Header from '../header/header';
 import ContentGrid from '../contentgrid/contentgrid';
 import GradientBg from '../gradientbg/gradientbg';
@@ -60,7 +61,7 @@ class Browse extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Page {...this.props}>
         <GradientBg />
         <div className="browse">
           <div className="header content-container fill-screen">
@@ -91,14 +92,14 @@ class Browse extends React.Component {
 
           <div className="about content-container fill-screen">
             <div className="content">
-              <p>I made my debut as an artist with "Thanksgiving is Yummy" (Crayola on loose leaf 8.5" by 11"), featured in the kindergarten parent newsletter. This marked the dawn of my creative exploits, which evenutally lead to receiving my BA in Painting and Design from USC's Roski School of Fine Arts.</p>
-              <p>My career hopped in a natural progression from design into UI &amp; UX, and I eventually built up my rapid prototyping skillset to lead to my current position in web development as a UX/UI Engineer at Apple.</p>
-              <p>As a developer, I translate my passion for art and design into responsive code and interactive web elements. Daily languages include Javascript, HTML, CSS, and frameworks/libraries including React, Node, MongoDB, and Sass.</p>
-              <p> When I'm not tinkering with code, you can find me doting on my pet rabbit, or wandering the mountains in pursuit of the Milky Way.</p>
+              <p>I made my debut as an artist with "Thanksgiving is Yummy" (Crayola on loose leaf 8.5" by 11"), featured in the kindergarten parent newsletter. This first piece was just one of many, and culminated in getting my BA in Painting and Design at USC's Roski School of Fine Arts.</p>
+              <p>My zealous for design transitioned into UI &amp; UX, and rapid protopying quickly grew into full-fledged web development. Today, I'm a UX/UI Engineer at Apple.</p>
+              <p>As a developer, I love puzzle-solving, and take a mobile-first, responsive approach in design and code. I get most excited by bringing pages to life with dynamic, performant, and configurable interactions. Daily languages include Javascript, HTML, CSS, and frameworks/libraries including React, Node, MongoDB, and Sass.</p>
+              <p>When I'm not tinkering with code, you can find me lounging with my pet rabbit, or wandering the mountains in pursuit of the Milky Way.</p>
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </Page>
     );
   }
 

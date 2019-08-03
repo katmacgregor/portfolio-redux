@@ -23,9 +23,14 @@
     background: $selection-bg;
   }
 
-  .header-container.nav { background-color: rgba($thumb, 0.9); }
+  .header-container.nav, footer { background-color: rgba($thumb, 0.9); }
   .bg-fill { @include page-background($bg1, $bg2); }
   .content-container-grid .content-item .thumb{ background-color: $thumb; }
+  .detail {
+    .title, .content-info a {
+      color: $link-color;
+    }
+  }
 }
 
 .theme {
@@ -49,11 +54,10 @@
         color: $selection-color;
       }
 
-      h1 .accent, h2:not(.project), h3, footer, .content-container.skills, .header-container.nav, .header-container.nav a{
+      h1 .accent, h2:not(.section-title), h3, footer, .content-container.skills, .header-container.nav, .header-container.nav a{
         color: $night-text;
       }
 
-      .main-container .arrow{ border-color: #fff; }
       .content-container-grid .content-item .thumb{
         .icon {
           background-position: 50% 100%;
@@ -69,8 +73,10 @@
         @include sprite-position(2, 5 2, $connect-icons);
       }
 
-      .arrow {
-        background-position: 0 100%;
+      footer, .browse .header {
+        .arrow {
+          background-position: 0 100%;
+        }
       }
 
       &.theme-evening{

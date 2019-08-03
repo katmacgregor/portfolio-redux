@@ -1,3 +1,5 @@
+import smoothscroll from 'smoothscroll-polyfill';
+
 export const handleFetch = (path, handleSuccess) => {
   fetch(path).then(function(response) {
     var contentType = response.headers.get('content-type');
@@ -18,4 +20,13 @@ export const checkVisibility = (el) => {
     rect.right > 0 &&
     rect.left < (window.innerWidth || window.width()) &&
     rect.top < (window.innerHeight || window.height());
+}
+
+export const scrollTop = (behavior) => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: behavior || 'smooth'
+  });
+  smoothscroll.polyfill();
 }
