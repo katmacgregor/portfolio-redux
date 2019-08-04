@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 import update from 'immutability-helper';
 
 function app(state = { loaded: false, theme: 'day', bgFixed: false }, action) {
@@ -25,9 +26,8 @@ function portfolio(state = { items: [], active: null }, action) {
   }
 };
 
-const rootReducer = combineReducers({
+export default (history) => combineReducers({
+  router: connectRouter(history),
   app,
   portfolio
 });
-
-export default rootReducer;
