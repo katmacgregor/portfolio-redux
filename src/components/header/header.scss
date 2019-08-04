@@ -39,6 +39,11 @@
         margin-left: 0.1em;
       }
     }
+    @include mid-high-max {
+      .connect a + a {
+        margin-left: 0.7em;
+      }
+    }
     @include mid-high-min {
       font-size: 0.7em;
     }

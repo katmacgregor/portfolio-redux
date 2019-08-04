@@ -22,7 +22,8 @@ export const checkVisibility = (el) => {
     rect.top < (window.innerHeight || window.height());
 }
 
-export const scrollTop = (behavior) => {
+export const scrollTop = (e, behavior) => {
+  console.log(behavior);
   window.scrollTo({
     top: 0,
     left: 0,
