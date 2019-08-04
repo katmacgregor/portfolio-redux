@@ -13,7 +13,9 @@ import App from './components/app/app';
 
 import * as serviceWorker from './serviceWorker';
 
-const history = createBrowserHistory();
+const history = createBrowserHistory({
+  basename: process.env.PUBLIC_URL
+});
 
 const store = createStore(
   createRootReducer(history), // root reducer with router state
