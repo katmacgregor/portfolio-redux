@@ -15,6 +15,7 @@ import Detail from '../detail/detail';
 import Nav from '../nav/nav';
 import Footer from '../footer/footer';
 import ThemeBg from '../themebg/themebg';
+import ErrorPage from '../errorpage/errorpage';
 
 const mapStateToProps = (state) => {
   return {
@@ -50,9 +51,7 @@ class App extends React.Component {
               {this.props.items.map((item, i) => (
                 <Route exact path={`/${item.class}`} key={i} component={Detail} />
               ))}
-              {/*
               <Route component={ErrorPage} />
-              */}
             </Switch>
           <Footer />
         </ThemeBg>
