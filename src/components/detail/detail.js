@@ -74,6 +74,8 @@ class Detail extends React.Component {
                       </a>
                     )}
                   </div>
+
+                  {!this.state.imagesLoaded && <Loading absolute />}
                 </div>
                 <div className="content-info">
                   <div className="desc" dangerouslySetInnerHTML={{__html: item.description }} />
@@ -108,7 +110,6 @@ class Detail extends React.Component {
             </React.Fragment>
           )}
         </div>
-        {!this.state.imagesLoaded && <Loading fixed />}
       </Page>
     );
   }

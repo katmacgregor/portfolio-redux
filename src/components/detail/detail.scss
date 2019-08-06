@@ -1,13 +1,25 @@
 @import "../../assets/styles/global/_breakpoints";
 @import "../../assets/styles/global/_style_elements";
 
+$intro-trans: 500ms;
+
 .detail {
   min-height: calc(100vh - #{$nav-height} - 53px);
   padding-top: $nav-height;
-  transition: opacity 250ms;
 
-  &:not(.item-ready) {
+  &.item-ready {
+    .content-header, .content-info, .images, .paging {
+      opacity: 1;
+    }
+
+    .content-info, .images, .paging {
+      transition-delay: ($intro-trans * 0.75);
+    }
+  }
+
+  .content-header, .content-info, .images, .paging {
     opacity: 0;
+    transition: opacity $intro-trans;
   }
 
   .title {
@@ -24,6 +36,7 @@
     padding-right: $side-padding;
     padding-bottom: 16px;
     box-sizing: border-box;
+
     .project.title{ display: block; }
   }
 
@@ -105,6 +118,17 @@
   }
 
   @media screen and (max-width: $mid-high-breakpoint - 1px) {
+    &.item-ready {
+      .banner {
+        opacity: 1;
+      }
+    }
+
+    .banner {
+      opacity: 0;
+      transition: opacity $intro-trans ($intro-trans * 0.3);
+    }
+
     .desc + .tools-container {
       margin-top: 10px;
     }
@@ -119,6 +143,14 @@
 
   @media screen and (min-width: $mid-high-breakpoint) {
     padding-bottom: 4%;
+
+    &.item-ready {
+      .banner-container .banner {
+        transform: translate(0, -50%);
+        opacity: 1;
+      }
+    }
+
     .banner-container {
       position: relative;
       overflow: hidden;
@@ -136,7 +168,9 @@
         top: 50%;
         right: -50px;
         max-width: 60%;
-        transform: translateY(-50%);
+        transform: translate(60%, -50%);
+        opacity: 0;
+        transition: transform $intro-trans, opacity $intro-trans ($intro-trans * 0.2);
       }
 
       .content-header {
