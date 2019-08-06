@@ -31,9 +31,9 @@ class App extends React.Component {
     const scrollTop = window.scrollY;
 
     if (!this.state.ticking) {
-      window.requestAnimationFrame(() => {
+      window.requestAnimationFrame((e) => {
         if(scrollTop > 0) {
-          utilities.scrollTop('auto');
+          utilities.scrollTop(e, 'auto');
         }
 
         this.setState({ ticking: false });
