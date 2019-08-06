@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -13,7 +13,7 @@ import App from './components/app/app';
 
 import * as serviceWorker from './serviceWorker';
 
-const history = createBrowserHistory({
+const history = createHashHistory({
   basename: process.env.PUBLIC_URL
 });
 
