@@ -94,11 +94,17 @@ p, li, .caption {
 img { max-width: 100%; }
 
 .app {
-  opacity: 0;
-  transition: opacity 800ms;
-  &.loaded {
-    opacity: 1;
-    .main-container { opacity: 1; }
+  &-wrapper {
+    opacity: 0;
+    transition: opacity 800ms;
+    &:not(.loaded) {
+      height: 100vh;
+      overflow: hidden;
+    }
+    &.loaded {
+      opacity: 1;
+      .main-container { opacity: 1; }
+    }
   }
 }
 

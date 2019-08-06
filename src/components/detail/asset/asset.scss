@@ -6,17 +6,23 @@ $holder-accent: rgba(0, 0, 0, 0.1);
 
 @mixin set-aspect($aspect) {
   overflow: hidden;
-  .aspect{
+  .aspect {
     position: relative;
     padding-top: $aspect;
-    img, video{
+
+    img, video, .image-asset-root {
       position: absolute;
       top: 0;
       left: 0;
       object-fit: cover;
       object-position: top;
     }
-    video{ height: 100%; }
+
+    video { height: 100%; }
+
+    .image-asset-root {
+      width: 100%;
+    }
   }
 }
 

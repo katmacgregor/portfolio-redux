@@ -1,0 +1,47 @@
+@import "../../assets/styles/global/_style_elements";
+
+.load-container {
+  &.fixed {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &.dark {
+    .loader:before {
+      background-color: rgba(#222, 0.85);
+    }
+  }
+
+  .loader {
+    $size: 50px;
+
+    position: relative;
+    overflow: hidden;
+    background-image: url('../../assets/images/moon.svg');
+    transform: translateZ(0);
+
+    &, &:before {
+      width: $size;
+      height: $size;
+      border-radius: 50%;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba($page-bg, 0.8);
+      transform: translateX(-100%);
+      animation: phase 3s infinite linear;
+    }
+  }
+}
+
+@keyframes phase {
+  to {
+    transform: translateX(100%);
+  }
+}

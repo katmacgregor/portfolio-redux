@@ -48,7 +48,7 @@ class Nav extends React.Component {
           }
         } else {
           // scroll down
-          if(this.state.show) {
+          if(this.state.show && (scrollTop > navHeight)) {
             this.setState({ show: false });
           }
         }

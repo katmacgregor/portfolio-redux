@@ -4,7 +4,11 @@
 .detail {
   min-height: calc(100vh - #{$nav-height} - 53px);
   padding-top: $nav-height;
-  background-color: $base-bg;
+  transition: opacity 250ms;
+
+  &:not(.item-ready) {
+    opacity: 0;
+  }
 
   .title {
     font-weight: 200;

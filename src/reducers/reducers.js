@@ -17,12 +17,17 @@ function app(state = { loaded: false, device: 'desktop', theme: 'day', bgFixed: 
   }
 };
 
-function portfolio(state = { items: [], active: null }, action) {
+function portfolio(state = { items: [], active: null, itemChanging: false }, action) {
   switch(action.type) {
     case 'ITEMS_FETCH_SUCCESS':
       return update(state, { items: { $set: action.items } });
     case 'SET_DETAIL_ITEM':
-      return update(state, { active: { $set: action.item } });
+      return update(state, {
+        active: { $set: action.item },
+        itemChanging: { $set: false }
+      });
+    case 'ITEM_CHANGING':
+      return update(state, { itemChanging: { $set: true } });
     default:
       return state;
   }

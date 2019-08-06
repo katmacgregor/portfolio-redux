@@ -1,6 +1,10 @@
+@import "../../assets/styles/global/_style_elements";
+
 .main-container {
   position: relative;
   width: 100%;
   opacity: 0;
+  padding-bottom: 1px; // hack for container height
+  background-color: $page-bg;
   transition: opacity 800ms 500ms;
 }

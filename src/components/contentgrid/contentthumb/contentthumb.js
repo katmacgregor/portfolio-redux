@@ -1,16 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+import * as ACTIONS from './contentthumb-actions';
+
 import classNames from 'classnames/bind';
 import './contentthumb.scss';
 
+const mapStateToProps = (state) => {
+  const { portfolio } = state;
+  return {
+    itemActive: portfolio.active
+  }
+};
+
 class ContentThumb extends React.Component {
+  constructor() {
+    super();
+
+    this.handleItemChange = this.handleItemChange.bind(this);
+  }
+
   render() {
     const { item } = this.props;
 
     return (
       <div className={classNames('content-item', `item-${item.class}`)}>
-        <Link to={`/${item.class}`} className={classNames('item', 'skip-link-style')} alt="{{item.name}}">
+        <Link to={`/${item.class}`} className={classNames('item', 'skip-link-style')} alt="{{item.name}}" onClick={this.handleItemChange}>
           <div className="item">
             <div className="wrapper">
               <div className="thumb">
@@ -30,7 +46,17 @@ class ContentThumb extends React.Component {
       </div>
     );
   }
+
+  handleItemChange() {
+    if((this.props.item && this.props.item.name) !== (this.props.itemActive && this.props.itemActive.name)) {
+      this.props.setItemChange();
+    }
+  }
 }
 
+ContentThumb = connect(
+  mapStateToProps,
+  ACTIONS
+)(ContentThumb);
 
 export default ContentThumb;

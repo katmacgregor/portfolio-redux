@@ -7,6 +7,8 @@ import * as utilities from '../../../shared/utilities';
 import classNames from 'classnames/bind';
 import './asset.scss';
 
+import ImageAsset from './imageasset/imageasset';
+
 const mapStateToProps = (state) => {
   return {
     device: state.app.device
@@ -24,6 +26,7 @@ class Asset extends React.Component {
 
     this.videoEl = React.createRef();
     this.setImageVisibility = this.setImageVisibility.bind(this);
+    this.imageLoaded = this.imageLoaded.bind(this);
   }
 
   componentDidMount() {
@@ -52,7 +55,11 @@ class Asset extends React.Component {
             </video>
           )}
           {!image.video && (
-            <img src={`${process.env.PUBLIC_URL}/images/content/${path}/${image.src}`} alt={image.alt} />
+            <ImageAsset
+              src={`${process.env.PUBLIC_URL}/images/content/${path}/${image.src}`}
+              alt={image.alt}
+              handlerFromParent={this.imageLoaded}
+            />
           )}
         </div>
       </div>
@@ -109,6 +116,10 @@ class Asset extends React.Component {
 
       this.setState({ ticking: true });
     }
+  }
+
+  imageLoaded(loaded) {
+    this.props.imageLoaded && this.props.imageLoaded(loaded);
   }
 }
 

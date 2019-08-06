@@ -4,7 +4,7 @@
 
 .browse {
   .content-container {
-    @include container-alternating-color($base-bg, $base: 0%);
+    @include container-alternating-color($page-bg, $base: 0%);
 
     &.skills{
       padding-top: $side-padding + 10px;

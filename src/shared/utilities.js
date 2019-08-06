@@ -23,7 +23,6 @@ export const checkVisibility = (el) => {
 }
 
 export const scrollTop = (e, behavior) => {
-  console.log(behavior);
   window.scrollTo({
     top: 0,
     left: 0,
