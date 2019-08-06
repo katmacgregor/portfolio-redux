@@ -169,7 +169,7 @@ $intro-trans: 500ms;
         top: 50%;
         right: -50px;
         max-width: 60%;
-        transform: translate(60%, -50%);
+        transform: translate(20%, -50%);
         opacity: 0;
         transition: transform $intro-trans, opacity $intro-trans ($intro-trans * 0.2);
       }
