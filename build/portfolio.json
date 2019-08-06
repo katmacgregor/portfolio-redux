@@ -4,7 +4,7 @@
       "name": "CT Games",
       "class": "ct_games",
       "description": "HTML5 &amp Phaser-based games",
-      "folder": "ct/games",
+      "folder": "ct-games",
       "main_image": {
         "src": "dory_five_thumb.jpg"
       }
