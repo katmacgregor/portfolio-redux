@@ -83,6 +83,7 @@ $intro-trans: 500ms;
       background-image: linear-gradient(rgba($fade-color, 0), rgba($fade-color, 0.75));
     }
     & > div {
+      position: relative;
       z-index: 1;
     }
 

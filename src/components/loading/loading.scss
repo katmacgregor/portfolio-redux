@@ -8,11 +8,11 @@
   }
 
   &.fixed {
-    position: fixed;
+    position: fixed !important;
   }
 
   &.absolute {
-    position: absolute;
+    position: absolute !important;
   }
 
   &.dark {
