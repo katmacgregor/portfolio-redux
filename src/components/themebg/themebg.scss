@@ -23,7 +23,8 @@
     background: $selection-bg;
   }
 
-  .header-container.nav, footer { background-color: rgba($thumb, 0.9); }
+  .header-container.nav { background-color: rgba($thumb, 0.9); }
+  footer { background-color: $thumb; }
   .bg-fill { @include page-background($bg1, $bg2); }
   .content-container-grid .content-item .thumb{ background-color: $thumb; }
   .detail {

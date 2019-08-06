@@ -1,6 +1,6 @@
 {
   "name": "Creative Technology Games",
-  "path": "ct/games",
+  "path": "ct-games",
   "description": "<p>Ideated, built, and deployed client-side, configurable, game engines built with Phaser &amp HTML5, pre-configured with npm, bower, and gulp</p><p>Each game engine was built as a boilerplate to be configurable and programmable by producers, synced with an internal content management system. Custom artwork is uploaded for each game to offer unique themed experiences across Disney's properties. Each engine works across the media site network, with a focus on social integration.</p><p>Optional introduction/interstitial/endgame screens offer an opportunity for cohesive storytelling throughout the experience.</p><p>Variable complexity is introduced into each game in order to appeal to guests of many ages and skillsets.</p>",
   "date": "2016",
   "tools": [

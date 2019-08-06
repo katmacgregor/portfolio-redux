@@ -4,10 +4,12 @@
 
 footer {
   position: relative;
+  padding: ($side-padding * 0.7) $side-padding $side-padding;
   text-align: center;
   border-top: 1px solid rgba(#fff, 0.08);
-  padding: ($side-padding * 0.7) $side-padding $side-padding;
+  background-color: $day-thumb;
   box-sizing: border-box;
+
   .connect{
     display: flex;
   }
