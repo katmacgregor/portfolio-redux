@@ -1,9 +1,17 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import * as utilities from '../../../shared/utilities';
 
 import classNames from 'classnames/bind';
 import './asset.scss';
+
+const mapStateToProps = (state) => {
+  return {
+    device: state.app.device
+  }
+};
 
 class Asset extends React.Component {
   constructor() {
@@ -34,7 +42,14 @@ class Asset extends React.Component {
       <div className="image-wrapper">
         <div className="aspect">
           {image.video && (
-            <video src={`${process.env.PUBLIC_URL}/images/content/${path}/${image.video.src}.mp4`} controls={image.video.controls} loop={image.video.loop} alt={image.alt} poster={`images/${path}/${image.video.src}.jpg`} ref={this.videoEl}></video>
+            <video
+              src={`${process.env.PUBLIC_URL}/images/content/${path}/${image.video.src}.mp4`}
+              controls={image.video.controls}
+              loop={image.video.loop}
+              alt={image.alt}
+              poster={`${process.env.PUBLIC_URL}/images/content/${path}/${image.video.src}.jpg`}
+              ref={this.videoEl}>
+            </video>
           )}
           {!image.video && (
             <img src={`${process.env.PUBLIC_URL}/images/content/${path}/${image.src}`} alt={image.alt} />
@@ -73,7 +88,7 @@ class Asset extends React.Component {
   setImageVisibility() {
     const el = this.videoEl.current;
 
-    if(el && !this.state.ticking) {
+    if((this.props.device === 'desktop') && el && !this.state.ticking) {
       window.requestAnimationFrame(() => {
         const isVisible = utilities.checkVisibility(el);
 
@@ -96,5 +111,9 @@ class Asset extends React.Component {
     }
   }
 }
+
+Asset = connect(
+  mapStateToProps
+)(Asset);
 
 export default Asset;

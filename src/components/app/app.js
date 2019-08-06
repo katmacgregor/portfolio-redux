@@ -32,7 +32,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const isMobile = this.isMobileDevice();
+    const device = isMobile ? 'mobile' : 'desktop';
+
     this.getPortfolioItems();
+    this.props.setDeviceType(device);
   }
 
   componentDidUpdate(prevProps) {
@@ -68,6 +72,10 @@ class App extends React.Component {
     }
 
     utilities.handleFetch(path, success);
+  }
+
+  isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
   }
 }
 
