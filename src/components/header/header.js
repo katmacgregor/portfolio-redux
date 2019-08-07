@@ -69,7 +69,7 @@ class Header extends React.Component {
             {content}
           </div>
         </div>
-        <Connect size={!nav ? 'large': null} />
+        <Connect showLabels={!nav} size={!nav ? 'large': null} />
       </div>
     );
   }

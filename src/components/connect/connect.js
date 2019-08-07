@@ -33,21 +33,26 @@ const connectItems = [
   }
 ];
 
-const Connect = ({size}) => (
+const Connect = ({size, showLabels}) => (
   <div className={classNames('connect', {[`icons-${size}`]: size})}>
     {connectItems.map((item, i) => {
-      const iconEl = <span className={classNames('icon', [item.id])} />;
+      const iconEl = (
+        <span>
+          <span className={classNames('icon', [item.id])} />
+          {showLabels && <span className="connect-icon-label">{item.title}</span>}
+        </span>
+      );
       let content;
 
       if(item.new) {
         content = (
-          <a href={item.link} title={item.title} className="skip-link-style" target="_blank" rel="noopener noreferrer" key={i}>
+          <a href={item.link} className="skip-link-style" target="_blank" rel="noopener noreferrer" key={i}>
             {iconEl}
           </a>
         );
       } else {
         content = (
-          <a href={item.link} title={item.title} className="skip-link-style" key={i}>
+          <a href={item.link} className="skip-link-style" key={i}>
             {iconEl}
           </a>
         );

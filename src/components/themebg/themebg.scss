@@ -55,7 +55,13 @@
         color: $selection-color;
       }
 
-      h1 .accent, h2:not(.section-title), h3, footer, .content-container.skills, .header-container.nav, .header-container.nav a{
+      h1 .accent,
+      h2:not(.section-title),
+      h3, footer,
+      .content-container.skills,
+      .header-container.nav,
+      .header-container.nav a,
+      .connect-icon-label {
         color: $night-text;
       }
 

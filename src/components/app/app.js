@@ -45,7 +45,7 @@ class App extends React.Component {
       const that = this;
       setTimeout(() => {
         that.props.setAppLoaded();
-      }, 2500);
+      }, 1500);
     }
   }
 

@@ -3,11 +3,23 @@
 @import "../../assets/styles/global/_style_elements";
 @import "../../assets/styles/mixins/icon_sprite";
 
+$trans: 250ms;
+
 .connect {
   a {
     display: inline-block;
     & + a {
       margin-left: 1.5em;
+    }
+
+    @include hover-focus-helper {
+      .icon {
+        transform: rotate(24deg);
+        opacity: 1;
+      }
+      .connect-icon-label {
+        opacity: 1;
+      }
     }
   }
 
@@ -18,12 +30,20 @@
     display: inline-block;
     position: relative;
     opacity: 0.8;
-    transition: transform 250ms, opacity 250ms;
+    transition: transform $trans, opacity $trans;
+  }
 
-    @include hover-focus-helper {
-      transform: rotate(24deg);
-      opacity: 1;
-    }
+  &-icon-label {
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    color: inherit;
+    font-size: 0.65em;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity $trans;
   }
 
   @include mid-high-min {
