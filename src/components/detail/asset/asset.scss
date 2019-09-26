@@ -93,12 +93,16 @@ $holder-accent: rgba(0, 0, 0, 0.1);
     text-align: center;
     margin-bottom: 4%;
     .section {
-      &-title, &-link {
+      &-title, &-desc {
         font-family: inherit;
       }
       &-title {
         font-weight: 300;
         margin-bottom: 1%;
+      }
+      &-desc {
+        font-size: 1em;
+        margin: 0;
       }
     }
   }

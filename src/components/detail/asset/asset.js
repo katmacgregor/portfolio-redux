@@ -67,12 +67,13 @@ class Asset extends React.Component {
 
     return (
       <div className={classNames('asset', [image.classes], {'has-video': image.video, 'has-caption': image.caption, 'banner': banner })}>
-        {image.heading && image.heading.title && (
+        {image.heading && (
           <div className="section-header">
             <h2 className="section-title">{image.heading.title}</h2>
-            {image.heading.link && (
+            {image.heading.desc && (
               <div>
-                <a className="section-link" href={image.heading.link.href} target="_blank" rel="noopener noreferrer">{image.heading.link.title}</a>
+                {image.heading.desc.href && <a className="section-desc" href={image.heading.desc.href} target="_blank" rel="noopener noreferrer">{image.heading.desc.title}</a>}
+                {!image.heading.desc.href && <p className="section-desc">{image.heading.desc.title}</p>}
               </div>
             )}
           </div>
