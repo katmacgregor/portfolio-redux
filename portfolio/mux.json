@@ -1,7 +1,7 @@
 {
-  "name": "M:UX",
+  "name": "m:UX",
   "path": "mux",
-  "description": "<p>Established and lead the M:UX team, which streamlined user experience development for the internal tools powering sites like the Disney portfolio of apps including disney.com, starwars.com, and more</p><p>Designed and developed a component library of scalable and customizable modules to use across services</p><p>Created cohesive branding identity for team and products</p>",
+  "description": "<p>Established and lead the m:UX team, which streamlined user experience development for the internal tools powering the Disney portfolio of apps including disney.com, starwars.com, and more</p><p>Designed and developed a component library of scalable and customizable modules to use across services</p><p>Created cohesive branding identity for team and products</p>",
   "date": "2018",
   "tools": [
     "React",
@@ -22,16 +22,14 @@
       "alt": "",
       "classes": "browser styled",
       "heading": {
-        "title": "m:Reboot Component Library",
-        "desc": {
-          "title": "Combination of custom and Bootstrap based React components"
-        }
-      }
+        "title": "m:Reboot Component Library"
+      },
+      "caption": "Combination of custom and Bootstrap based React components"
     },
     {
       "src": "style_specificity.png",
       "alt": "",
-      "classes": "inline",
+      "classes": "inline image-right",
       "caption": "Components have default styling and configurable theming"
     },
     {
