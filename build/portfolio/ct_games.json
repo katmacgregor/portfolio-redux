@@ -25,7 +25,7 @@
       "classes": "browser styled",
       "heading": {
         "title": "Finding Dory Forgetful Friend Adventure",
-        "link": {
+        "desc": {
           "title": "play game",
           "href": "https://lol.disney.com/finding-dory-forgetful-friend-adventure"
         }
@@ -46,7 +46,7 @@
       "alt": "Star Wars Hyperspace Dash Game",
       "heading": {
         "title": "Star Wars Hyperspace Dash",
-        "link": {
+        "desc": {
           "title": "play game",
           "href": "https://lol.disney.com/star-wars-hyperspace-dash"
         }
@@ -59,7 +59,7 @@
       "classes": "browser styled",
       "heading": {
         "title": "Match 3 Generator",
-        "link": {
+        "desc": {
           "title": "play game",
           "href": "https://lol.disney.com/games/disney-tsum-tsum-mix"
         }
@@ -81,7 +81,7 @@
       "classes": "browser styled",
       "heading": {
         "title": "Memory Card Generator",
-        "link": {
+        "desc": {
           "title": "play game",
           "href": "https://lol.disney.com/games/once-upon-a-pair"
         }

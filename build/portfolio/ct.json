@@ -1,7 +1,7 @@
 {
   "name": "Creative Technology",
   "path": "ct",
-  "description": "<p>Creative Technology is an internal group within the Disney Digital Network dedicated to creating captivating, high-end experiences, focusing on increased engagement, audience growth, and monetization opportunities.</p><p>All interactive experiences are built responsively with a mobile-first mentality, for cross-network distribution, using emerging technologies to create interactive experiences &amp push the boundaries of traditional web and application development.</p><p>Projects also include <a href=\"/ct_games\">CT Game Engines</a></p>",
+  "description": "<p>Core member of the Creative Technology group within the Disney Digital Network dedicated to creating captivating, high-end experiences, focusing on increased engagement, audience growth, and monetization opportunities.</p><p>All interactive experiences are built responsively with a mobile-first mentality, for cross-network distribution, using emerging technologies to create interactive experiences &amp push the boundaries of traditional web and application development.</p><p>Projects also include <a href=\"/ct_games\">CT Game Engines</a></p>",
   "date": "2016",
   "tools": [
     "Bower",
@@ -34,6 +34,9 @@
       },
       "alt": "Creative Technology Interactive Pinata",
       "classes": "browser styled image-right",
+      "heading": {
+        "title": "Projects"
+      },
       "caption": "An interactive piñata that cracks progressively over 4 clicks, fully opening on the 4th crack to reveal the following options: a button with a CMS programmable link. Shower of objects of a single CMS programmable image from the top of the module i.e. falling candy."
     },
     {
@@ -44,6 +47,36 @@
       "alt": "Creative Technology SVG Living Poster",
       "classes": "browser styled",
       "caption": "An experiment to bring an SVG image to life, using CSS animation to add motion and interactivity."
+    },
+    {
+      "src": "sadness_paintbucket.jpg",
+      "alt": "Coloring Book Paint Bucket Tool",
+      "classes": "browser styled image-right",
+      "heading": {
+        "title": "Coloring Book",
+        "desc": {
+          "title": "view page",
+          "href": "http://lol.disney.com/games/coloring-pages/bambi-thumper-coloring-page"
+        }
+      },
+      "caption": "An interactive coloring book, where the SVG's white areas are converted to paintable spaces that can be filled with a variety of colors and patterns. Synced with Disney Interactive's internal CMS configuration options, so that the images, internationalized text translations, colors & tool types can be customizable and programmable."
+    },
+    {
+      "src": "sadness_tools.jpg",
+      "alt": "Coloring Book Tool Flyout",
+      "classes": "browser styled",
+      "caption": "Utilizes SVG's to create a responsive, dynamic coloring surface that capitalizes on Disney's plethora of publishing content, and brings the physical coloring book into the digital space."
+    },
+    {
+      "src": "sadness_airbrush.jpg",
+      "alt": "Coloring Book Airbrush Tool",
+      "classes": "browser styled image-right",
+      "caption": "In addition to various painting tools, users can undo/redo their most recent action, clear the entire image to the original state, download/save the image, and print."
+    },
+    {
+      "src": "mickey_mobile.jpg",
+      "alt": "Coloring Book Mobile  State",
+      "classes": "device iphone styled"
     }
   ]
 }
