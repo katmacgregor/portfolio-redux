@@ -1,0 +1,83 @@
+{
+  "name": "M:UX",
+  "path": "mux",
+  "description": "<p>Established and lead the M:UX team, which streamlined user experience development for the internal tools powering sites like the Disney portfolio of apps including disney.com, starwars.com, and more</p><p>Designed and developed a component library of scalable and customizable modules to use across services</p><p>Created cohesive branding identity for team and products</p>",
+  "date": "2018",
+  "tools": [
+    "React",
+    "Gulp",
+    "npm",
+    "Branding",
+    "HTML5",
+    "SVG"
+  ],
+  "banner": {
+    "src": "mux_lib_hp.png",
+    "alt": "",
+    "classes": "browser styled"
+  },
+  "images": [
+    {
+      "src": "mux_lib_el.png",
+      "alt": "",
+      "classes": "browser styled",
+      "heading": {
+        "title": "m:Reboot Component Library",
+        "desc": {
+          "title": "Combination of custom and Bootstrap based React components"
+        }
+      }
+    },
+    {
+      "src": "style_specificity.png",
+      "alt": "",
+      "classes": "inline",
+      "caption": "Components have default styling and configurable theming"
+    },
+    {
+      "src": "mux_lib_el_rich.png",
+      "alt": "",
+      "classes": "browser styled"
+    },
+    {
+      "src": "mux_lib_el_rich-modal.png",
+      "alt": "",
+      "classes": "browser styled"
+    },
+    {
+      "src": "graph.jpg",
+      "alt": "",
+      "classes": "browser styled",
+      "heading": {
+        "title": "m:Graph"
+      },
+      "caption": "Metadata service using m:Reboot and custom theme"
+    },
+    {
+      "src": "Graph_Homepage.png",
+      "alt": "",
+      "classes": "inline"
+    },
+    {
+      "src": "graph_nav.png",
+      "alt": "",
+      "classes": "inline"
+    },
+    {
+      "src": "logos.png",
+      "alt": "",
+      "heading": {
+        "title": "Branding"
+      }
+    },
+    {
+      "src": "logo_explore.jpg",
+      "alt": "",
+      "heading": {
+        "desc": {
+          "title": "Logo exploration"
+        }
+      }
+    }
+  ]
+}

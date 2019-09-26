@@ -19,31 +19,21 @@
       }
     },
     {
+      "name": "m:UX",
+      "class": "mux",
+      "description": "Unified internal tools powering the Disney portfolio",
+      "folder": "mux",
+      "main_image": {
+        "src": "mux_lib_hp.png"
+      }
+    },
+    {
       "name": "Star Wars",
       "class": "starwars",
       "description": "Redesign of StarWars.com",
       "folder": "starwars",
       "main_image": {
         "src": "sw_home.jpg"
-      }
-    },
-
-    {
-      "name": "Disney.com",
-      "class": "disney",
-      "description": "Digital storytelling",
-      "folder": "dcom",
-      "main_image": {
-        "src": "dcom_cars.jpg"
-      }
-    },
-    {
-      "name": "Disney Junior",
-      "class": "disney_junior",
-      "description": "Child-focused redesign of DisneyJunior.com",
-      "folder": "junior",
-      "main_image": {
-        "src": "devicescomp_junior.png"
       }
     },
     {
@@ -56,21 +46,30 @@
       }
     },
     {
-      "name": "Coloring Book",
-      "class": "coloring",
-      "description": "SVG-based coloring book",
-      "folder": "coloring",
+      "name": "Disney.com",
+      "class": "disney",
+      "description": "Digital storytelling",
+      "folder": "dcom",
       "main_image": {
-        "src": "coloring_cms.jpg"
+        "src": "dcom_cars.jpg"
       }
     },
     {
-      "name": "Disney Tumblr",
-      "class": "tumblr",
-      "description": "UGC Contest sites for movie premieres",
-      "folder": "tumblr",
+      "name": "Playmation",
+      "class": "playmation",
+      "description": "Marketing site for Disney product",
+      "folder": "playmation",
       "main_image": {
-        "src": "tumblr_alice.jpg"
+        "src": "product_repulsor.jpg"
+      }
+    },
+    {
+      "name": "Disney Junior",
+      "class": "disney_junior",
+      "description": "Child-focused redesign of DisneyJunior.com",
+      "folder": "junior",
+      "main_image": {
+        "src": "devicescomp_junior.png"
       }
     },
     {
@@ -92,12 +91,12 @@
       }
     },
     {
-      "name": "Playmation",
-      "class": "playmation",
-      "description": "Marketing site for Disney product",
-      "folder": "playmation",
+      "name": "Disney Tumblr",
+      "class": "tumblr",
+      "description": "UGC Contest sites for movie premieres",
+      "folder": "tumblr",
       "main_image": {
-        "src": "product_repulsor.jpg"
+        "src": "tumblr_alice.jpg"
       }
     },
     {
