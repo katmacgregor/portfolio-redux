@@ -19,7 +19,7 @@
   "images": [
     {
       "src": "mux_lib_el.png",
-      "alt": "",
+      "alt": "m:Reboot Component Library homepage",
       "classes": "browser styled",
       "heading": {
         "title": "m:Reboot Component Library"
@@ -28,54 +28,58 @@
     },
     {
       "src": "style_specificity.png",
-      "alt": "",
+      "alt": "m:Reboot Component Library documentation",
       "classes": "inline image-right",
       "caption": "Components have default styling and configurable theming"
     },
     {
       "src": "mux_lib_el_rich.png",
-      "alt": "",
+      "alt": "m:Reboot Component Library rich text module",
       "classes": "browser styled"
     },
     {
       "src": "mux_lib_el_rich-modal.png",
-      "alt": "",
+      "alt": "m:Reboot Component Library rich text module edit image",
       "classes": "browser styled"
     },
     {
-      "src": "graph.jpg",
-      "alt": "",
+      "src": "graph-char.jpg",
+      "alt": "m:Graph Character Page",
       "classes": "browser styled",
       "heading": {
         "title": "m:Graph"
-      },
+      }
+    },
+    {
+      "src": "graph.jpg",
+      "alt": "m:Graph search results",
+      "classes": "browser styled",
       "caption": "Metadata service using m:Reboot and custom theme"
     },
     {
       "src": "Graph_Homepage.png",
-      "alt": "",
-      "classes": "inline"
+      "alt": "m:Graph site map",
+      "classes": "inline image-right",
+      "caption": "Site architecture and flow for m:Graph platform"
     },
     {
-      "src": "graph_nav.png",
-      "alt": "",
-      "classes": "inline"
+      "src": "graph_nav.jpg",
+      "alt": "Nav component responsive states",
+      "classes": "inline",
+      "caption": "Navigation component exploration and responsive states"
     },
     {
       "src": "logos.png",
-      "alt": "",
+      "alt": "m:Graph and m:Assets logos",
       "heading": {
         "title": "Branding"
       }
     },
     {
       "src": "logo_explore.jpg",
-      "alt": "",
-      "heading": {
-        "desc": {
-          "title": "Logo exploration"
-        }
-      }
+      "alt": "Logo exploration",
+      "classes": "inline",
+      "caption": "Logo exploration"
     }
   ]
 }
