@@ -2,6 +2,7 @@
   "name": "Creative Technology",
   "path": "ct",
   "description": "<p>Core member of the Creative Technology group within the Disney Digital Network dedicated to creating captivating, high-end experiences, focusing on increased engagement, audience growth, and monetization opportunities.</p><p>All interactive experiences are built responsively with a mobile-first mentality, for cross-network distribution, using emerging technologies to create interactive experiences &amp push the boundaries of traditional web and application development.</p><p>Projects also include <a href=\"/ct_games\">CT Game Engines</a></p>",
+  "color": "#dd5093",
   "date": "2016",
   "tools": [
     "Bower",
