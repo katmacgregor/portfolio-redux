@@ -1,7 +1,7 @@
 @import "../../../assets/styles/global/_breakpoints";
 @import "../../../assets/styles/global/_style_elements";
 
-$holder-color: lighten($banner-bg, 4%);
+$holder-color: lighten($banner-bg, 3.25%);
 $holder-accent: rgba(0, 0, 0, 0.05);
 
 @mixin set-aspect($aspect) {
