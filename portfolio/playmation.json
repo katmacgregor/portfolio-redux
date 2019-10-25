@@ -2,6 +2,7 @@
   "name": "Playmation",
   "path": "playmation",
   "description": "<p>Tech lead for first in-house Disney Consumer Product website, Playmation.com</p><p>Communicated directly with 3rd party vendor on designs, coordinating on technical execution and limitations to enhance design and implementation</p><p>Programmable product pages with custom applied theming (allies as blue and enemies as red), with producer configurations including left/right layout, feature image, description and features, product thumb, and retail links</p><p>Several configurable interactive elements, including touch-enabled hotspot overlays, intro animations on page load and scroll, and dynamic expanding panes</p>",
+  "color": "#0849b5",
   "date": "2015",
   "tools": [
     "Backbone",

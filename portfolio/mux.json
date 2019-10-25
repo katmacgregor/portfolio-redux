@@ -2,6 +2,7 @@
   "name": "m:UX",
   "path": "mux",
   "description": "<p>Established and lead the m:UX team, which streamlined user experience development for the internal tools powering the Disney portfolio of apps including disney.com, starwars.com, and more</p><p>Designed and developed a component library of scalable and customizable modules to use across services</p><p>Created cohesive branding identity for team and products</p>",
+  "color": "#5585fb",
   "date": "2018",
   "tools": [
     "React",
