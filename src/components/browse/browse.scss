@@ -29,6 +29,19 @@
     transform: translateX(-50%);
   }
 
+  @include min-height {
+    .header.content-container {
+      height: 62vh;
+      .header-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 300px;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
   @include mid-high-min {
     .content-container {
       &.fill-screen {

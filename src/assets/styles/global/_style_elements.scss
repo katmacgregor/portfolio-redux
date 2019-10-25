@@ -5,6 +5,8 @@ $accent: #25A8DF;
 
 $base-bg: #333;
 $page-bg: #fafafa;
+$banner-bg: #e8e7e7;
+$banner-bg-accent: rgba(lighten($banner-bg, 6%), 0.85);
 
 $light-text: rgba(#fff, 0.9);
 $dark-text: rgba(#666, 0.9);

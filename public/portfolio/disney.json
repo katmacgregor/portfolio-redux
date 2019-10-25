@@ -2,6 +2,7 @@
   "name": "Disney.com",
   "path": "dcom",
   "description": "<p>Created features and experiences across domestic &amp international Disney portfolio of sites</p><p>Agile software development within Sinatra/Backbone architecture</p><p>Refactored codebase to minimize code bloat and page load times, and increase general standards and legibility</p><p>Defined and created the CSS coding standards and style guide that was distributed to all devs</p><p>Transition wireframes into code for prototypes and production, incorporating interactivity, animated elements, and fluid responsive states</p><p><a href=\"https://www.webbyawards.com/winners/2015/websites/general-website/youth/disneycom/\" target=\"blank\">2015 Webby Award Honoree:Youth Website</a></p>",
+  "color": "#2b92e7",
   "date": "2013-2018",
   "tools": [
     "HTML5",

@@ -23,7 +23,7 @@
     background: $selection-bg;
   }
 
-  .header-container.nav { background-color: rgba($thumb, 0.9); }
+  .header-container.nav:not(.skip-theme) { background-color: rgba($thumb, 0.9); }
   footer { background-color: $thumb; }
   .bg-fill { @include page-background($bg1, $bg2); }
   .content-container-grid .content-item .thumb{ background-color: $thumb; }
@@ -59,8 +59,8 @@
       h2:not(.section-title),
       h3, footer,
       .content-container.skills,
-      .header-container.nav,
-      .header-container.nav a,
+      .header-container.nav:not(.skip-theme),
+      .header-container.nav:not(.skip-theme) a,
       .connect-icon-label {
         color: $night-text;
       }
@@ -70,14 +70,16 @@
           background-position: 50% 100%;
         }
       }
-      .header-container.nav {
+      .header-container.nav:not(.skip-theme) {
         border-bottom: 1px solid rgba(#fff, 0.15);
       }
 
       .content-container.about{ color: $day-text; }
 
-      .connect .icon {
-        @include sprite-position(2, 5 2, $connect-icons);
+      .header-container:not(.nav), .header-container.nav:not(.skip-theme), footer {
+        .connect .icon {
+          @include sprite-position(2, 5 2, $connect-icons);
+        }
       }
 
       footer, .browse .header {

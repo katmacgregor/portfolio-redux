@@ -1,8 +1,8 @@
 @import "../../../assets/styles/global/_breakpoints";
 @import "../../../assets/styles/global/_style_elements";
 
-$holder-color: #ddd;
-$holder-accent: rgba(0, 0, 0, 0.1);
+$holder-color: lighten($banner-bg, 4%);
+$holder-accent: rgba(0, 0, 0, 0.05);
 
 @mixin set-aspect($aspect) {
   overflow: hidden;
@@ -156,7 +156,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
         width: 25%;
       }
     }
-    &.styled{
+    &.styled:not(.banner){
       .image-wrapper{
         max-width: 750px;
         margin: 0 auto;
@@ -164,6 +164,12 @@ $holder-accent: rgba(0, 0, 0, 0.1);
         .caption{
           font-size: 1rem;
         }
+      }
+    }
+
+    &.styled.banner{
+      .image-wrapper{
+        max-width: 1020px;
       }
     }
 
@@ -219,20 +225,23 @@ $holder-accent: rgba(0, 0, 0, 0.1);
       $thickness: 60px;
       .image-wrapper{
         position: relative;
-        border-radius: 50px;
+        border-radius: 40px;
         border: $thickness solid $holder-color;
         background-color: $holder-color;
         box-sizing: border-box;
         &:before, &:after{
           content: "";
           position: absolute;
-          border-radius: 50%;
+          border-radius: 50px;
           z-index: 1;
+        }
+        &:before{
           background-color: $holder-accent;
         }
         &:after{
           border: 2px solid lighten($holder-accent, 30%);
           box-sizing: border-box;
+          background-color: rgba($holder-accent, 0.02);
         }
         img, video{
           border-radius: 3px;
@@ -240,6 +249,10 @@ $holder-accent: rgba(0, 0, 0, 0.1);
       }
 
       &.ipad .image-wrapper{
+        $sides: 20px;
+        border-top-width: $sides;
+        border-bottom-width: $sides;
+
         &:before, &:after{
           top: 50%;
           transform: translateY(-50%);
@@ -263,7 +276,7 @@ $holder-accent: rgba(0, 0, 0, 0.1);
       &.iphone{
         @include set-aspect(percentage(16/9));
         .image-wrapper{
-          $side-width: 20px;
+          $side-width: 12px;
 
           max-width: 280px;
           border-radius: 30px;
@@ -274,10 +287,10 @@ $holder-accent: rgba(0, 0, 0, 0.1);
             transform: translateX(-50%);
           }
           &:before{
-            $size: 8px;
+            $size: 6px;
 
             top: -(($size/2) + ($thickness/2));
-            width: $size;
+            width: 20%;
             height: $size;
           }
           &:after{

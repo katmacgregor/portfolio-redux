@@ -56,9 +56,10 @@ class Detail extends React.Component {
   render() {
     const { item } = this.props;
 
+    console.log(item);
     return (
       <Page {...this.props}>
-        <div className={classNames("detail", { "item-ready": !this.props.itemChanging && this.state.imagesLoaded })}>
+        <div className={classNames("detail", item && item.path, { "item-ready": !this.props.itemChanging && this.state.imagesLoaded })}>
           {item && (
             <React.Fragment>
               <div className="content-container skip-padding">
@@ -67,7 +68,7 @@ class Detail extends React.Component {
                     <Asset image={item.banner} path={item.path} banner imageLoaded={this.handleImageLoaded} />
                   )}
                   <div className="content-header">
-                    <h1 className="project title">{item.name}</h1>
+                    <h1 className="project title" style={{color: item.color}}>{item.name}</h1>
                     {item.link && item.link.title && (
                       <a className="link" href={item.link.href} target="_blank" rel="noopener noreferrer">
                         <span>{item.link.title}</span>

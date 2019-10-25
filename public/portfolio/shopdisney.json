@@ -2,6 +2,7 @@
   "name": "shopDisney",
   "path": "shop",
   "description": "<p>Served as front-end project lead for team of 10+ developers in the redesign of shopDisney.com, which was the first e-commerce site built on the internal CMS platform</p><p>Collaborate with the project dev leads across platforms to project scope, streamline workflow, and define feature set and infrastructure</p><p>Balanced feature development with personnel management and advising on technical implementation of features, with a focus on globalized components</p>",
+  "color": "#1b94e7",
   "date": "2017",
   "tools": [
     "HTML",

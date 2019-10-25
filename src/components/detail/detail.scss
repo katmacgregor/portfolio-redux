@@ -2,6 +2,7 @@
 @import "../../assets/styles/global/_style_elements";
 
 $intro-trans: 500ms;
+$offset-x-start: 20%;
 
 .detail {
   min-height: calc(100vh - #{$nav-height} - 53px);
@@ -70,9 +71,8 @@ $intro-trans: 500ms;
   }
 
   .banner-container {
-    $fade-color: #e8e7e7;
     position: relative;
-    background-color: rgba($fade-color, 0.2);
+    background-color: $banner-bg-accent;
     &:after {
       content: "";
       position: absolute;
@@ -80,7 +80,7 @@ $intro-trans: 500ms;
       width: 100%;
       height: 30%;
       z-index: 0;
-      background-image: linear-gradient(rgba($fade-color, 0), rgba($fade-color, 0.75));
+      background-image: linear-gradient(rgba($banner-bg, 0), rgba($banner-bg, 0.75));
     }
     & > div {
       position: relative;
@@ -147,7 +147,7 @@ $intro-trans: 500ms;
 
     &.item-ready {
       .banner-container .banner {
-        transform: translate(0, -50%);
+        transform: translate(3%, -44%);
         opacity: 1;
       }
     }
@@ -168,17 +168,16 @@ $intro-trans: 500ms;
       .banner {
         top: 50%;
         right: -50px;
-        max-width: 60%;
-        transform: translate(20%, -50%);
+        max-width: 68%;
+        transform: translate($offset-x-start, -44%);
         opacity: 0;
         transition: transform $intro-trans, opacity $intro-trans ($intro-trans * 0.2);
       }
 
       .content-header {
         left: 0;
-        // bottom: 1.8%;
         top: 52%;
-        width: 44%;
+        width: 39%;
         transform: translateY(-50%);
         .title {
           font-size: 5vw;
@@ -200,6 +199,12 @@ $intro-trans: 500ms;
         font-size: 1.1em;
       }
       .meta-container { flex: 1 1 percentage(1/4); }
+    }
+
+    &.apt-list {
+      .asset:not(.styled):not(.inline):not(.banner) img {
+        max-width: 28%;
+      }
     }
   }
 }

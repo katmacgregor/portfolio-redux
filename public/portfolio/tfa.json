@@ -2,6 +2,7 @@
   "name": "The Force Awakens Takeover",
   "path": "tfa",
   "description": "<p>Overlay takeover for release of The Force Awakens, featuring an overlay to choose between the light and dark sides, which then toggles styling &amp content to reflect which side was chosen.</p><p>Programmed content can be configured to appear on the \"light side,\" \"dark side,\" or the default of \"Neutral\" where the content will appear regardless of which side is selected.</p><p>Users can also toggle their selection after the initial overlay state, which swaps the entire page theming and select content</p>",
+  "color": "#efd730",
   "date": "2015",
   "tools": [
     "jQuery",

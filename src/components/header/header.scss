@@ -14,11 +14,18 @@
     padding: 0 4vw;
     z-index: 10;
     overflow: hidden;
-    background-color: rgba($day-thumb, 0.9);
-    border-bottom: 1px solid rgba(#666, 0.15);
     transform: translateY(-100%);
     transition: position 100ms, background-color 200ms, transform 100ms;
     box-sizing: border-box;
+
+    &:not(.skip-theme) {
+      background-color: rgba($day-thumb, 0.9);
+      border-bottom: 1px solid rgba(#666, 0.15);
+    }
+
+    &.skip-theme {
+      background-color: $banner-bg-accent;
+    }
 
     &.show {
       transform: translateY(0);

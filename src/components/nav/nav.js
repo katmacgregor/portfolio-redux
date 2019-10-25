@@ -30,7 +30,7 @@ class Nav extends React.Component {
 
   render() {
     return (
-      <Header nav show={this.state.show} />
+      <Header nav skipTheme={this.props.skipTheme} show={this.state.show} />
     );
   }
 

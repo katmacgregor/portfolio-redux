@@ -42,7 +42,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { nav, show } = this.props;
+    const { nav, show, skipTheme } = this.props;
     let content;
 
     if(!nav) {
@@ -63,7 +63,7 @@ class Header extends React.Component {
     }
 
     return (
-      <div className={classNames('header-container', { 'nav': nav, 'show': show })} ref={this.headerEl}>
+      <div className={classNames('header-container', { 'nav': nav, 'show': show, 'skip-theme': skipTheme })} ref={this.headerEl}>
         <div className="header">
           <div className="title">
             {content}

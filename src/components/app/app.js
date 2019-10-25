@@ -50,11 +50,13 @@ class App extends React.Component {
   }
 
   render() {
+    const { loaded, location } = this.props;
+    const isRoot = (location.pathname === '/');
     return (
       <div className="app">
-        <div className={classNames("app-wrapper", { "loaded": this.props.loaded })}>
-          <ThemeBg timeQuery={this.props.location.search || null}>
-            <Nav hideTop={this.props.location.pathname === '/'} />
+        <div className={classNames("app-wrapper", { "loaded": loaded })}>
+          <ThemeBg timeQuery={location.search || null}>
+            <Nav hideTop={isRoot} skipTheme={!isRoot}  />
               <Switch>
                 <Route exact path='/' component={Browse} />
                 {this.props.items.map((item, i) => (
@@ -65,7 +67,7 @@ class App extends React.Component {
             <Footer />
           </ThemeBg>
         </div>
-        {!this.props.loaded && <Loading fixed dark />}
+        {!loaded && <Loading fixed dark />}
       </div>
     );
   }
