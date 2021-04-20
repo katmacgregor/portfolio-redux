@@ -13,19 +13,16 @@ const skills = [
     title: "Technologies",
     items: [
       "HTML5",
-      "CSS2/3",
-      "Sass",
       "JavaScript",
+      "Sass",
+      "CSS2/3",
       "React",
+      "SwiftUI",
       "Ruby",
       "MongoDB",
       "Canvas",
-      "jQuery",
       "Backbone",
-      "Gulp",
-      "Phaser",
       "npm",
-      "Social APIs",
       "Git"
     ]
   },
@@ -38,15 +35,13 @@ const skills = [
       "IA/UX",
       "Wireframes",
       "Responsive Design",
-      "Graphic Design",
-      "Agile Methodology",
       "Sketch",
       "Illustrator",
       "Photoshop",
       "InDesign",
-      "Painting",
       "Branding",
-      "Drawing & Illustration"
+      "Painting",
+      "Illustration"
     ]
   }
 ];

@@ -29,7 +29,8 @@ const connectItems = [
   {
     id: "resume",
     link: `${process.env.PUBLIC_URL}/KMacGregor_resume_web.pdf`,
-    title: "Resume"
+    title: "Resume",
+    new: true
   }
 ];
 
