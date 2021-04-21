@@ -9,16 +9,16 @@ $offset-x-start: 20%;
   padding-top: $nav-height;
 
   &.item-ready {
-    .content-header, .content-info, .images, .paging {
+    .content-header, .content-info, .sections, .paging {
       opacity: 1;
     }
 
-    .content-info, .images, .paging {
+    .content-info, .sections, .paging {
       transition-delay: ($intro-trans * 0.75);
     }
   }
 
-  .content-header, .content-info, .images, .paging {
+  .content-header, .content-info, .sections, .paging {
     opacity: 0;
     transition: opacity $intro-trans;
   }
@@ -108,6 +108,10 @@ $offset-x-start: 20%;
       border: 1px solid rgba(#000, 0.1);
       border-radius: 2px;
     }
+  }
+
+  .section + .section {
+    margin-top: 6vh;
   }
 
   .images {
@@ -201,10 +205,29 @@ $offset-x-start: 20%;
       .meta-container { flex: 1 1 percentage(1/4); }
     }
 
+    .images {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .section + .section {
+      margin-top: 16vh;
+    }
+
+    .section .section-header + .images .asset.inline.half:nth-of-type(1) + .asset.inline.half:nth-of-type(2),
+    .section .section-header + .images .asset.inline:not(.half) + .asset.inline:not(.half) {
+      margin-top: 0
+    }
+
     &.apt-list {
       .asset:not(.styled):not(.inline):not(.banner) img {
         max-width: 28%;
       }
+    }
+
+    // TODO: quick hardcode
+    &.illustration .section:nth-of-type(2) .asset:not(.styled):not(.inline):not(.banner) img {
+      max-width: 75%;
     }
   }
 }

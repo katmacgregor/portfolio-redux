@@ -9,7 +9,10 @@ export const handleFetch = (path, handleSuccess) => {
     throw new TypeError("not json");
   })
   .then(json => handleSuccess(json))
-  .catch(error => { console.log(error); });
+  .catch(error => {
+    console.error("** JSON loading error **");
+    console.error(error);
+  });
 };
 
 // check if an element is in the viewport

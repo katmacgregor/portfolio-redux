@@ -1,0 +1,107 @@
+{
+  "name": "Illustration",
+  "path": "illustration",
+  "description": "<p>While I've always loved drawing, it became secondary as I focused on my career and learning to code—researching and learning new languages and techniques—occupied my free time. I dabbled with drawing here and there throughout, but the atmosphere in 2020 reignited a passion to draw.</p><p>While pencil and paper is my old reliable, it’s been very exciting to play with new applications and tools and translate those skills to the Apple Pencil and iPad. My style is still shifting and growing, but is always rooted in an emphasis on detail.</p>",
+  "color": "#b8a9e6",
+  "date": "2020-2021",
+  "tools": [
+    "Hand Drawing",
+    "Procreate",
+    "Adobe Fresco",
+    "Adobe Illustrator"
+  ],
+  "banner": {
+    "src": "kmacgregor_draw_progress.jpg",
+    "alt": "",
+    "classes": "device ipad styled"
+  },
+  "sections": [
+    {
+      "heading": {
+        "title": "Nature Collection",
+        "desc": {
+          "title": "Hand drawn posters based on photographs I've taken at some of my favorite nature destinations"
+        }
+      },
+      "images": [
+        {
+          "src": "kmacgregor_natureposter-morro.jpg",
+          "alt": "Nature Poster: Morro Bay",
+          "classes": "inline half"
+        },
+        {
+          "src": "kmacgregor_natureposter-tetons.jpg",
+          "alt": "Nature Poster: Grand Teton National Park",
+          "classes": "inline half"
+        },
+        {
+          "src": "kmacgregor_natureposter-emerald.jpg",
+          "alt": "Nature Poster: Emerald Lake",
+          "classes": "inline half"
+        },
+        {
+          "src": "kmacgregor_natureposter-grandcanyon.jpg",
+          "alt": "Nature Poster: Grand Canyon National Park",
+          "classes": "inline half"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "title": "Schitt's Creek",
+        "desc": {
+          "title": "A little bit of an ode to a much beloved tv show"
+        }
+      },
+      "images": [
+        {
+          "src": "kmacgregor_schitts.jpg",
+          "alt": "Schitt's Creek"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "title": "Triptych",
+        "desc": {
+          "title": "Honoring powerful political women that continued making history in 2020"
+        }
+      },
+      "images": [
+        {
+          "src": "kmacgregor_tryp_kamala.jpg",
+          "alt": "Kamala Harris",
+          "classes": "inline third"
+        },
+        {
+          "src": "kmacgregor_tryp_ruth.jpg",
+          "alt": "Ruth Bader Ginsburg",
+          "classes": "inline third"
+        },
+        {
+          "src": "kmacgregor_tryp_stacey.jpg",
+          "alt": "Stacey Abrams",
+          "classes": "inline third"
+        },
+        {
+          "src": "kmacgregor_vp.jpg",
+          "alt": "VP Kamala Harris"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "title": "Man's Best Friend",
+        "desc": {
+          "title": "A commission to honor the life and love between an ownner and his fur child"
+        }
+      },
+      "images": [
+        {
+          "src": "kmacgregor_sam.jpg",
+          "alt": "Man takes a nap with dog"
+        }
+      ]
+    }
+  ]
+}

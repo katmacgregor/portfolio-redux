@@ -11,6 +11,7 @@ import './detail.scss';
 import Page from '../page/page';
 import Paging from '../paging/paging';
 import Asset from './asset/asset';
+import SectionHeading from './sectionheading/sectionheading';
 import Loading from '../loading/loading';
 
 const mapStateToProps = (state) => {
@@ -34,7 +35,7 @@ class Detail extends React.Component {
 
   componentDidMount() {
     const item = this.props.match.path;
-    const path = `${process.env.PUBLIC_URL}/portfolio/${item}.json`;
+    const path = `${process.env.PUBLIC_URL}/portfolio${item}.json`;
     const that = this;
 
     const success = (data) => {
@@ -56,7 +57,6 @@ class Detail extends React.Component {
   render() {
     const { item } = this.props;
 
-    console.log(item);
     return (
       <Page {...this.props}>
         <div className={classNames("detail", item && item.path, { "item-ready": !this.props.itemChanging && this.state.imagesLoaded })}>
@@ -101,9 +101,14 @@ class Detail extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="images">
-                  {item.images && item.images.map((image, i) => (
-                    <Asset image={image} path={item.path} key={i} />
+                <div className="sections">
+                  {item.sections && item.sections.map((section, i) => (
+                    <div className="section">
+                      <SectionHeading header={section.heading} key={`section-${i}`} />
+                      <div className="images" key={i}>
+                        {section.images.map((image, j) => <Asset image={image} path={item.path} key={j} />)}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>

@@ -1,0 +1,30 @@
+@import "../../../assets/styles/global/_breakpoints";
+
+.section-header {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 4%;
+  padding: 0 30px;
+  .section {
+    &-title, &-desc {
+      font-family: inherit;
+    }
+    &-title {
+      font-weight: 300;
+    }
+    &-title + .section-desc-wrapper {
+      margin-top: 1%;
+    }
+    &-desc {
+      font-size: 1em;
+      margin: 0;
+    }
+  }
+
+  @media screen and (max-width: $mid-high-breakpoint - 1px){
+    font-size: 0.9rem;
+    .section-title {
+      font-size: 1.5em;
+    }
+  }
+}

@@ -14,30 +14,34 @@
     "alt": "Alice Tumblr Home",
     "classes": "browser styled"
   },
-  "images": [
+  "sections": [
     {
-      "video": {
-        "src": "tumblr_alice",
-        "controls": true
-      },
-      "alt": "Alice Tumblr",
-      "classes": "browser styled"
-    },
-    {
-      "video": {
-        "src": "tumblr_pirates",
-        "controls": true
-      },
-      "alt": "Pirates of the Caribbean Tumblr",
-      "classes": "browser styled"
-    },
-    {
-      "video": {
-        "src": "tumblr_toystory",
-        "controls": true
-      },
-      "alt": "Toy Story Anniversay Tumblr",
-      "classes": "browser styled"
+      "images": [
+        {
+          "video": {
+            "src": "tumblr_alice",
+            "controls": true
+          },
+          "alt": "Alice Tumblr",
+          "classes": "browser styled"
+        },
+        {
+          "video": {
+            "src": "tumblr_pirates",
+            "controls": true
+          },
+          "alt": "Pirates of the Caribbean Tumblr",
+          "classes": "browser styled"
+        },
+        {
+          "video": {
+            "src": "tumblr_toystory",
+            "controls": true
+          },
+          "alt": "Toy Story Anniversay Tumblr",
+          "classes": "browser styled"
+        }
+      ]
     }
   ]
 }

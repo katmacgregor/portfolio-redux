@@ -18,11 +18,11 @@ const skills = [
       "CSS2/3",
       "React",
       "SwiftUI",
+      "NodeJS",
       "Ruby",
       "MongoDB",
       "Canvas",
-      "Backbone",
-      "npm",
+      "Backbone",,
       "Git"
     ]
   },

@@ -14,67 +14,71 @@
     "alt": "Playmation Responsive Homepage",
     "classes": "styled"
   },
-  "images": [
+  "sections": [
     {
-      "video": {
-        "src": "playmation_parents",
-        "controls": true
-      },
-      "alt": "Playmation Parents Site",
-      "classes": "browser styled",
-      "caption": "Marketing site geared towards parents including product overview and legal information"
-    },
-    {
-      "video": {
-        "src": "hotspot_mobile_sized",
-        "controls": true
-      },
-      "alt": "Mobile Hotspot Interaction",
-      "classes": "device iphone styled"
-    },
-    {
-      "video": {
-        "src": "avengers_hp_sized",
-        "controls": true
-      },
-      "alt": "Playmation Avengers Homepage",
-      "classes": "browser styled image-right",
-      "caption": "Marketing site geared towards themed and specific products, with the first iteration being the Avengers play system. The site included storytelling and gameplay mechanics, as well as retailer links."
-    },
-    {
-      "src": "avengers_hp_character.jpg",
-      "alt": "Playmation Avengers Character Scroller",
-      "classes": "browser styled"
-    },
-    {
-      "src": "avengers_thor_full.jpg",
-      "alt": "Playmation Avengers Thor",
-      "classes": "browser styled"
-    },
-    {
-      "src": "avengers_blackwidow.jpg",
-      "alt": "Playmation Avengers Black Widow",
-      "classes": "inline thirds"
-    },
-    {
-      "src": "avengers_ironskull.jpg",
-      "alt": "Playmation Avengers Iron Skull",
-      "classes": "inline thirds"
-    },
-    {
-      "src": "avengers_repulsor.jpg",
-      "alt": "Playmation Avengers Repulsor",
-      "classes": "inline thirds"
-    },
-    {
-      "src": "avengers_hp_gear.jpg",
-      "alt": "Playmation Avengers Gear",
-      "classes": "browser styled"
-    },
-    {
-      "src": "avengers_hp_order.jpg",
-      "alt": "Playmation Avengers Order",
-      "classes": "browser styled"
+      "images": [
+        {
+          "video": {
+            "src": "playmation_parents",
+            "controls": true
+          },
+          "alt": "Playmation Parents Site",
+          "classes": "browser styled",
+          "caption": "Marketing site geared towards parents including product overview and legal information"
+        },
+        {
+          "video": {
+            "src": "hotspot_mobile_sized",
+            "controls": true
+          },
+          "alt": "Mobile Hotspot Interaction",
+          "classes": "device iphone styled"
+        },
+        {
+          "video": {
+            "src": "avengers_hp_sized",
+            "controls": true
+          },
+          "alt": "Playmation Avengers Homepage",
+          "classes": "browser styled image-right",
+          "caption": "Marketing site geared towards themed and specific products, with the first iteration being the Avengers play system. The site included storytelling and gameplay mechanics, as well as retailer links."
+        },
+        {
+          "src": "avengers_hp_character.jpg",
+          "alt": "Playmation Avengers Character Scroller",
+          "classes": "browser styled"
+        },
+        {
+          "src": "avengers_thor_full.jpg",
+          "alt": "Playmation Avengers Thor",
+          "classes": "browser styled"
+        },
+        {
+          "src": "avengers_blackwidow.jpg",
+          "alt": "Playmation Avengers Black Widow",
+          "classes": "inline third"
+        },
+        {
+          "src": "avengers_ironskull.jpg",
+          "alt": "Playmation Avengers Iron Skull",
+          "classes": "inline third"
+        },
+        {
+          "src": "avengers_repulsor.jpg",
+          "alt": "Playmation Avengers Repulsor",
+          "classes": "inline third"
+        },
+        {
+          "src": "avengers_hp_gear.jpg",
+          "alt": "Playmation Avengers Gear",
+          "classes": "browser styled"
+        },
+        {
+          "src": "avengers_hp_order.jpg",
+          "alt": "Playmation Avengers Order",
+          "classes": "browser styled"
+        }
+      ]
     }
   ]
 }
