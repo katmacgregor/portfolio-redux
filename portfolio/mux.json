@@ -17,70 +17,74 @@
     "alt": "",
     "classes": "browser styled"
   },
-  "images": [
+  "sections": [
     {
-      "src": "mux_lib_el.png",
-      "alt": "m:Reboot Component Library homepage",
-      "classes": "browser styled",
-      "heading": {
-        "title": "m:Reboot Component Library"
-      },
-      "caption": "Combination of custom and Bootstrap based React components"
-    },
-    {
-      "src": "style_specificity.png",
-      "alt": "m:Reboot Component Library documentation",
-      "classes": "inline image-right",
-      "caption": "Components have default styling and configurable theming"
-    },
-    {
-      "src": "mux_lib_el_rich.png",
-      "alt": "m:Reboot Component Library rich text module",
-      "classes": "browser styled"
-    },
-    {
-      "src": "mux_lib_el_rich-modal.png",
-      "alt": "m:Reboot Component Library rich text module edit image",
-      "classes": "browser styled"
-    },
-    {
-      "src": "graph-char.jpg",
-      "alt": "m:Graph Character Page",
-      "classes": "browser styled",
-      "heading": {
-        "title": "m:Graph"
-      }
-    },
-    {
-      "src": "graph.jpg",
-      "alt": "m:Graph search results",
-      "classes": "browser styled",
-      "caption": "Metadata service using m:Reboot and custom theme"
-    },
-    {
-      "src": "Graph_Homepage.png",
-      "alt": "m:Graph site map",
-      "classes": "inline image-right",
-      "caption": "Site architecture and flow for m:Graph platform"
-    },
-    {
-      "src": "graph_nav.jpg",
-      "alt": "Nav component responsive states",
-      "classes": "inline",
-      "caption": "Navigation component exploration and responsive states"
-    },
-    {
-      "src": "logos.png",
-      "alt": "m:Graph and m:Assets logos",
-      "heading": {
-        "title": "Branding"
-      }
-    },
-    {
-      "src": "logo_explore.jpg",
-      "alt": "Logo exploration",
-      "classes": "inline",
-      "caption": "Logo exploration"
+      "images": [
+        {
+          "src": "mux_lib_el.png",
+          "alt": "m:Reboot Component Library homepage",
+          "classes": "browser styled",
+          "heading": {
+            "title": "m:Reboot Component Library"
+          },
+          "caption": "Combination of custom and Bootstrap based React components"
+        },
+        {
+          "src": "style_specificity.png",
+          "alt": "m:Reboot Component Library documentation",
+          "classes": "inline image-right",
+          "caption": "Components have default styling and configurable theming"
+        },
+        {
+          "src": "mux_lib_el_rich.png",
+          "alt": "m:Reboot Component Library rich text module",
+          "classes": "browser styled"
+        },
+        {
+          "src": "mux_lib_el_rich-modal.png",
+          "alt": "m:Reboot Component Library rich text module edit image",
+          "classes": "browser styled"
+        },
+        {
+          "src": "graph-char.jpg",
+          "alt": "m:Graph Character Page",
+          "classes": "browser styled",
+          "heading": {
+            "title": "m:Graph"
+          }
+        },
+        {
+          "src": "graph.jpg",
+          "alt": "m:Graph search results",
+          "classes": "browser styled",
+          "caption": "Metadata service using m:Reboot and custom theme"
+        },
+        {
+          "src": "Graph_Homepage.png",
+          "alt": "m:Graph site map",
+          "classes": "inline image-right",
+          "caption": "Site architecture and flow for m:Graph platform"
+        },
+        {
+          "src": "graph_nav.jpg",
+          "alt": "Nav component responsive states",
+          "classes": "inline",
+          "caption": "Navigation component exploration and responsive states"
+        },
+        {
+          "src": "logos.png",
+          "alt": "m:Graph and m:Assets logos",
+          "heading": {
+            "title": "Branding"
+          }
+        },
+        {
+          "src": "logo_explore.jpg",
+          "alt": "Logo exploration",
+          "classes": "inline",
+          "caption": "Logo exploration"
+        }
+      ]
     }
   ]
 }

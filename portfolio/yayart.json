@@ -14,25 +14,29 @@
     "alt": "YayArt Responsive",
     "classes": "styled"
   },
-  "images": [
+  "sections": [
     {
-      "src": "hp_original.jpg",
-      "alt": "YayArt Original Homepage",
-      "classes": "browser styled set-aspect",
-      "caption": "Homepage layout and design prior to case study"
-    },
-    {
-      "src": "hp_sketch.jpg",
-      "alt": "YayArt Homepage Sketch"
-    },
-    {
-      "src": "hp_wire.jpg",
-      "alt": "YayArt Homepage Wire"
-    },
-    {
-      "src": "hp_final.jpg",
-      "alt": "YayArt Homepage Final",
-      "classes": "browser styled"
+      "images": [
+        {
+          "src": "hp_original.jpg",
+          "alt": "YayArt Original Homepage",
+          "classes": "browser styled set-aspect",
+          "caption": "Homepage layout and design prior to case study"
+        },
+        {
+          "src": "hp_sketch.jpg",
+          "alt": "YayArt Homepage Sketch"
+        },
+        {
+          "src": "hp_wire.jpg",
+          "alt": "YayArt Homepage Wire"
+        },
+        {
+          "src": "hp_final.jpg",
+          "alt": "YayArt Homepage Final",
+          "classes": "browser styled"
+        }
+      ]
     }
   ]
-  }
+}

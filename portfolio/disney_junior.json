@@ -13,36 +13,40 @@
     "src": "devicescomp_junior.png",
     "alt": "Disney Junior Responsive"
   },
-  "images": [
+  "sections": [
     {
-      "src": "junior_sitemap3.jpg",
-      "alt": "Disney Junior Sitemap",
-      "classes": "inline"
-    },
-    {
-      "src": "hp_wire.jpg",
-      "alt": "Disney Junior Homepage Wireframe",
-      "classes": "device ipad styled"
-    },
-    {
-      "src": "hp_final.png",
-      "alt": "Disney Junior Homepage Final",
-      "classes": "device ipad styled"
-    },
-    {
-      "src": "doc_wire.jpg",
-      "alt": "Disney Junior Showpage Wire",
-      "classes": "device ipad styled"
-    },
-    {
-      "src": "doc_final.png",
-      "alt": "Disney Junior Showpage",
-      "classes": "device ipad styled"
-    },
-    {
-      "src": "junior_jake_games.jpg",
-      "alt": "Disney Junior Game Page",
-      "classes": "browser styled"
+      "images": [
+        {
+          "src": "junior_sitemap3.jpg",
+          "alt": "Disney Junior Sitemap",
+          "classes": "inline"
+        },
+        {
+          "src": "hp_wire.jpg",
+          "alt": "Disney Junior Homepage Wireframe",
+          "classes": "device ipad styled"
+        },
+        {
+          "src": "hp_final.png",
+          "alt": "Disney Junior Homepage Final",
+          "classes": "device ipad styled"
+        },
+        {
+          "src": "doc_wire.jpg",
+          "alt": "Disney Junior Showpage Wire",
+          "classes": "device ipad styled"
+        },
+        {
+          "src": "doc_final.png",
+          "alt": "Disney Junior Showpage",
+          "classes": "device ipad styled"
+        },
+        {
+          "src": "junior_jake_games.jpg",
+          "alt": "Disney Junior Game Page",
+          "classes": "browser styled"
+        }
+      ]
     }
   ]
 }

@@ -13,14 +13,18 @@
     "alt": "The Force Awakens Disney.com Takeover",
     "classes": "browser styled"
   },
-  "images": [
+  "sections": [
     {
-      "video": {
-        "src": "tfa_takeover",
-        "controls": true
-      },
-      "alt": "The Force Awakens Disney.com Takeover Screencap",
-      "classes": "browser styled"
+      "images": [
+        {
+          "video": {
+            "src": "tfa_takeover",
+            "controls": true
+          },
+          "alt": "The Force Awakens Disney.com Takeover Screencap",
+          "classes": "browser styled"
+        }
+      ]
     }
   ]
 }
