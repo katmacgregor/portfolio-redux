@@ -100,12 +100,12 @@
       }
     },
     {
-      "name": "ApartmentList",
-      "class": "apartmentlist",
-      "description": "Illustrated personas of 20 well-known urban neighborhoods",
-      "folder": "apt-list",
+      "name": "Illustration",
+      "class": "illustration",
+      "description": "Hand drawn doodlin's",
+      "folder": "illustration",
       "main_image": {
-        "src": "ApartmentList-Personas_delivery-04.jpg"
+        "src": "kmacgregor_natureposter-morro.jpg"
       }
     }
   ]
