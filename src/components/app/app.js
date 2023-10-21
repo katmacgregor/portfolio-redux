@@ -16,6 +16,7 @@ import Nav from '../nav/nav';
 import Footer from '../footer/footer';
 import ThemeBg from '../themebg/themebg';
 import ErrorPage from '../errorpage/errorpage';
+import HPPage from '../hp/hp';
 import Loading from '../loading/loading';
 
 const mapStateToProps = (state) => {
@@ -62,6 +63,7 @@ class App extends React.Component {
                 {this.props.items.map((item, i) => (
                   <Route exact path={`/${item.class}`} key={i} component={Detail} />
                 ))}
+                <Route exact path='/hp' component={HPPage} />
                 <Route component={ErrorPage} />
               </Switch>
             <Footer />
