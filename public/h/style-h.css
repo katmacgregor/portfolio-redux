@@ -1,0 +1,231 @@
+:root {
+  --trans-dur: 1s;
+  --long-trans: 3s;
+  --owl-swoop-delay: 0.4s;
+  --owl-delay: 5s;
+
+
+  --snitch-timing: 80ms;
+  --snitch-rotate: 6deg;
+
+  --color-night-darkest: #16161a;
+  --color-night-mid: #1e3651;
+  --color-night-light: #3d4d68;
+  --color-yellow: #c4a048;
+  --color-border: #f9f9e2;
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
+}
+body{
+  text-align: center;
+  background-color: var(--color-border);
+}
+
+svg{ max-height: 100vh; }
+
+.snitch-yellow {
+  fill: var(--color-yellow);
+}
+
+#sky,
+#bg-clouds,
+#foreground-clouds {
+  transition: var(--long-trans);
+}
+.night #sky,
+.night #bg-clouds {
+  opacity: 0;
+}
+
+#stars {
+  opacity: 0;
+  transition: opacity var(--long-trans);
+}
+
+.night #stars {
+  opacity: 1;
+  transition: opacity var(--long-trans) var(--long-trans);
+}
+
+#owl {
+  opacity: 0;
+  transform: translateX(-35%);
+  transition: opacity var(--trans-dur), transform 0s var(--trans-dur);
+}
+#owl path {
+  transform: translateY(14%);
+  transition: transform 0s var(--trans-dur);
+}
+.night #owl {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity var(--trans-dur), transform var(--long-trans) var(--owl-delay);
+}
+.night #owl path {
+  transform: translateY(0);
+  transition: transform var(--long-trans) calc(var(--owl-swoop-delay) + var(--owl-delay));
+}
+
+.roof-light,
+.roof-mid,
+.roof-dark,
+.grass-light,
+.castle-light,
+.castle-light-mid,
+.castle-mid,
+.castle-dark-mid,
+.castle-wall,
+#walls .roof-dark,
+.grass-light,
+.grass-base,
+.grass-dark-2,
+.grass-dark,
+.stone-light,
+.stone-base,
+.stone-dark,
+.windows-empty,
+.title,
+.quidditch-hoop-base,
+.quidditch-hoop-shadow,
+#foreground-clouds path {
+  transition: fill var(--long-trans);
+}
+
+.title,
+.quidditch-hoop-shadow,
+.quidditch-hoop-base,
+.windows-lit,
+.window-light-roof-accent,
+.windows-lit-roof {
+  stroke-width: 0 !important;
+}
+
+.windows-lit,
+.window-light-roof-accent,
+.windows-lit-roof {
+  transition: fill var(--trans-dur);
+}
+
+.night .title {
+  fill: var(--color-border);
+}
+
+.night #foreground-clouds {
+  opacity: 60%;
+}
+.night #foreground-clouds path {
+  fill: #9aa2bb;
+}
+
+.night .quidditch-hoop-base {
+  fill: var(--color-night-darkest);
+}
+.night .quidditch-hoop-shadow {
+  fill: var(--color-night-light);
+}
+
+.night .roof-light {
+  fill: var(--color-night-light);
+}
+.night .roof-mid {
+  fill: var(--color-night-mid);
+}
+.night .roof-dark {
+  fill: #0e263e;
+}
+
+.night .castle-light {
+  fill: #3e3742;
+}
+.night .castle-light-mid {
+  fill: #312d35;
+}
+.night .castle-mid {
+  fill: #262630;
+}
+.night .castle-dark-mid,
+.night #walls .roof-dark {
+  fill: #1e1f26;
+}
+
+.night .castle-wall {
+  fill: var(--color-night-darkest);
+}
+
+.night .grass-light {
+  fill: #1c654c;
+}
+.night .grass-base {
+  fill: #20493b;
+}
+.night .grass-dark-2 {
+  fill: #193f33;
+}
+.night .grass-dark {
+  fill: #193430;
+}
+
+.night .stone-light {
+  fill: #636666;
+}
+.night .stone-base {
+  fill: #545556;
+}
+.night .stone-dark {
+  fill: #4a4c4b;
+}
+
+.night .windows-lit,
+.night .window-light-roof-accent,
+.night .windows-lit-roof {
+  fill: #996930;
+  transition: fill var(--trans-dur) var(--long-trans);
+}
+.night .windows-empty {
+  fill: #0f1012;
+}
+
+#wing-right {
+  animation: flutter-right infinite alternate var(--snitch-timing);
+  transform-origin: 758px 768px;
+}
+#wing-left {
+  transform-origin: 622px 814px;
+  animation: flutter-left infinite alternate var(--snitch-timing);
+}
+#snitch {
+  transition: transform 2000ms;
+}
+#snitch-2 {
+  transition: transform 1000ms;
+}
+.night #snitch {
+  transform: translate(13%, -39%);
+}
+
+.night #snitch-2 {
+  transform: translate(40%);
+}
+
+#snitch_stream {
+  transition: opacity 1000ms 2000ms;
+}
+.night #snitch_stream {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+@keyframes flutter-right {
+  to {
+    transform: rotate(var(--snitch-rotate));    
+  }
+}
+
+@keyframes flutter-left {
+  to {
+    transform: rotate(calc(var(--snitch-rotate) * -1));    
+  }
+}
