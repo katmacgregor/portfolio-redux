@@ -74,12 +74,9 @@ class HPPage extends React.Component {
   }
   
   handleClick() {
-    console.log("test");
-    // body.classList.toggle('night');
     this.setState(prevState => ({
       isDay: !prevState.isDay
     }));
-    console.log(this.state.isDay);
   }
 }
 
