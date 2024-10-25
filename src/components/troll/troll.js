@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import './troll.scss';
+import './troll.scss';
 
 class TrollPage extends React.Component {
   constructor () {
@@ -10,7 +10,7 @@ class TrollPage extends React.Component {
   render() {
     return (
       <video
-        class="nick hide-footer"
+        class="troll hide-footer"
         src={`${process.env.PUBLIC_URL}/images/hp/trolls_crop.mov`}
         autoplay
         muted

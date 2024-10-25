@@ -9,3 +9,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `npm run build`
 ### `npm run eject`
 ### `npm run deploy`
+### Try push, use github token to authenticate before deploy

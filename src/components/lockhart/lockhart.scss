@@ -1,0 +1,19 @@
+.header-container.nav.show {
+  display: none !important;
+}
+
+.hide-footer + footer {
+  display: none;
+}
+
+.lockhart{
+  height: 100vh;
+}
+
+.lockhart img {
+  position: absolute;
+  max-width: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

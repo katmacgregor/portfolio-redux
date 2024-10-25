@@ -18,6 +18,7 @@ import ThemeBg from '../themebg/themebg';
 import ErrorPage from '../errorpage/errorpage';
 import HPPage from '../hp/hp';
 import NickPage from '../nick/nick';
+import LockhartPage from '../lockhart/lockhart';
 import TrollPage from '../troll/troll';
 import Loading from '../loading/loading';
 
@@ -67,6 +68,7 @@ class App extends React.Component {
                 ))}
                 <Route exact path='/hp' component={HPPage} />
                 <Route exact path='/hp-nick' component={NickPage} />
+                <Route exact path='/hp-lockhart' component={LockhartPage} />
                 <Route exact path='/hp-troll' component={TrollPage} />
                 <Route component={ErrorPage} />
               </Switch>
