@@ -25,7 +25,7 @@
   --nav-bg: rgba(255, 255, 255, 0.45);
 }
 
-/*@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --text-primary: #fcfcfc;
     --text-secondary: #c0c0c0;
@@ -36,7 +36,7 @@
     --border: #333;
     --bg-placeholder: #212424;
   }
-}*/
+}
 
 .rotator {
   transition: color 250ms;
@@ -424,7 +424,23 @@ section { padding: 40px 0; }
   border-radius: 50%;
   background-color: var(--bg-placeholder);
   width: clamp(150px, 20vw, 186px);
+  height: clamp(150px, 20vw, 186px);
   margin-bottom: 22px;
+}
+.highlight-image.earbuds {
+  background-image: url(../images/product-bud-in-ear.svg);
+}
+.highlight-image.headphones {
+  background-image: url(../images/product-headphones.svg);
+}
+.highlight-image.speaker {
+  background-image: url(../images/product-speakers.svg);
+}
+
+@media (prefers-color-scheme: dark) {
+  .highlight-image.earbuds  {
+    background-image: url(../images/product-bud-in-ear-dark.svg);
+  }
 }
 
 .gallery-entry { display: flex; gap: 32px; align-items: center; margin-bottom: 48px; }
