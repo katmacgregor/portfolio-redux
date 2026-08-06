@@ -1,0 +1,243 @@
+/* Beeps & boops: speaker "press-and-pair" walkthrough.
+   Stage 1 (resting): plain speaker icon, no highlight.
+   Stage 2.1 (button-target): the "camera" zooms in on the power button
+   and a soft blue highlight fades in behind it, hinting at the tap
+   target. Stroke widths on the zoomed elements are animated in lockstep
+   with the zoom (pre-divided by the same scale factor, matching the
+   source artwork) so outlines don't visually thicken as they scale up.
+   Stage 2.2 (button-press): once the target highlight has settled, it
+   shrinks and darkens (fill-opacity 0.35 -> 0.6) to read as a press.
+   Stage 3 (pairing): right as the press is about to release, the LED
+   lights up and starts pulsing; the target highlight releases and
+   fades, and three notes pop in (scaling up from 60%) in an overlapping
+   sequence, rising gently out of the grille and fading as they go.
+   Stage 4 (popup): the camera eases back out to a middle zoom level so
+   the phone can rejoin the frame, sliding up from below into its normal
+   resting spot. The LED keeps pulsing continuously the whole way
+   through this stage before everything finally zooms back out to rest.
+
+   This is the full sequence (target > press > pairing > popup), still
+   built as a simple back-and-forth loop rather than a hard cut back to
+   frame 1, so it can be reviewed end-to-end on its own. 12s per cycle. */
+
+/* Rest/target/popup matrices below were recalibrated against the
+   redrawn (proportion-corrected) speaker artwork: #spk-speaker and
+   #spk-press-target's REST values came directly from the corrected
+   source file, and since that file's rest values differ from the old
+   ones by a tiny, near-perfectly-uniform ~0.565% scale (plus a sub-2px
+   translate) — not a skewed/non-uniform correction — that same per-
+   element ratio was composed onto the old target/press/popup matrices
+   to get the corrected versions here, preserving the exact zoom
+   relationships (and therefore all the timing/choreography) from
+   before. Phone/card matrices are untouched — they're independent of
+   the speaker body's own proportions. */
+svg.svg-anim-gate:not(.is-paused) #spk-speaker {
+  animation: spk-speaker-zoom 12s ease-in-out infinite;
+}
+@keyframes spk-speaker-zoom {
+  0%, 10%       { transform: matrix(0.301334,0,0,0.401779,43.999441,-2676.825141); }
+  14.67%, 57.42% { transform: matrix(0.568334,0,0,0.757781,56.328455,-5277.319962); }
+  68%, 83.33%   { transform: matrix(0.453751,0,0,0.605003,51.037446,-4161.579285); }
+  95%, 100%     { transform: matrix(0.301334,0,0,0.401779,43.999441,-2676.825141); }
+}
+
+/* press-target's own transform carries the initial zoom-in (rest ->
+   target), the press squish (target -> pressed -> back to target), then
+   just holds at target size (invisible by then) through pairing and
+   popup before zooming back out with everything else. */
+svg.svg-anim-gate:not(.is-paused) #spk-press-target {
+  animation: spk-target-zoom 12s ease-in-out infinite;
+}
+@keyframes spk-target-zoom {
+  0%, 10%        { transform: matrix(0.26227,0,0,0.323612,-542.18984,-2122.033323); }
+  14.67%, 24%    { transform: matrix(0.494657,0,0,0.610352,-1051.310243,-4219.129277); }
+  28%, 34.67%    { transform: matrix(0.4013,0,0,0.49516,-814.653671,-3378.905032); }
+  38.67%, 83.33% { transform: matrix(0.494657,0,0,0.610352,-1051.310243,-4219.129277); }
+  95%, 100%      { transform: matrix(0.26227,0,0,0.323612,-542.18984,-2122.033323); }
+}
+
+/* Fill-opacity: 0 through the zoom (waits for the scale to finish before
+   fading in), 0.35 while just "targeted", up to 0.6 while "pressed",
+   then releases back down and fades out as we head into pairing. */
+svg.svg-anim-gate:not(.is-paused) #spk-press-target-fill {
+  animation: spk-target-fill 12s ease-in-out infinite;
+}
+@keyframes spk-target-fill {
+  0%, 14.67%    { fill-opacity: 0; }
+  20%, 24%      { fill-opacity: 0.35; }
+  28%, 34.67%   { fill-opacity: 0.6; }
+  38.67%        { fill-opacity: 0.35; }
+  42.67%, 100%  { fill-opacity: 0; }
+}
+
+/* Stroke-widths rescaled to the corrected artwork's new REST widths
+   (highlight 4.56->6.38px, button 2.31->2.12px), then the target/popup
+   stops recomputed at the same ratio to REST so they keep reading as a
+   constant on-screen thickness across zoom levels, same as before. */
+svg.svg-anim-gate:not(.is-paused) #spk-highlight path {
+  animation: spk-highlight-stroke 12s ease-in-out infinite;
+}
+@keyframes spk-highlight-stroke {
+  0%, 10%       { stroke-width: 6.38px; }
+  14.67%, 57.42% { stroke-width: 3.39px; }
+  68%, 83.33%   { stroke-width: 4.24px; }
+  95%, 100%     { stroke-width: 6.38px; }
+}
+
+svg.svg-anim-gate:not(.is-paused) #spk-button > ellipse,
+svg.svg-anim-gate:not(.is-paused) #spk-button1 > ellipse {
+  animation: spk-button-stroke 12s ease-in-out infinite;
+}
+@keyframes spk-button-stroke {
+  0%, 10%       { stroke-width: 2.12px; }
+  14.67%, 57.42% { stroke-width: 1.13px; }
+  68%, 83.33%   { stroke-width: 1.41px; }
+  95%, 100%     { stroke-width: 2.12px; }
+}
+
+/* The phone is never faded — it's purely a translate, and it starts
+   off-canvas at rest (stage 1) rather than sitting visible there: it
+   stays off-canvas through the idle hold and target/press/pairing, then
+   slides up into its normal resting spot as the camera settles at the
+   popup zoom level, holds through the popup hold, then slides back down
+   off-canvas in sync with the final zoom back out to rest. */
+svg.svg-anim-gate:not(.is-paused) #spk-phone-container {
+  animation: spk-phone-slide 12s ease-in-out infinite;
+}
+@keyframes spk-phone-slide {
+  0%, 58.67%    { transform: matrix(13.740362,0,0,18.558424,291.112352,533.184258); }
+  68%, 83.33%   { transform: matrix(13.740362,0,0,18.558424,291.112352,33.184258); }
+  95%, 100%     { transform: matrix(13.740362,0,0,18.558424,291.112352,533.184258); }
+}
+
+/* Card: the "My Beats" confirmation card inside the phone stays hidden
+   until the phone has fully finished translating up (68%), then scales
+   in quickly (250ms) from 70% while fading in, centered on its own
+   visual bounds. It then stays fully shown all the way through the
+   popup hold AND the phone's return descent — it doesn't fade out on
+   its own, it just rides down with the phone and resets back to hidden
+   right as the phone finishes leaving frame (95%), so it never visibly
+   disappears while the phone is still in view. */
+svg.svg-anim-gate:not(.is-paused) #card {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spk-card-in 12s ease-in-out infinite;
+}
+@keyframes spk-card-in {
+  0%, 68%   { opacity: 0; transform: scale(0.7); }
+  70.08%    { opacity: 1; transform: scale(1); }
+  94%       { opacity: 1; transform: scale(1); }
+  95%, 100% { opacity: 0; transform: scale(0.7); }
+}
+
+/* LED: turns on right as the press is about to release (28-34.67%, just
+   ahead of press-target's release ramp above) — so it reads as
+   confirming the tap right before you let go — and stays lit/pulsing
+   through the release, pairing, and the whole popup hold, then switches
+   off right as the phone starts sliding back down (83.33%, matching
+   spk-phone-slide above) rather than continuing to pulse through the
+   descent. This gate is a plain on/off — the continuous pulse lives on
+   the nested #spk-led-pulse element below so the two don't fight over
+   the same property on the same element. */
+svg.svg-anim-gate:not(.is-paused) #spk-led-on-gate {
+  animation: spk-led-gate 12s ease-in-out infinite;
+}
+@keyframes spk-led-gate {
+  0%, 28%        { opacity: 0; }
+  34.67%, 83.33% { opacity: 1; }
+  85%, 100%      { opacity: 0; }
+}
+
+/* Continuous 1s on/off pulse, always running — invisible whenever the
+   gate above is at 0, so it only reads while the LED is "on". */
+svg.svg-anim-gate:not(.is-paused) #spk-led-pulse {
+  animation: spk-led-pulse 1s ease-in-out infinite;
+}
+@keyframes spk-led-pulse {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
+}
+
+/* Pairing notes: rebuilt from 3 reference frames the user provided
+   (notes-1/2/3.svg) showing each note's actual path rather than a
+   guessed one. Isolating each note across the 3 files revealed the
+   real shape of the sequence: note-1 spawns near the grille, drifts up
+   and slightly right, and is gone by frame 3; note-2 spawns a beat
+   later from a spot further left, on a similar up-right diagonal;
+   note-3 spawns later still (absent in frames 1-2), from the same
+   general spot as note-1, and had visibly GROWN in scale by its one
+   captured risen frame — so its float now grows ~17% in size as it
+   rises, not just drifts. All three converge on roughly the same
+   source point near the grille/button row, matching "coming out of
+   it," then diverge as they rise, which is what gives the up-and-right
+   drift its slightly fanned-out look.
+   Each note's own path below is built from the exact reference
+   matrices where we have them (frame1/frame2/frame3), with only the
+   very end of the fade (a short continued drift past the last captured
+   frame) interpolated to avoid an abrupt stop. Scale-in from 60% still
+   anchors on each note's own on-screen "head" point (same technique as
+   before) so it pops in place at its spawn spot rather than drifting
+   as it grows. Stagger timing (44%/46.67%/49.33% onset) is unchanged
+   from before — only the spatial path changed.
+   Each rise waypoint after the pop-in sets animation-timing-function:
+   linear — with this many closely-spaced stops, the animation's default
+   ease-in-out was easing in and out of EVERY single segment, which reads
+   as the note decelerating/re-accelerating at each waypoint (visible
+   "steps") instead of one continuous drift. Linear across the whole
+   rise removes those pauses; only the initial pop-in (0% -> full scale)
+   keeps the default ease, since that's a single discrete beat rather
+   than a multi-point path. */
+svg.svg-anim-gate:not(.is-paused) #spk-note-1 {
+  animation: spk-note-1-float 12s ease-in-out infinite;
+}
+@keyframes spk-note-1-float {
+  0%, 42.67% { opacity: 0; transform: matrix(0.099541,-0.014361,0.010238,0.126158,-247.916681,-498.120155); }
+  44%        { opacity: 1; transform: matrix(0.165902,-0.023934,0.017063,0.210263,-641.511245,-1023.202359); animation-timing-function: linear; }
+  46.67%     { opacity: 1; transform: matrix(0.165902,-0.023934,0.017063,0.210263,-646.599825,-1095.083956); animation-timing-function: linear; }
+  49.33%     { opacity: 1; transform: matrix(0.165902,-0.023934,0.017063,0.210263,-640.321564,-1136.943989); animation-timing-function: linear; }
+  52%        { opacity: 0; transform: matrix(0.165902,-0.023934,0.017063,0.210263,-637.809455,-1153.688003); }
+  100%       { opacity: 0; transform: matrix(0.099541,-0.014361,0.010238,0.126158,-247.916681,-498.120155); }
+}
+
+svg.svg-anim-gate:not(.is-paused) #spk-note-2 {
+  animation: spk-note-2-float 12s ease-in-out infinite;
+}
+@keyframes spk-note-2-float {
+  0%, 45.33% { opacity: 0; transform: matrix(0.103683,-0.034027,0.025029,0.135579,-378.042513,-446.421883); }
+  46.67%     { opacity: 1; transform: matrix(0.172806,-0.056712,0.041714,0.225966,-853.502864,-945.913401); animation-timing-function: linear; }
+  49.11%     { opacity: 1; transform: matrix(0.172806,-0.056712,0.041714,0.225966,-828.386804,-987.77444); animation-timing-function: linear; }
+  51.56%     { opacity: 1; transform: matrix(0.172806,-0.056712,0.041714,0.225966,-803.270743,-1029.634474); animation-timing-function: linear; }
+  53.33%     { opacity: 1; transform: matrix(0.172806,-0.056712,0.041714,0.225966,-800.13111,-1067.308001); animation-timing-function: linear; }
+  54.67%     { opacity: 0; transform: matrix(0.172806,-0.056712,0.041714,0.225966,-798.875055,-1082.377613); }
+  100%       { opacity: 0; transform: matrix(0.103683,-0.034027,0.025029,0.135579,-378.042513,-446.421883); }
+}
+
+svg.svg-anim-gate:not(.is-paused) #spk-note-3 {
+  animation: spk-note-3-float 12s ease-in-out infinite;
+}
+@keyframes spk-note-3-float {
+  0%, 48%    { opacity: 0; transform: matrix(0.099541,-0.014361,0.010238,0.126158,-247.916681,-498.120155); }
+  49.33%     { opacity: 1; transform: matrix(0.165902,-0.023934,0.017063,0.210263,-641.511245,-1023.202359); animation-timing-function: linear; }
+  53.33%     { opacity: 1; transform: matrix(0.180106,-0.025983,0.018523,0.228266,-727.16028,-1152.903598); animation-timing-function: linear; }
+  56%        { opacity: 1; transform: matrix(0.19431,-0.028032,0.019984,0.246268,-812.809315,-1282.603832); animation-timing-function: linear; }
+  57.33%     { opacity: 0; transform: matrix(0.201385,-0.029053,0.020712,0.255235,-855.473441,-1347.211065); }
+  100%       { opacity: 0; transform: matrix(0.099541,-0.014361,0.010238,0.126158,-247.916681,-498.120155); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  svg.svg-anim-gate #spk-speaker,
+  svg.svg-anim-gate #spk-press-target,
+  svg.svg-anim-gate #spk-press-target-fill,
+  svg.svg-anim-gate #spk-highlight path,
+  svg.svg-anim-gate #spk-button > ellipse,
+  svg.svg-anim-gate #spk-button1 > ellipse,
+  svg.svg-anim-gate #spk-phone-container,
+  svg.svg-anim-gate #card,
+  svg.svg-anim-gate #spk-led-on-gate,
+  svg.svg-anim-gate #spk-led-pulse,
+  svg.svg-anim-gate #spk-note-1,
+  svg.svg-anim-gate #spk-note-2,
+  svg.svg-anim-gate #spk-note-3 {
+    animation: none;
+  }
+}

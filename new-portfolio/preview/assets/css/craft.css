@@ -1,0 +1,155 @@
+/* Craft page — a deliberate departure from the rest of the site.
+   Styled after MinaLima's prop-design aesthetic (the studio behind the
+   actual Harry Potter graphic props): parchment + ink + brass, an
+   engraved display serif, specimen-plate framing, and a manicule (☞)
+   standing in for the usual dividers/bullets. Scoped entirely under
+   body.craft-page so it never touches the rest of the site. Swap the
+   two font-family declarations below for your own fonts whenever —
+   everything else keys off them.
+
+   AquilineTwo (custom upload) is now the page's one typeface, applied
+   to everything under `main` — headings, body copy, captions, the back
+   link — so it never touches <site-nav>/<site-footer> (both sit as
+   siblings of <main>, outside this scope, and keep the site's normal
+   Mulish/Fraunces fonts). Cinzel/EB Garamond stay loaded as the
+   fallback stack in case the custom font fails to load. */
+@font-face {
+  font-family: "AquilineTwo";
+  src: url("../fonts/AquilineTwo.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Portkey transition — activating on the hero rotator ("craft.html" is
+   the only link into this page) tags <html> with .portkey-launch right
+   before navigating, so the outgoing page gets yanked into a spin/blur
+   while this page spins/flashes in to meet it. Defined on both ends
+   (main.css has the matching .portkey-launch old-root rule) since which
+   document's stylesheet actually drives the old-root animation varies
+   by browser. */
+
+:root {
+  --color-craft: #2b2116;
+}
+@keyframes portkey-pull {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; filter: brightness(1) blur(0); }
+  45% { filter: brightness(1.8) blur(2px); }
+  100% { transform: scale(0.1) rotate(50deg); opacity: 0; filter: brightness(3) blur(10px); }
+}
+@keyframes portkey-arrive {
+  0% { transform: scale(2.4) rotate(-45deg); opacity: 0; filter: brightness(2.6) blur(16px); }
+  55% { opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; filter: brightness(1) blur(0); }
+}
+::view-transition-old(root) {
+  animation: portkey-pull 0.5s cubic-bezier(0.6, 0, 0.9, 0.4) both;
+}
+::view-transition-new(root) {
+  animation: portkey-arrive 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.15s;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+}
+
+body.craft-page {
+  --text-secondary: var(--color-craft);
+  --text-muted: var(--color-craft);
+  background-image: url(../images/parchment.webp);
+  background-size: cover;
+  background-color: radial-gradient(ellipse at top, #f8f0dc 0%, #f1e3c4 55%, #e7d6ab 100%);
+  color: var(--color-craft);
+}
+
+body.craft-page .craft-content {
+  font-family: "AquilineTwo", "Cinzel", serif;
+  text-align: center;
+}
+
+.craft-header {
+  padding-top: 48px;
+  padding-bottom: 8px;
+}
+
+.craft-header__back {
+  display: inline-block;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, color 0.25s ease;
+  padding: 0 30px;
+  max-width: var(--page-max);
+}
+.craft-header__back:hover {
+  color: #52380f;
+  border-bottom-color: #a9812f;
+}
+
+.craft-page h1, .craft-page p {
+  font-family: "AquilineTwo", "Cinzel", serif;
+}
+.craft-page h1 {
+  font-weight: 700;
+  font-size: clamp(34px, 6vw, 64px);
+  color: var(--color-craft);
+  margin: 0;
+}
+
+.craft-page p {
+  font-size: 1.8em;
+}
+
+.craft-header__rule {
+ height: 2px;
+  max-width: 220px;
+  margin: 20px auto 26px;
+  background: linear-gradient(to right, #2c2116, rgb(62 49 35 / 0%));
+}
+
+.craft-plate::before,
+.craft-plate::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #a9812f;
+  pointer-events: none;
+}
+.craft-plate::before {
+  top: -7px;
+  left: -7px;
+  border-right: none;
+  border-bottom: none;
+}
+.craft-plate::after {
+  bottom: -7px;
+  right: -7px;
+  border-left: none;
+  border-top: none;
+}
+
+.craft-plate img {
+  border: 1px solid rgba(169, 129, 47, 0.35);
+}
+
+.craft-plate__caption {
+  font-family: "AquilineTwo", "Cinzel", serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #7a5a24;
+  line-height: 1.9;
+  margin: 16px 6px 0;
+}
+
+.craft-divider {
+  font-size: 26px;
+  color: #a9812f;
+  margin: 20px 0;
+  transform: rotate(90deg);
+}
+
+@media (max-width: 640px) {
+  .craft-header__intro { font-size: 17px; }
+}
