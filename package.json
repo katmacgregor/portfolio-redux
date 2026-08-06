@@ -22,7 +22,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "deploy:new-portfolio": "gh-pages -d new-portfolio/preview"
   },
   "eslintConfig": {
     "extends": "react-app"
