@@ -56,6 +56,7 @@
 body.craft-page {
   --text-secondary: var(--color-craft);
   --text-muted: var(--color-craft);
+  --border-strong: var(--color-craft);
   background-image: url(../images/parchment.webp);
   background-size: cover;
   background-color: radial-gradient(ellipse at top, #f8f0dc 0%, #f1e3c4 55%, #e7d6ab 100%);
@@ -74,14 +75,11 @@ body.craft-page .craft-content {
 
 .craft-header__back {
   display: inline-block;
-  border-bottom: 1px solid transparent;
   transition: border-color 0.25s ease, color 0.25s ease;
   padding: 0 30px;
   max-width: var(--page-max);
-}
-.craft-header__back:hover {
-  color: #52380f;
-  border-bottom-color: #a9812f;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .craft-page h1, .craft-page p {
