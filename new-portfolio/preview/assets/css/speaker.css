@@ -158,9 +158,9 @@ svg.svg-anim-gate:not(.is-paused) #spk-led-pulse {
   50%      { opacity: 1; }
 }
 
-/* Pairing notes: rebuilt from 3 reference frames the user provided
-   (notes-1/2/3.svg) showing each note's actual path rather than a
-   guessed one. Isolating each note across the 3 files revealed the
+/* Pairing notes: rebuilt from 3 reference frames (notes-1/2/3.svg)
+   showing each note's actual path rather than a guessed one. Isolating
+   each note across the 3 files revealed the
    real shape of the sequence: note-1 spawns near the grille, drifts up
    and slightly right, and is gone by frame 3; note-2 spawns a beat
    later from a spot further left, on a similar up-right diagonal;

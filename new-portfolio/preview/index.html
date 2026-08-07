@@ -313,7 +313,7 @@
             <clipPath id="_2clip"><rect x="1010.365" y="164.043" width="245.711" height="244.327"/></clipPath>
             <clipPath id="_3clip"><rect x="210.701" y="295.416" width="245.711" height="244.327"/></clipPath>
             <g id="_5">
-              <rect id="_5-bg" x="898.217" y="785.366" width="245.711" height="244.327" clip-path="url(#_5clip)" style="fill:#4faf7b;stroke:#555555;stroke-width:12.144px;"/>
+              <rect id="_5-bg" x="898.217" y="785.366" width="245.711" height="244.327" clip-path="url(#_5clip)" style="stroke:#555555;stroke-width:12.144px;"/>
               <g transform="matrix(0.140357,0.000000,0.000000,0.139605,892.123491,873.499855)" style="fill-opacity:1;stroke-opacity:1;">
                         <g id="phone1">
                             <g id="button" transform="matrix(1.264686,0,0,1.288011,-8957.058587,-7025.062517)">
@@ -337,7 +337,7 @@
             </g>
             <g id="_2">
               <rect id="_2-bg" x="1010.365" y="164.043" width="245.711" height="244.327" clip-path="url(#_2clip)" style="stroke:#555555;stroke-width:12.144px;"/>
-              <g id="_2-content" transform="matrix(2.803460,-0.228155,0.171117,2.102597,795.319229,-101.682928)" style="fill-opacity:1;stroke-opacity:1;">
+              <g id="_2-content-unstretch"><g id="_2-content" transform="matrix(2.803460,-0.228155,0.171117,2.102597,795.319229,-101.682928)" style="fill-opacity:1;stroke-opacity:1;">
                     <g id="earbud" transform="matrix(0.245962,0.015193,-0.008546,0.245962,45.154536,131.396715)">
                         <g transform="matrix(0.282145,-0.073345,0.055008,0.376193,-2608.042147,-2256.304763)">
                             <g id="eartip">
@@ -362,10 +362,10 @@
                             <path d="M3684.273,7890.507L3684.273,7881.839L3692.99,7881.839" style="fill:none;stroke:rgb(54,57,165);stroke-width:3.76px;"/>
                         </g>
                     </g>
-                </g>
+                </g></g>
             </g>
             <g id="_3">
-              <rect id="_3-bg" x="210.701" y="295.416" width="245.711" height="244.327" clip-path="url(#_3clip)" style="fill:#4faf7b;stroke:#555555;stroke-width:12.144px;"/>
+              <rect id="_3-bg" x="210.701" y="295.416" width="245.711" height="244.327" clip-path="url(#_3clip)" style="stroke:#555555;stroke-width:12.144px;"/>
               <g transform="matrix(0.948608,-0.063586,0.063246,0.943528,374.862755,331.465442)" style="fill-opacity:1;stroke-opacity:1;">
                         <g id="ear" transform="matrix(0.42244,0,0,0.318536,-90.833687,-46.639798)">
                             <g id="base1" transform="matrix(0.341339,0,0,0.455118,-1189.503792,-3764.827454)">
@@ -892,7 +892,7 @@
   // detaches every animation-name at once (snapping back to each
   // element's base hidden state), removing it re-attaches them fresh
   // from their own delay=0.
-  const CYCLE_MS = 13580; // hold on the final settled frame (bud+phone) extended from 500ms to 1s before the loop resets. Timed off the latest-finishing entrance (phone's slide-in, ending at 12580) plus the 1000ms hold
+  const CYCLE_MS = 14130; // hold on the final settled frame (bud+phone) for 1000ms before the loop resets (and fades, see .is-fading below). Timed off the latest-finishing entrance (phone's slide-in, ending at 13130) plus the 1000ms hold
   const protoLoop = document.getElementById('proto-loop');
   const protoReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -904,21 +904,27 @@
       // than replaying off-screen.
       if (protoLoop.classList.contains('is-paused')) return;
 
-      protoLoop.classList.add('is-paused');
-      // A synchronous forced-reflow (void protoLoop.offsetWidth) is the usual
-      // trick for restarting a CSS animation, but it turned out NOT to be
-      // reliable here: animations that have already fired and are holding
-      // via animation-fill-mode:forwards (which is most of them, by the
-      // time a full cycle has played out) would stay stuck at their held
-      // value instead of replaying, even though animation-name was
-      // correctly reattached — confirmed by direct testing. Deferring the
-      // re-add across two animation frames (past the next real paint,
-      // not just a synchronous layout recalc) reliably avoids this.
-      requestAnimationFrame(() => {
+      // Same fade-then-reset shape as the video loop-hold restart in
+      // partials.js (.loop-hold-fade/.is-fading): fade the whole canvas
+      // out first, reset underneath while it's invisible, then let it
+      // reappear already reset instead of visibly snapping.
+      protoLoop.classList.add('is-fading');
+      setTimeout(() => {
+        protoLoop.classList.add('is-paused');
+        protoLoop.classList.remove('is-fading');
+        // A synchronous forced-reflow (void protoLoop.offsetWidth) is the
+        // usual trick for restarting a CSS animation, but isn't reliable
+        // here: an animation that already fired and is holding via
+        // animation-fill-mode:forwards (true of most of these by the time
+        // a full cycle has played out) stays stuck at its held value even
+        // after animation-name is reattached, unless the re-add is
+        // deferred past an actual paint rather than just a layout recalc.
         requestAnimationFrame(() => {
-          protoLoop.classList.remove('is-paused');
+          requestAnimationFrame(() => {
+            protoLoop.classList.remove('is-paused');
+          });
         });
-      });
+      }, 400);
     }, CYCLE_MS);
   }
 </script>
