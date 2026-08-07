@@ -1,0 +1,729 @@
+/* ---- animation states ---- */
+/* A linear multi-stage story that plays once per loop and holds its
+   final state — see the JS at the bottom. Elements sit at base (hidden)
+   styles with no animation-name until `svg.svg-anim-gate:not(.is-paused)`
+   is added to the SVG root; that attaches every animation-name at once
+   and each one runs on its own delay/duration from there. */
+
+/* Whole-canvas fade for the loop reset, mirroring the video
+   loop-hold-fade pattern in main.css (.loop-hold-fade/.is-fading): the
+   JS fades #proto-loop out via .is-fading before resetting the
+   per-element animation state underneath, so the cut back to stage 1
+   reads as a fade rather than an instant snap. */
+#proto-loop { transition: opacity 0.4s ease; }
+#proto-loop.is-fading { opacity: 0; }
+
+#lightbulb {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+svg.svg-anim-gate:not(.is-paused) #lightbulb {
+  /* Subtle scale-pop entrance: starts a little small, overshoots past
+     100% via the back-ease, settles at scale(1) — a single one-shot
+     pop, no idle loop. Second animation (lightbulbFadeOut) stacks
+     after it for stage 3, same later-wins pattern as popOut. Stage 1
+     is tightened (dots/bubble stagger 100ms apart instead of 150ms,
+     lightbulb pops in at 550ms instead of 760ms) as part of a general
+     speed-up pass on stages 1-2. */
+  animation:
+    popIn 310ms cubic-bezier(0.34, 1.56, 0.64, 1) 340ms forwards,
+    lightbulbFadeOut 120ms ease-in-out 2500ms forwards;
+}
+
+@keyframes lightbulbFadeOut {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+
+/* --- 1.1 -> 1.2: the pulse "draws in" ---
+   The bulb is now solid-filled gold and the filament is a plain white
+   heart outline from the very first frame — both static, no lighting-up
+   transition anymore (the whole point of the redesign is that it reads
+   as already-lit). The only thing that still animates inside the bulb
+   is the EKG/heartbeat line: it draws left-to-right via the same
+   stroke-dasharray/dashoffset technique used for the wires in stage
+   5.1 (dasharray set to the path's true length via svgpathtools, dashoffset
+   animated down to 0). Retimed as part of the full-cycle pacing pass:
+   bulb pop-in and this draw were both compressed by the same ~0.617
+   ratio so their proportion to each other holds (stickies still start
+   right around the ~70% mark of this draw), landing sticky 1's entrance
+   exactly on the new 1000ms target. */
+#pulse-line {
+  --len: 414.76px;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+}
+svg.svg-anim-gate:not(.is-paused) #pulse-line {
+  animation: drawStandard 370ms ease-out 740ms forwards;
+}
+
+/* --- 2: stickies arrive ---
+   Ordered by layer NAME (1,2,3,4,5), not DOM order (the source file's
+   actual sibling order is 5,2,3,1,4) — delays below are assigned by id,
+   not by source position, so this is correct regardless of how the
+   original file happened to list them.
+   Each sticky fades in while translating ~20px TOWARD the bulb's center
+   (i.e. it starts 20px further out than its real coded position), then
+   does a quick overshoot + squash "press into place" on landing.
+   Per-element travel direction/distance is passed in via --dx/--dy custom
+   properties (set inline on each element below) so one shared keyframe
+   set covers all five — cheaper than five near-duplicate @keyframes
+   blocks, and still only touches transform/opacity. --dx/--dy were
+   computed as: (bulb center) minus (each sticky's own center), unit
+   vector * 20px, one time in a spreadsheet — not live-computed, since
+   these are static layout positions.
+   Landing itself was tightened from 480ms to 400ms and the stagger
+   between stickies from 260ms to 200ms apart, so the row fills in
+   noticeably quicker. */
+
+#_1, #_2, #_3, #_4, #_5 {
+  opacity: 0;
+  stroke-opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+/* Each sticky's own `fill` used to be set inline on its -bg child
+   (e.g. #_2-bg had fill:#5aaec9 directly on the element), which
+   silently blocks that child from ever inheriting an animated `fill`
+   from the wrapper — storyboardPlaceholderFill/toCanvas/toBoard
+   (below) all animate `fill` on the wrapper (#_2/#_3/#_5), so without
+   this fix the panels would visually stay stuck on their
+   original color forever. Moved each base color up here instead, with
+   the matching -bg element's inline fill removed, so the animated
+   value actually cascades down to what's on screen. */
+#_2 { fill: #5aaec9; }
+#_3 { fill: #4faf7b; }
+#_5 { fill: #4faf7b; }
+
+/* Each of _1..._5 is now a wrapper <g> holding a background shape (renamed
+   #_N-bg) plus the new sticky content (icon/text) pasted in alongside it,
+   so the whole thing moves/fades as one rigid unit under a single
+   animation. moveToStoryboard (below) still animates `stroke-opacity`
+   0 -> 1 on #_2/#_3/#_5 to reveal the storyboard border — that only works
+   because #_N-bg's own inline style no longer sets stroke-opacity itself
+   (it used to, which would've blocked inheritance from this wrapper and
+   silently broken the border reveal). Set here instead so it's inherited
+   down to #_N-bg correctly. */
+
+svg.svg-anim-gate:not(.is-paused) #_1 {
+  animation:
+    stickyIn 400ms ease-out 1000ms forwards,
+    floatOut 350ms ease-in 2500ms forwards; /* falls first, stage 3 */
+}
+svg.svg-anim-gate:not(.is-paused) #_3 {
+  animation:
+    stickyIn 400ms ease-out 1400ms forwards,
+    moveToStoryboard 400ms ease-in-out 2870ms forwards,
+    storyboardPlaceholderFill 400ms ease-in-out 2870ms forwards,
+    fadeOutLeftover 500ms ease-in 4670ms forwards;
+}
+svg.svg-anim-gate:not(.is-paused) #_4 {
+  animation:
+    stickyIn 400ms ease-out 1600ms forwards,
+    floatOut 350ms ease-in 2650ms forwards; /* starts partway through 1's fall, stage 3 */
+}
+svg.svg-anim-gate:not(.is-paused) #_5 {
+  animation:
+    stickyIn 400ms ease-out 1800ms forwards,
+    moveToStoryboard 400ms ease-in-out 2870ms forwards,
+    storyboardPlaceholderFill 400ms ease-in-out 2870ms forwards,
+    fadeOutLeftover 500ms ease-in 4670ms forwards;
+}
+
+/* --- 3: storyboard ---
+   Stickies 1 & 4 drop out of frame (floatOut, 350ms) starting at
+   2500ms and 2650ms — sticky 4 lets go 150ms after sticky 1, so the two
+   falls overlap rather than running in lockstep. Sticky 1 is gone by
+   2850ms; sticky 4 by 3000ms, well after stickies 2/3/5 have
+   already started moving into their storyboard row (moveToStoryboard,
+   2870ms) — an overlap, not a dependency, so it's fine for 4's
+   fall to still be finishing as the row starts forming. Storyboard
+   panels get their stroke fading in as they land (see the clip-path
+   trick below) and their fill transitioning to the placeholder color
+   (see storyboardPlaceholderFill below) for #_3/#_5, or resizing
+   straight into the code panel for #_2. The lightbulb's own
+   shrink-and-fade (lightbulbFadeOut) runs on the same 2500ms trigger
+   as sticky 1's fall. */
+
+#_2 { --dx3: -382.33px; --dy3: 226.293px; }
+#_3 { --dx3: -15.865px; --dy3: 94.92px; }
+#_5 { --dx3: 163.018px;  --dy3: -395.03px; }
+
+@keyframes floatOut {
+  0%   { opacity: 1; transform: translate(0, 0); }
+  100% { opacity: 0; transform: translate(0, 500px); }
+}
+
+/* moveToStoryboard's 700ms duration means the effective stroke-width
+   ramps from 0 to a full 8px alongside the position/size change — the
+   border "grows in" as the sticky lands, rather than popping in at the
+   end. Scale factor 1.31758 = 323.745/245.711 (measured from the
+   3-storyboard source geometry). */
+@keyframes moveToStoryboard {
+  0%   { transform: translate(0, 0) scale(1); stroke-opacity: 0; fill-opacity: 1; }
+  100% { transform: translate(var(--dx3), var(--dy3)) scale(1.31758); stroke-opacity: 1; fill-opacity: 0; }
+}
+
+/* #_2/#_3/#_5 all stay as solid storyboard placeholder boxes instead
+   of going hollow: stacked after moveToStoryboard on the same
+   400ms/2870ms timing, so it wins the "later entry in the animation
+   list" tie for fill-opacity (pinned at 1 throughout) while
+   moveToStoryboard still drives the transform/stroke. fill itself
+   isn't set at 0% here, so it picks up each element's own true
+   starting color (#5aaec9/#4faf7b, set on #_2/#_3/#_5 above) and
+   transitions to the sitewide placeholder gray — hardcoded to match
+   var(--bg-placeholder)'s light-mode value rather than referencing the
+   variable directly, since nothing else in this illustration is
+   dark-mode aware and it would otherwise be the one color here that
+   shifts under prefers-color-scheme. #_2 carries this same placeholder
+   fill on into toCanvas (see its own 0% keyframe below), rather than
+   going hollow like it used to, so it reads as one continuous panel
+   growing and darkening into the code editor instead of a color flash. */
+@keyframes storyboardPlaceholderFill {
+  0%   { fill-opacity: 1; }
+  100% { fill-opacity: 1; fill: #f2f2f2; }
+}
+
+/* --- 4.1: blank canvas ---
+   Source's 4.1 stickies group contains ONLY sticky 2 — 3 and 5 (and the
+   storyboard count/copy groups they belong to) aren't present, so they
+   fade out here rather than being left behind as orphaned leftovers.
+   Sticky 2 sits as the same solid placeholder-gray storyboard panel as
+   #_3/#_5 (storyboardPlaceholderFill, below) through stage 3, then
+   grows non-uniformly (different x/y scale — target is a wide
+   1075.868x723.375 canvas, not a square) into the solid #555 code-editor
+   panel. toCanvas's own 0% restates the placeholder fill as its
+   starting point so the handoff is a continuous color shift (light gray
+   -> dark gray) rather than a flash. */
+svg.svg-anim-gate:not(.is-paused) #_2 {
+  animation:
+    stickyIn 400ms ease-out 1200ms forwards,
+    moveToStoryboard 400ms ease-in-out 2870ms forwards,
+    storyboardPlaceholderFill 400ms ease-in-out 2870ms forwards,
+    toCanvas 480ms ease-in-out 4670ms forwards,
+    toBoard 550ms ease-in-out 6690ms forwards,
+    fadeOutLeftover 700ms ease-in 11130ms forwards;
+}
+/* The earbud icon pasted into #_2 (id="_2-content" in the markup) rode
+   along untouched through every #_2 transform above, since it's just a
+   sibling of the background shape inside the same wrapper. That's fine
+   through the storyboard stage (moveToStoryboard's scale is uniform),
+   but toCanvas's scale is NOT uniform (1.31758 -> 4.37859/2.96068, a
+   wide-not-square target) — inherited as-is, the icon visibly stretches
+   out of its own aspect ratio right as it fades. #_2-content-unstretch
+   is a plain wrapper (no transform of its own) added around #_2-content
+   purely to carry a counter-scale: since SVG composes a child's own
+   transform on top of whatever its animated ancestor is doing, setting
+   this wrapper's scale to toCanvas's reciprocal at each keyframe cancels
+   the stretch back out while still inheriting #_2's translate, so the
+   icon holds its own proportions and rides along with the panel instead
+   of warping. It's also got no business surviving into the code-editor
+   panel at all, so it still fades out over the same 600ms/4670ms window
+   as toCanvas, disappearing as the panel finishes forming rather than
+   cutting abruptly. */
+svg.svg-anim-gate:not(.is-paused) #_2-content {
+  animation: fadeOutLeftover 600ms ease-in-out 4670ms forwards;
+}
+#_2-content-unstretch { transform-box: fill-box; transform-origin: center; }
+svg.svg-anim-gate:not(.is-paused) #_2-content-unstretch {
+  animation: unstretchToCanvas 480ms ease-in-out 4670ms forwards;
+}
+/* Reciprocals of toCanvas's own 0%/100% scale values (1/1.31758 and
+   1/4.37859, 1/2.96068). Only exact at those two endpoints — a linear
+   ease-in-out counter-curve isn't a true inverse of toCanvas's own
+   ease-in-out mid-transition — but close enough over a fast 480ms
+   window where the icon is also simultaneously fading to transparent. */
+@keyframes unstretchToCanvas {
+  0%   { transform: scale(0.75899, 0.75899); }
+  100% { transform: scale(0.22839, 0.33776); }
+}
+/* _2 used to close the loop by shrinking/repositioning into "dot2"
+   (a rewind back to its stage-1/2 look) via toHollow/toDot2. It now
+   just fades out in place with everything else in the board group
+   instead — no more scale or reposition. */
+@keyframes toCanvas {
+  0%   { transform: translate(var(--dx3), var(--dy3)) scale(1.31758); fill: #f2f2f2; fill-opacity: 1; stroke-opacity: 1; }
+  100% { transform: translate(-382.847px, 276.294px) scale(4.37859, 2.96068); fill: #555; fill-opacity: 1; stroke-opacity: 1; }
+}
+@keyframes toBoard {
+  0%   { transform: translate(-382.847px, 276.294px) scale(4.37859, 2.96068); fill: #555; fill-opacity: 1; stroke-opacity: 1; }
+  100% { transform: translate(-382.326px, 292.227px) scale(3.63399, 1.85989); fill: #555; fill-opacity: 1; stroke-opacity: 1; }
+}
+
+/* --- 5.1: board ---
+   Sequence: `board-cursor` — section-grow's own bg-alike shape
+   (renamed from source's "cursor" to avoid colliding with the stage-4
+   typing cursor) — waits until sticky 2 has fully finished resizing
+   into the board background (toBoard, above, ends 7240ms) before it
+   fades in, rather than starting alongside it. That gap was added on
+   top of the code panel's own fadeOutLeftover (ends 7090ms) so the
+   board's details never appear on top of the still-visible code text
+   or a still-resizing panel — board-cursor now only starts once both
+   are done. Then the four sections' hole-grids fade in RIGHT TO LEFT: section-grow's holes
+   first (rightmost, x~1049-1179), then section1, section2, and
+   section last (leftmost, x~332-459) — matched to their actual x
+   positions in the source, not to their id numbers, since those don't
+   correlate with left-right order in this file.
+   Then wires "draw" via the standard stroke-dasharray/dashoffset
+   technique — dasharray set to the path's own true length (measured
+   with svgpathtools, not eyeballed), animating dashoffset to 0.
+   BOTTOM-TO-TOP requires checking each wire's actual authored
+   direction first: wire-blue1/red1/red2 are authored top-to-bottom
+   (start y < end y), so they use the negated-offset variant (start at
+   -length instead of +length) to reverse the reveal direction. node's
+   wire and both led wires are authored with start BELOW end already,
+   so the plain/standard variant already draws bottom-to-top with no
+   trick needed. wire-blue2 has equal start/end height (it's a
+   symmetric upward arc, not a top/bottom line), so "bottom to top"
+   doesn't cleanly apply — left it on the standard/natural direction.
+   Order: blue1+red1 together, then (after both finish) red2+blue2
+   together, then node (wire draws, then its yellow body fades in),
+   then led's wire1+wire2 together, then — once those finish — glow,
+   led-bulb, the small highlight circle, and the highlight pill fade in
+   (not draw) in that exact order. `led`'s `bulb` was renamed
+   `led-bulb` since it would otherwise collide with the mascot bulb
+   from 1.1/1.2 — unrelated shapes; 1.1's bulb is untouched. */
+
+#board-cursor { opacity: 0; }
+svg.svg-anim-gate:not(.is-paused) #board-cursor {
+  animation:
+    fadeInSimple 300ms ease-out 7240ms forwards,
+    fadeOutLeftover 700ms ease-in 11130ms forwards;
+}
+svg.svg-anim-gate:not(.is-paused) #code {
+  animation: fadeOutLeftover 400ms ease-in 6690ms forwards;
+}
+
+#holes, #section1, #section2, #section { opacity: 0; }
+svg.svg-anim-gate:not(.is-paused) #holes    { animation: fadeInSimple 350ms ease-out 7590ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #section1 { animation: fadeInSimple 350ms ease-out 7790ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #section2 { animation: fadeInSimple 350ms ease-out 7990ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #section  { animation: fadeInSimple 350ms ease-out 8190ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+
+/* wire draw setup: --len is set at runtime from the browser's own
+   getTotalLength() (see script at the bottom) rather than hardcoded —
+   a manually-measured/rounded length here was the actual cause of the
+   stray "dots": with stroke-linecap:round (set globally on this SVG),
+   even a ~0.005px mismatch between the CSS length and the path's true
+   rendered length leaves a hairline sliver of dash exposed, and a
+   round cap paints ANY nonzero-length sliver as a full stroke-width
+   circle. Reading the exact length straight from the DOM eliminates
+   the mismatch at the source instead of chasing more decimal places.
+   The draw itself is fast: each duration below is ~60% of its
+   original value (620->370, 360->220, 120->70, 110->70, 130->80),
+   preserving the original relative pacing between wires (longer paths
+   still take longer to draw) while the whole thing reads noticeably
+   quicker. The 300ms beat between each pair (blue1+red1 -> red2+blue2
+   -> node's wire -> led's wire1+wire2) was also tightened to 200ms. */
+#wire-blue1 { stroke-dasharray: var(--len); stroke-dashoffset: calc(-1 * var(--len)); }
+#wire-red1  { stroke-dasharray: var(--len); stroke-dashoffset: calc(-1 * var(--len)); }
+#wire-red2  { stroke-dasharray: var(--len); stroke-dashoffset: calc(-1 * var(--len)); }
+#wire-blue2 { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+#wire       { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+#wire1      { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+#wire2      { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+
+svg.svg-anim-gate:not(.is-paused) #wire-blue1 { animation: drawReversed 370ms linear 8740ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #wire-red1  { animation: drawReversed 220ms linear 8740ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #wire-red2  { animation: drawReversed 70ms linear 9310ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #wire-blue2 { animation: drawStandard 70ms linear 9310ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #wire       { animation: drawStandard 70ms linear 9580ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #wire1      { animation: drawStandard 80ms linear 10050ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #wire2      { animation: drawStandard 70ms linear 10050ms forwards, fadeOutLeftover 700ms ease-in 11130ms forwards; }
+
+@keyframes drawStandard {
+  from { stroke-dashoffset: var(--len); }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes drawReversed {
+  from { stroke-dashoffset: calc(-1 * var(--len)); }
+  to   { stroke-dashoffset: 0; }
+}
+
+#node-body { opacity: 0; }
+svg.svg-anim-gate:not(.is-paused) #node-body {
+  animation:
+    fadeInSimple 200ms ease-out 9650ms forwards,
+    fadeOutLeftover 700ms ease-in 11130ms forwards;
+}
+
+#glow, #led-bulb, #led-highlight-circle, #led-highlight-rect { opacity: 0; }
+/* #glow gets its own transform-box: it's the one piece of the LED that
+   travels (see glowMorphToBud below), everything else here just fades. */
+#glow { transform-box: fill-box; transform-origin: center; will-change: transform, opacity; }
+svg.svg-anim-gate:not(.is-paused) #led-bulb {
+  animation:
+    fadeInSimple 250ms ease-out 10330ms forwards,
+    ledBulbLightUp 150ms ease-out 10780ms forwards,
+    fadeOutLeftover 700ms ease-in 11130ms forwards;
+}
+
+/* --- 5.2 -> 1.1: closing the loop ---
+   Starts at 11830ms, immediately as the board group's own
+   fadeOutLeftover finishes (11130ms + 700ms) — earbud-reveal picks up
+   the instant the board is fully gone, no extra beat needed since the
+   fade itself already provides the pause. `led-bulb` is the one element that gets an actual
+   transform rather than a plain fade: it grows and moves to land
+   exactly on the mascot bulb's position/size in 1.1 (translate/scale
+   computed from both elements' real bounding boxes), fading its own
+   fill-opacity to 0 in the process — which conveniently matches 1.1's
+   unlit `#bulb` resting fill-opacity (also 0), so there's no color
+   mismatch at the handoff. Every other 5.2 element (the board, all
+   four sections, all wires, node, and the rest of `led`'s parts)
+   just fades out — nothing else has a real counterpart in 1.1 to
+   transform into. The actual "coming back" — thought-bubble, dots,
+   and the real #lightbulb popping in again — isn't built here at
+   all: it's 1.1's ORIGINAL entrance animations replaying, which
+   happens for free once the loop (see the script at the bottom)
+   resets `.svg-anim-gate:not(.is-paused)` and re-triggers everything from scratch. */
+/* --- 5.1 -> 5.2: the LED turns on ---
+   glow, led-bulb, led-highlight-circle, and led-highlight-rect all
+   fade in together at 10330ms. The actual "LED turns on" moment
+   (glowOn/ledBulbLightUp/highlightBrighten color changes, plus
+   blink's flash) starts at 10780ms, a 200ms beat after they've
+   settled in.
+   All layer ids matched 1:1 between the two source files except one
+   brand-new group: `blink`, the six sunburst rays around the bulb —
+   absent entirely from 5.1, so it pops in fresh rather than
+   transitioning from anything. Everything else is a genuine
+   transform of an existing element:
+     - glow: recolors black -> white (it had no fill at all in 5.1,
+       i.e. effectively off; explicit fill:#000 was added as its base
+       state purely so this is a real animated transition rather than
+       an implicit undefined -> defined jump)
+     - led-highlight-circle / led-highlight-rect: fill-opacity nudges
+       0.4 -> 0.5, a subtle brighten (matches the actual delta in the
+       5.2 source)
+     - led-bulb: unchanged in the source, not touched here
+   blink's rays scale+fade in from the LED's center (transform-origin
+   via fill-box on the group, which centers close enough to the bulb's
+   dome) for a quick "flash" burst read, rather than a plain fade. */
+svg.svg-anim-gate:not(.is-paused) #glow {
+  /* stays a normal board element now — lights up green with the rest
+     of 5.2, then fades out with the board (see #glow-travel below for
+     how it actually reaches the bud). */
+  animation:
+    fadeInSimple 250ms ease-out 10330ms forwards,
+    glowOn 150ms ease-out 10780ms forwards,
+    fadeOutLeftover 700ms ease-in 11130ms forwards;
+}
+/* glow's move onto the bud used to be done by animating #glow itself
+   with a z-index bump to paint over #earbud-reveal — z-index on raw
+   SVG shapes turned out not to be reliable enough. Simpler and
+   guaranteed-correct: #glow-travel is a plain duplicate of #glow's
+   path (already green, no color animation needed), placed as an
+   actual sibling AFTER #earbud-reveal inside #bud-slide, so normal DOM
+   paint order puts it on top with zero z-index guesswork. It starts
+   at the original glow's exact position (same `d`, same coordinate
+   space — #bud-slide has no static transform of its own) right as the
+   real #glow starts fading out, and travels the same path glowMorphToBud
+   always described. Nested inside #bud-slide, it also inherits that
+   group's own slide-left animation for free during 6 -> 6.2 — no
+   separate "slide with the bud" keyframe needed here. */
+/* The #led-glow filter (see the <defs> at the top of the SVG) lives as
+   a plain SVG `filter` attribute directly on the inner shape
+   (#glow-travel-shape), not on #glow-travel itself — this wrapper only
+   ever handles opacity/transform, keeping the two concerns on separate
+   elements. stdDeviation is set in the ellipse's own (large, pre-scale)
+   local units, and gets shrunk twice before it hits the screen: once by
+   the ~0.28-0.31x landing scale, and again by the viewBox (1500 units
+   wide) being displayed in a much narrower on-page container. A first
+   pass at stdDeviation=8 came out sub-pixel once both of those applied
+   rendering as a sharp edge with no visible halo in a real browser.
+   Bumped to 36, with the filter region widened from
+   -60%/220% to -400%/900% (region padding is a % of the ellipse's own
+   tiny bbox, not of the blur radius, so a bigger stdDeviation needs a
+   proportionally bigger region or the blur just gets clipped off).
+   Note: cairosvg doesn't implement feGaussianBlur/feMerge at all — it
+   silently drops the whole filter and renders the sharp shape, even in
+   a bare, transform-free isolated test. That's a renderer gap, not a
+   bug in this markup; visual tuning of this effect
+   has to happen by checking an actual browser instead. */
+#glow-travel { opacity: 0; transform-box: fill-box; transform-origin: center; will-change: transform, opacity; }
+svg.svg-anim-gate:not(.is-paused) #glow-travel {
+  animation:
+    fadeInSimple 150ms ease-out 11130ms forwards,
+    glowMorphToBud 700ms ease-in-out 11130ms forwards;
+}
+svg.svg-anim-gate:not(.is-paused) #led-highlight-circle {
+  animation:
+    fadeInSimple 250ms ease-out 10330ms forwards,
+    highlightBrighten 150ms ease-out 10780ms forwards,
+    fadeOutLeftover 700ms ease-in 11130ms forwards;
+}
+svg.svg-anim-gate:not(.is-paused) #led-highlight-rect {
+  animation:
+    fadeInSimple 250ms ease-out 10330ms forwards,
+    highlightBrighten 150ms ease-out 10780ms forwards,
+    fadeOutLeftover 700ms ease-in 11130ms forwards;
+}
+#blink {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+svg.svg-anim-gate:not(.is-paused) #blink {
+  animation:
+    blinkOn 150ms cubic-bezier(0.34, 1.56, 0.64, 1) 10780ms forwards,
+    fadeOutLeftover 700ms ease-in 11130ms forwards;
+}
+
+@keyframes glowOn {
+  from { fill: #313131; }
+  to   { fill: #4faf7b; }
+}
+/* --- 6: the reveal ---
+   glow (already green from glowOn) is the one circuit-board element with
+   a real counterpart in the physical product: the tiny status LED on the
+   earbud's window. It travels there directly — translate/scale computed
+   from glow's own bounding box onto the earbud LED dot's real bounding
+   box (same correction-transform technique used to place every pasted
+   asset in this file) — while earbud-reveal fades in underneath so the
+   dot visibly "lands" on the earbud rather than arriving in empty space.
+   Everything else from 5.1/5.2 (board, wires, node, led-bulb, highlights,
+   blink) just fades out along with it — same "nothing else has a real
+   counterpart" logic as the rest of the closing loop. */
+/* Reused by both #glow-travel (see above #glow's rule) and, in an
+   earlier pass, #glow itself — kept as one shared keyframe since the
+   translate/scale values describing the move onto the bud didn't
+   change, only which element plays it. */
+@keyframes glowMorphToBud {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(15.244px, 571.032px) scale(0.2835, 0.30855); }
+}
+
+#earbud-reveal { opacity: 0; }
+svg.svg-anim-gate:not(.is-paused) #earbud-reveal {
+  /* holds — see the note on #glow's animation above. */
+  animation: fadeInSimple 400ms ease-out 11830ms forwards;
+}
+
+/* --- 6 -> 6.2: the bud makes room, the phone arrives ---
+   Once the bud has fully faded in and settled (11830+400=12230), a
+   300ms beat, then both halves of the "pairing shot" move together:
+   the bud slides left (a plain translate on a NEW wrapper, #bud-slide,
+   with no transform of its own — it exists purely so the CSS-animated
+   translate doesn't fight with #earbud-reveal's own placement matrix,
+   same reasoning as every other correction-transform in this file) and
+   the phone/BPM card slides in from off-canvas right at the same
+   moment. #glow-travel — already resting on the bud's LED window from
+   the stage-6 morph — lives inside #bud-slide too, so it rides along
+   with the same translate for free, no separate keyframe needed to
+   keep it glued to the bud through the move. Delta was measured the
+   same way as every other placement here: the earbud's own bounding
+   box in the two reference frames (6.1 vs 6.2), not eyeballed. */
+#bud-slide { will-change: transform; }
+svg.svg-anim-gate:not(.is-paused) #bud-slide {
+  animation: budSlideLeft 500ms ease-in-out 12530ms forwards;
+}
+@keyframes budSlideLeft {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(-311.374px, 0); }
+}
+
+#phone-reveal { opacity: 0; will-change: transform, opacity; }
+svg.svg-anim-gate:not(.is-paused) #phone-reveal {
+  /* holds — see the note on #glow's animation above. */
+  animation:
+    fadeInSimple 150ms ease-out 12530ms forwards,
+    phoneSlideIn 600ms ease-out 12530ms forwards;
+}
+@keyframes phoneSlideIn {
+  0%   { transform: translate(650px, 0); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes ledBulbLightUp {
+  from { fill: #bec5c3; }
+  to   { fill: #4faf7b; }
+}
+@keyframes highlightBrighten {
+  from { fill-opacity: 0.4; }
+  to   { fill-opacity: 0.5; }
+}
+@keyframes blinkOn {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeOutLeftover {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* cursor: fades in once canvas has landed, then blinks forever — crisp
+   on/off via steps(), not a smooth fade, to read as a real text cursor
+   rather than a pulsing UI element. */
+#cursor { opacity: 0; }
+svg.svg-anim-gate:not(.is-paused) #cursor {
+  animation:
+    fadeInSimple 300ms ease-out 5300ms forwards,
+    cursorBlink 1000ms steps(2, jump-none) 5450ms infinite,
+    cursorTypeRow1 320ms steps(8, jump-start) 5650ms forwards,
+    cursorTypeRow2 320ms steps(8, jump-start) 6060ms forwards,
+    cursorTypeRow3 320ms steps(8, jump-start) 6470ms forwards,
+    fadeOutLeftover 400ms ease-in 6690ms forwards;
+}
+
+/* Three lines now, so the cursor "types" in three passes instead of
+   one: across row 1, snap back to the left edge and down a line,
+   across row 2, snap again, across row 3. Each pass is its own
+   one-shot steps(8) animation on `transform`, stacked in source order
+   — same later-wins-while-active trick used throughout this file. While
+   a later pass is still in its delay, the earlier pass's forwards-held
+   end value keeps showing (cursor waits at the right edge of the line
+   it just finished); the instant the next pass's delay elapses it
+   jumps straight to its own 0% keyframe, giving the "carriage return"
+   snap for free with no extra keyframe needed. */
+@keyframes cursorTypeRow1 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(822.041px, 0); }
+}
+@keyframes cursorTypeRow2 {
+  from { transform: translate(0, 130px); }
+  to   { transform: translate(822.041px, 130px); }
+}
+@keyframes cursorTypeRow3 {
+  from { transform: translate(0, 260px); }
+  to   { transform: translate(822.041px, 260px); }
+}
+
+/* --- 4.1 -> 4.2: typing ---
+   Starts at 8380ms (500ms after the cursor settles into its steady
+   blink at 7880ms — tightened from 800ms as part of a general pass to
+   cut idle beats throughout, same spirit as stage 1). Three lines of
+   8 glyphs each, so the per-character beat is 95ms and each glyph's
+   own fade is 120ms — the original single-line pace (130ms/150ms)
+   would have made 3x the characters drag. A 180ms pause between the
+   last glyph of one line and the first of the next stands in for the
+   "Enter" beat. cursorTypeRow1/2/3 (above) each advance the cursor in
+   8 equal discrete jumps over the same 760ms span as their row via
+   steps(8), so each jump lines up with that row's next character — no
+   manual 8-stop keyframe needed since the typing interval within a
+   row is uniform.
+   Row starts: row 1 at 8380ms; row 2 at 9345ms (last row-1 glyph
+   settles at 9165ms + 180ms pause); row 3 at 10310ms (same pattern).
+   Last glyph of row 3 settles at 11095ms, then a 550ms beat before
+   the canvas morphs into the board at 11645ms. Rows 2 and 3 reuse
+   row 1's own glyph shapes/x-positions, just wrapped in a
+   `translate(0, Y)` group each (Y=130/260) so no new path geometry
+   was needed. */
+#number, #number1, #number2, #number3, #number4, #number5, #number6, #number7,
+#number8, #number9, #number10, #number11, #number12, #number13, #number14, #number15,
+#number16, #number17, #number18, #number19, #number20, #number21, #number22, #number23 {
+  opacity: 0;
+}
+/* row 1 */
+svg.svg-anim-gate:not(.is-paused) #number  { animation: codeCharAppear 120ms ease-out 5650ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number1 { animation: codeCharAppear 120ms ease-out 5690ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number2 { animation: codeCharAppear 120ms ease-out 5730ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number3 { animation: codeCharAppear 120ms ease-out 5770ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number4 { animation: codeCharAppear 120ms ease-out 5810ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number5 { animation: codeCharAppear 120ms ease-out 5850ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number6 { animation: codeCharAppear 120ms ease-out 5890ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number7 { animation: codeCharAppear 120ms ease-out 5930ms forwards; }
+/* row 2 */
+svg.svg-anim-gate:not(.is-paused) #number8  { animation: codeCharAppear 120ms ease-out 6060ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number9  { animation: codeCharAppear 120ms ease-out 6100ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number10 { animation: codeCharAppear 120ms ease-out 6140ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number11 { animation: codeCharAppear 120ms ease-out 6180ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number12 { animation: codeCharAppear 120ms ease-out 6220ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number13 { animation: codeCharAppear 120ms ease-out 6260ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number14 { animation: codeCharAppear 120ms ease-out 6300ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number15 { animation: codeCharAppear 120ms ease-out 6340ms forwards; }
+/* row 3 */
+svg.svg-anim-gate:not(.is-paused) #number16 { animation: codeCharAppear 120ms ease-out 6470ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number17 { animation: codeCharAppear 120ms ease-out 6510ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number18 { animation: codeCharAppear 120ms ease-out 6550ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number19 { animation: codeCharAppear 120ms ease-out 6590ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number20 { animation: codeCharAppear 120ms ease-out 6630ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number21 { animation: codeCharAppear 120ms ease-out 6670ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number22 { animation: codeCharAppear 120ms ease-out 6710ms forwards; }
+svg.svg-anim-gate:not(.is-paused) #number23 { animation: codeCharAppear 120ms ease-out 6750ms forwards; }
+
+@keyframes codeCharAppear {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes cursorBlink {
+  0%, 49%  { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+#_1 { --dx: -18.0px; --dy: 8.7px; }   /* bulb is up-right of sticky 1 */
+#_2 { --dx: 17.1px;  --dy: -10.4px; } /* bulb is down-left of sticky 2 */
+#_3 { --dx: -19.4px; --dy: -4.8px; }  /* bulb is right of sticky 3 */
+#_4 { --dx: 19.9px;  --dy: -1.9px; }  /* bulb is left of sticky 4 */
+#_5 { --dx: 11.5px;  --dy: 16.4px; }  /* bulb is up-left of sticky 5 */
+
+@keyframes stickyIn {
+  0%   { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1); }
+  55%  { opacity: 1; transform: translate(0, 0) scale(1.04); }   /* arrives, slight overshoot */
+  75%  { opacity: 1; transform: translate(0, 0) scaleX(1.02) scaleY(0.94); } /* squash = "press" */
+  100% { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+
+
+/* Each storyboard column (number + its copy lines) pops in together,
+   left to right: count-1+copy-1, then count-2+copy-2, then
+   count-3+copy-3 — reusing the existing popIn keyframe (scale+fade,
+   the same "pop" used for the lightbulb entrance) rather than a plain
+   fade, matching "pop in ... in sequence." Staggered 250ms apart with
+   a 350ms pop each, so there's a brief overlap between columns rather
+   than a strict wait-for-previous-to-finish gap. */
+#count-1, #copy-1, #count-2, #copy-2, #count-3, #copy-3 {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+svg.svg-anim-gate:not(.is-paused) #count-1, svg.svg-anim-gate:not(.is-paused) #copy-1 {
+  animation:
+    popIn 350ms cubic-bezier(0.34, 1.56, 0.64, 1) 3570ms forwards,
+    fadeOutLeftover 500ms ease-in 4670ms forwards;
+}
+svg.svg-anim-gate:not(.is-paused) #count-2, svg.svg-anim-gate:not(.is-paused) #copy-2 {
+  animation:
+    popIn 350ms cubic-bezier(0.34, 1.56, 0.64, 1) 3820ms forwards,
+    fadeOutLeftover 500ms ease-in 4670ms forwards;
+}
+svg.svg-anim-gate:not(.is-paused) #count-3, svg.svg-anim-gate:not(.is-paused) #copy-3 {
+  animation:
+    popIn 350ms cubic-bezier(0.34, 1.56, 0.64, 1) 4070ms forwards,
+    fadeOutLeftover 500ms ease-in 4670ms forwards;
+}
+
+@keyframes fadeInSimple {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes bubblePop {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes undulate {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.035); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #lightbulb {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  #pulse-line { animation: none !important; stroke-dashoffset: 0 !important; }
+  #_1, #_2, #_3, #_4, #_5 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
