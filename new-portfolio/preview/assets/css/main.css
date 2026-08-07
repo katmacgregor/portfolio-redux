@@ -894,6 +894,12 @@ body.lightbox-locked { overflow: hidden; }
   .lightbox { transition: none; }
 }
 
+.work-next:after {
+  content: "\2192"; /* Outputs: → */
+}
+.work-prev:before {
+  content: "\2190"; /* Outputs: ← */
+}
 .work-next {
   display: flex; align-items: baseline; justify-content: flex-end; gap: 8px;
   padding-top: 40px; padding-bottom: 26px;
