@@ -522,7 +522,7 @@ section { padding: 40px 0; }
    longer-form body copy on individual case study pages instead of
    short gallery blurbs. */
 .work-entry { display: flex; gap: 32px; align-items: center; margin: 40px 0; }
-.work-entry__media { flex: 1; min-width: 0; }
+.work-entry__media { flex: 1; min-width: 0; width: 100%; }
 .work-entry__media img, .work-entry__media video, .work-entry__media {
   aspect-ratio: 4/3; object-fit: cover; object-position: top; display: block;
 }
