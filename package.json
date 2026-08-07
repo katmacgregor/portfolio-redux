@@ -23,7 +23,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "deploy:new-portfolio": "gh-pages -d new-portfolio/preview"
+    "deploy:new-portfolio": "gh-pages -d new-portfolio/preview --dotfiles"
   },
   "eslintConfig": {
     "extends": "react-app"

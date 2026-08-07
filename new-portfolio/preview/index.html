@@ -892,7 +892,7 @@
   // detaches every animation-name at once (snapping back to each
   // element's base hidden state), removing it re-attaches them fresh
   // from their own delay=0.
-  const CYCLE_MS = 14130; // hold on the final settled frame (bud+phone) for 1000ms before the loop resets (and fades, see .is-fading below). Timed off the latest-finishing entrance (phone's slide-in, ending at 13130) plus the 1000ms hold
+  const CYCLE_MS = 15130; // hold on the final settled frame (bud+phone) for 2000ms before the loop resets (and fades, see .is-fading below). Timed off the latest-finishing entrance (phone's slide-in, ending at 13130) plus the 2000ms hold
   const protoLoop = document.getElementById('proto-loop');
   const protoReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
