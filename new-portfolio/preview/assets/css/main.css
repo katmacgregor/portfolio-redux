@@ -441,6 +441,9 @@ section { padding: 40px 0; }
   .highlight-image.earbuds  {
     background-image: url(../images/product-bud-in-ear-dark.svg);
   }
+  .highlight-image.headphones {
+    background-image: url(../images/product-headphones-dark.svg);
+  }
 }
 
 .gallery-entry { display: flex; gap: 32px; align-items: center; margin-bottom: 48px; }
