@@ -41,6 +41,29 @@
 .rotator {
   transition: color 250ms;
 }
+
+#rotator-next {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transition: opacity 250ms;
+  padding: 0;
+  margin-bottom: 16px;
+}
+#rotator-next svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
 .word-border {
   width: 100%;
   height: 3px;
@@ -59,6 +82,9 @@
 }
 .rotator:hover .word-border:before {
   max-width: 320px;
+}
+.hero__rotator:hover #rotator-next, .hero__rotator:focus-within #rotator-next {
+  opacity: 1;
 }
 
 .rotator:hover {
@@ -272,6 +298,9 @@ img, video { max-width: 100%; height: auto; display: block; }
   color: var(--text-primary);
 }
 
+.hero__rotator {
+  position: relative;
+}
 .hero__rotator button {
   position: relative;
   background: none;
