@@ -466,7 +466,45 @@
   var wand = document.querySelector(".wand");
   var revelioEls = document.querySelectorAll(".asset-revelio");
   if (wand) {
+    // Touch: if no revelio item is on screen, scroll to the nearest one first so the change is visible.
+    var touchOnly = window.matchMedia("(hover: none)").matches;
+    var spellTargets = document.querySelectorAll(".asset-revelio, .image-slider");
+    function nearestOffscreenTarget() {
+      var vh = window.innerHeight, mid = vh / 2, best = null, bestDist = Infinity;
+      for (var i = 0; i < spellTargets.length; i++) {
+        var r = spellTargets[i].getBoundingClientRect();
+        if (r.width === 0) continue;
+        if (r.bottom > 0 && r.top < vh) return null; // something is already in view
+        var d = Math.min(Math.abs(r.top - mid), Math.abs(r.bottom - mid));
+        if (d < bestDist) { bestDist = d; best = spellTargets[i]; }
+      }
+      return best;
+    }
+    var scrolling = false;
     function toggleWand() {
+      if (touchOnly && !scrolling) {
+        var target = nearestOffscreenTarget();
+        if (target) {
+          scrolling = true;
+          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          target.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+          // apply once the scroll settles (no scroll events for 150ms), with a hard cap
+          var idle, done = function () {
+            window.removeEventListener("scroll", onScroll);
+            clearTimeout(idle); clearTimeout(cap);
+            scrolling = false;
+            applyWand();
+          };
+          var onScroll = function () { clearTimeout(idle); idle = setTimeout(done, 150); };
+          var cap = setTimeout(done, 1500);
+          window.addEventListener("scroll", onScroll, { passive: true });
+          idle = setTimeout(done, 300);
+          return;
+        }
+      }
+      applyWand();
+    }
+    function applyWand() {
       var next = document.body.getAttribute("data-spell") === "revelio" ? "finite" : "revelio";
       document.body.setAttribute("data-spell", next);
       wand.setAttribute("data-label", next);
