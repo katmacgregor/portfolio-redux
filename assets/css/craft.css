@@ -248,7 +248,7 @@ body.craft-page p a {
 }
 
 .content-heading {
-  max-width: var(--heading-max, 250px);
+  max-width: min(var(--heading-max, 250px), 100%);
   align-self: flex-start;
   animation: floating 6s linear infinite;
   will-change: transform;
@@ -1519,4 +1519,20 @@ body[data-spell="finite"] .passage-hand {
   .phoenix-section { margin-bottom: 0; }
   .flourish .caption.caption-top { padding-bottom: 8px; }
   .phoenix-drawing { top: 0; left: 0; }
+}
+
+/* decorative trails and sparkle canvases overhang the edges; clip them so iOS doesn't widen the layout to fit */
+body.craft-page, .craft-content {
+  overflow-x: hidden;  /* fallback */
+  overflow-x: clip;
+}
+
+/* phones: image pairs stack one per row at full width instead of sitting 2-up */
+@media (max-width: 640px) {
+  .craft-page .gallery,
+  .craft-page .mosaic { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
+  .craft-page .mosaic > .span-2 { grid-row: auto; }
+  .craft-page .gallery > .stack-pudding,
+  .craft-page .gallery > .stack-food { order: 0; grid-column: auto; }
+  .craft-page .gallery:has(> .mosaic__corridor) > :last-child { justify-self: stretch; }
 }
