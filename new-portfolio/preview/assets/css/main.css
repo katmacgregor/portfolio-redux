@@ -137,13 +137,22 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: hidd
    right before navigating to craft.html, so leaving the page feels like
    the portkey activating rather than a plain link click. The matching
    arrival animation lives in craft.css. */
-@keyframes portkey-pull {
-  0% { transform: scale(1) rotate(0deg); opacity: 1; filter: brightness(1) blur(0); }
-  45% { filter: brightness(1.8) blur(2px); }
-  100% { transform: scale(0.1) rotate(50deg); opacity: 0; filter: brightness(3) blur(10px); }
+@property --reveal {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@keyframes portkey-close {
+  from { --reveal: 175%; }
+  to   { --reveal: 0%; }
+}
+html.portkey-launch::view-transition {
+  background: #140c06;
 }
 html.portkey-launch::view-transition-old(root) {
-  animation: portkey-pull 0.5s cubic-bezier(0.6, 0, 0.9, 0.4) both;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 calc(var(--reveal) - 42%), transparent var(--reveal));
+          mask-image: radial-gradient(ellipse at 50% 50%, #000 calc(var(--reveal) - 42%), transparent var(--reveal));
+  animation: portkey-close 0.55s cubic-bezier(0.6, 0, 0.8, 0.5) both;
 }
 @media (prefers-reduced-motion: reduce) {
   html.portkey-launch::view-transition-old(root) { animation: none !important; }
@@ -231,6 +240,18 @@ a.link-accent.link-border:after {
 }
 
 img, video { max-width: 100%; height: auto; display: block; }
+
+img {
+  /* Prevents dragging of the image itself */
+  -webkit-user-drag: none;
+  user-drag: none;
+
+  /* Prevents highlighting/selecting the image */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE10+ */
+  user-select: none;         /* Standard */
+}
 
 .wrap-width {
   max-width: var(--page-max);
