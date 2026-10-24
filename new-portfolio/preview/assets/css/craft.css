@@ -4,7 +4,7 @@
        url("../fonts/AquilineTwo.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "4 Privet Drive";
@@ -12,7 +12,7 @@
        url("../fonts/4PrivetDrive.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "Dear Mr Potter";
@@ -20,7 +20,7 @@
        url("../fonts/DearMrPotter.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "Caslon Antique";
@@ -28,7 +28,7 @@
        url("../fonts/CaslonAntique.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 /* Breakpoints (media queries can't read custom properties):
