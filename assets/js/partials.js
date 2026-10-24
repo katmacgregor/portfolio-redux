@@ -130,12 +130,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Subtle fade/rise for media as it scrolls into view.
-  var revealEls = document.querySelectorAll('.work-media, .work-media--pair, .gallery-entry, .work-entry, .extra-body img, .extra-body video');
+  // Fade/rise for content as it scrolls into view. Items entering in the same batch are staggered.
+  var revealEls = document.querySelectorAll('.work-media, .work-media--pair, .gallery-entry, .work-entry, .extra-body img, .extra-body video, ' +
+    '.text-emphasize p, section > .heading, section > h2, section > h2 + p, .hero__greeting, .hero__rotator, .error-404 > *, .section-intro, .highlights .col, .work-list__row, .about p, .contact');
   if (revealEls.length && 'IntersectionObserver' in window) {
     var revealObserver = new IntersectionObserver(function (entries) {
+      var k = 0;
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
+          entry.target.style.setProperty('--reveal-i', Math.min(k++, 5));
           entry.target.classList.add('is-visible');
           revealObserver.unobserve(entry.target);
         }
@@ -145,6 +148,13 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   }
+
+  // Lazy images fade in once loaded (CSS hides them until img-loaded; craft handles its own).
+  document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+    function show() { img.classList.add('img-loaded'); }
+    if (img.complete) show();
+    else { img.addEventListener('load', show); img.addEventListener('error', show); }
+  });
 
   // Inline <svg> work banners that animate (Disney Junior's day/night
   // sky, Creative Technology's looping logo mark, etc) only run while
@@ -313,4 +323,82 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
+});
+
+// Page transitions: the arriving page's nav is its own view-transition layer and shows at full
+// opacity from the first frame (see main.css), so only the content cross-fades and the nav never
+// blinks. Skipped for #hash links (the page scrolls away from the nav right after landing) and for
+// the craft page, whose portkey reveal needs everything under the iris.
+(function () {
+  if (!("onpagereveal" in window)) return;
+  window.addEventListener("pagereveal", function (e) {
+    var nav = document.querySelector("site-nav > .nav");
+    if (!e.viewTransition || !nav || location.hash || window.scrollY > 8) return;
+    if (document.body && document.body.classList.contains("craft-page")) return;
+    nav.style.viewTransitionName = "site-nav";
+    e.viewTransition.finished.finally(function () { nav.style.viewTransitionName = ""; });
+  });
+})();
+
+// Case-study headings rise in letter by letter, the same push the hero rotator uses.
+// Respects reduced motion; the heading keeps its text for assistive tech.
+function buildRiseHeading() {
+  var h1 = document.querySelector(".work-header h1");
+  if (!h1 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var text = h1.textContent;
+  h1.setAttribute("aria-label", text);
+  var clip = document.createElement("span");
+  clip.className = "rise-clip";
+  clip.setAttribute("aria-hidden", "true");
+  text.split("").forEach(function (ch, i) {
+    var s = document.createElement("span");
+    s.className = "rise-char";
+    s.style.setProperty("--i", i);
+    s.textContent = ch === " " ? "\u00a0" : ch;
+    clip.appendChild(s);
+  });
+  h1.textContent = "";
+  h1.appendChild(clip);
+}
+
+// Banner fades must start after the page is actually on screen: a class added before the first
+// paint has no earlier style to transition from, and during a page transition the new page is
+// still fading in. "revealed" resolves after the view transition (if any) and two frames.
+var revealed = new Promise(function (resolve) {
+  function go() { requestAnimationFrame(function () { requestAnimationFrame(resolve); }); }
+  if ("onpagereveal" in window) {
+    window.addEventListener("pagereveal", function (e) {
+      if (e.viewTransition) e.viewTransition.finished.then(go, go); else go();
+    }, { once: true });
+    setTimeout(go, 1500); // safety net
+  } else {
+    go();
+  }
+});
+
+function whenDecoded(imgs) {
+  return Promise.all(imgs.map(function (i) {
+    return (i.decode ? i.decode() : Promise.resolve()).catch(function () {});
+  }));
+}
+
+function fadeInBanners() {
+  // image banners: fade the image in over its tinted frame
+  document.querySelectorAll(".work-banner-frame > img").forEach(function (img) {
+    Promise.all([revealed, whenDecoded([img])]).then(function () { img.classList.add("is-loaded"); });
+  });
+  // multi-layer and inline-SVG banners: lift a tinted cover instead (no opacity on animated layers)
+  document.querySelectorAll(".work-banner-fade, .work-banner-frame--svg").forEach(function (box) {
+    var imgs = Array.prototype.slice.call(box.querySelectorAll("img"));
+    Promise.all([revealed, whenDecoded(imgs)]).then(function () { box.classList.add("is-loaded"); });
+  });
+}
+
+// This script loads synchronously in <head> so the nav and footer exist for the first paint.
+// The heading stays hidden (see main.css) until its letters are built, then is revealed.
+document.documentElement.classList.add("has-js");
+document.addEventListener("DOMContentLoaded", function () {
+  buildRiseHeading();
+  fadeInBanners();
+  document.documentElement.classList.add("rise-ready");
 });

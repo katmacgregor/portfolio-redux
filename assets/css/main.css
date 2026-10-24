@@ -129,8 +129,23 @@
 
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: hidden; }
 
+/* Page transitions (cross-document view transitions; unsupported browsers just navigate).
+   The old page stays solid underneath while the new one fades in on top, so there is never a
+   moment where neither covers the background. Normal blending avoids the default additive
+   (plus-lighter) mix, which brightens when the two opacities don't sum to 1. */
 @view-transition {
   navigation: auto;
+}
+@keyframes vt-in { from { opacity: 0; } }
+::view-transition-old(root),
+::view-transition-new(root) { mix-blend-mode: normal; }
+::view-transition-old(root) { animation: none; }
+::view-transition-new(root) { animation: vt-in 220ms ease-out both; }
+/* the arriving nav (named in partials.js) is solid from the first frame, no fade */
+::view-transition-group(site-nav),
+::view-transition-new(site-nav) { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
 }
 
 /* Portkey launch — toggled on <html> by the hero rotator's click handler
@@ -156,15 +171,6 @@ html.portkey-launch::view-transition-old(root) {
 }
 @media (prefers-reduced-motion: reduce) {
   html.portkey-launch::view-transition-old(root) { animation: none !important; }
-}
-
-body {
-  animation: fadein 0.3s ease;
-}
-
-@keyframes fadein {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 html, body {
@@ -477,21 +483,7 @@ section { padding: 40px 0; }
   height: clamp(150px, 20vw, 186px);
   margin-bottom: 22px;
 }
-.highlight-image.earbuds {
-  background-image: url(../images/product-bud-in-ear.svg);
-}
-.highlight-image.headphones {
-  background-image: url(../images/product-headphones.svg);
-}
-.highlight-image.speaker {
-  background-image: url(../images/product-speakers.svg);
-}
-
-@media (prefers-color-scheme: dark) {
-  .highlight-image.earbuds  {
-    background-image: url(../images/product-bud-in-ear-dark.svg);
-  }
-}
+.highlight-image img { display: block; width: 100%; height: 100%; }
 
 .gallery-entry { display: flex; gap: 32px; align-items: center; margin-bottom: 48px; }
 .gallery-entry__wide .gallery-entry__media { margin-bottom: 20px; }
@@ -664,6 +656,19 @@ section { padding: 40px 0; }
   transform: translateX(3px);
 }
 
+/* hovering a row dims its siblings and nudges the title in step with the chevron;
+   opacity and transform only, and pointer devices only */
+.work-list__row { transition: opacity 0.2s ease; }
+.work-list__title-group { transition: transform 0.2s ease; }
+@media (hover: hover) {
+  .work-list:has(.work-list__row:hover) .work-list__row:not(:hover) { opacity: 0.45; }
+  .work-list__row:hover .work-list__title-group { transform: translateX(3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-list__row, .work-list__title-group { transition: none; }
+  .work-list__row:hover .work-list__title-group { transform: none; }
+}
+
 .about, .contact {
   text-align: center;
 }
@@ -731,6 +736,14 @@ footer.site-footer {
 .work-header, .extra-header { padding-top: 20px; }
 .work-header__back, .extra-header__back { font-size: 12px; color: var(--text-muted); display: inline-block; margin-bottom: 24px; }
 .work-header h1 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.01em; font-size: 34px; margin: 0 0 6px; }
+/* heading letters rise in from below, staggered like the hero rotator (letters built in partials.js) */
+html.has-js:not(.rise-ready) .work-header h1 { visibility: hidden; }
+.rise-clip { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.14em; }
+.rise-char {
+  display: inline-block;
+  animation: rise-in 450ms cubic-bezier(0.16, 1, 0.3, 1) calc(200ms + var(--i) * 30ms) backwards;
+}
+@keyframes rise-in { from { transform: translateY(100%); } }
 .work-header__meta { font-size: 13px; color: var(--text-muted); margin: 0 0 28px; }
 
 .work-banner {
@@ -744,6 +757,36 @@ footer.site-footer {
   margin-bottom: 40px;
   object-fit: cover;
   object-position: top;
+}
+
+/* Image banners sit in a frame tinted with the image's main color, and the image fades in over it
+   (is-loaded is added by partials.js), so a slow load doesn't pop in against the page background. */
+.work-banner-frame {
+  max-width: 1500px;
+  margin: 0 auto 40px;
+  aspect-ratio: var(--banner-ratio);
+  background: var(--banner-bg);
+}
+.work-banner-frame > .work-banner { margin: 0; max-width: none; background: none; }
+.work-banner-frame > img.work-banner { opacity: 0; transition: opacity 1s ease; }
+.work-banner-frame > img.work-banner.is-loaded { opacity: 1; }
+/* a banner made of several layers (image + inline SVG) is revealed by fading a tinted cover away,
+   so no layer changes opacity underneath. partials.js adds is-loaded once the images have decoded. */
+.work-banner-fade, .work-banner-frame--svg { position: relative; background: var(--banner-bg); }
+.work-banner-fade::after,
+.work-banner-frame--svg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--banner-bg);
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+.work-banner-fade.is-loaded::after,
+.work-banner-frame--svg.is-loaded::after { opacity: 0; }
+@media (scripting: none), (prefers-reduced-motion: reduce) {
+  .work-banner-frame > img.work-banner { opacity: 1; transition: none; }
+  .work-banner-fade::after, .work-banner-frame--svg::after { display: none; }
 }
 
 /* The default height clamp assumes a roughly 4:3-to-8:5 banner crop.
@@ -967,31 +1010,41 @@ body.lightbox-locked { overflow: hidden; }
   padding: 0; border-top: none; margin-top: 0;
 }
 
-.work-media,
-.work-media--pair,
-.gallery-entry,
-.work-entry,
-.extra-body img,
-.extra-body video {
+/* SCROLL REVEAL — items fade up once as they enter the viewport (partials.js adds is-visible).
+   Gated on has-js so nothing stays hidden if scripting is off. Items that enter together are
+   staggered via --reveal-i, set per batch in partials.js. */
+html.has-js :is(.work-media, .work-media--pair, .gallery-entry, .work-entry, .extra-body img, .extra-body video) {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--reveal-i, 0) * 70ms);
 }
-.work-media.is-visible,
-.work-media--pair.is-visible,
-.gallery-entry.is-visible,
-.work-entry.is-visible,
-.extra-body img.is-visible,
-.extra-body video.is-visible {
+html.has-js :is(.work-media, .work-media--pair, .gallery-entry, .work-entry, .extra-body img, .extra-body video).is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* index page: these use an animation (not a transition) so their own hover opacity, e.g. the
+   work-list dimming, still works once revealed */
+@keyframes reveal-up { from { opacity: 0; transform: translateY(14px); } }
+html.has-js :is(.text-emphasize p, section > .heading, section > h2, section > h2 + p, .hero__greeting, .hero__rotator, .error-404 > *, .section-intro, .highlights .col, .work-list__row, .about p, .contact) { opacity: 0; }
+html.has-js :is(.text-emphasize p, section > .heading, section > h2, section > h2 + p, .hero__greeting, .hero__rotator, .error-404 > *, .section-intro, .highlights .col, .work-list__row, .about p, .contact).is-visible {
+  opacity: 1;
+  animation: reveal-up 600ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--reveal-i, 0) * 70ms) backwards;
+}
+
+/* lazy images fade in once loaded instead of popping in (not on craft, which has its own) */
+html.has-js body:not(.craft-page) img[loading="lazy"] { opacity: 0; transition: opacity 400ms ease; }
+html.has-js body:not(.craft-page) img[loading="lazy"].img-loaded { opacity: 1; }
+
 @media (prefers-reduced-motion: reduce) {
-  .work-media, .work-media--pair, .gallery-entry, .work-entry, .extra-body img {
+  html.has-js :is(.work-media, .work-media--pair, .gallery-entry, .work-entry, .extra-body img, .extra-body video),
+  html.has-js :is(.text-emphasize p, section > .heading, section > h2, section > h2 + p, .hero__greeting, .hero__rotator, .error-404 > *, .section-intro, .highlights .col, .work-list__row, .about p, .contact),
+  html.has-js body:not(.craft-page) img[loading="lazy"] {
     opacity: 1;
     transform: none;
     transition: none;
+    animation: none;
   }
 }
 
