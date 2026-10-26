@@ -277,6 +277,11 @@ document.addEventListener('DOMContentLoaded', function () {
       var clone = mediaEl.cloneNode(true);
       clone.removeAttribute('class');
       clone.removeAttribute('tabindex');
+      if (clone.tagName === 'IMG') {
+        // the lazy-image fade hides lazy images until img-loaded; the clone is already cached
+        clone.removeAttribute('loading');
+        clone.classList.add('img-loaded');
+      }
       if (clone.tagName === 'VIDEO') {
         clone.setAttribute('controls', '');
         clone.muted = true;
